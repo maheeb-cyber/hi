@@ -1,6 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,9 +13,12 @@ import {
   Cpu, 
   BookOpen, 
   Award,
-  Send
+  ExternalLink,
+  Send,
+  FileText
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
+import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
 import { useState } from "react";
 
 export default function Portfolio() {
@@ -57,7 +60,6 @@ export default function Portfolio() {
     { id: "projects", label: "Projects" },
     { id: "eca", label: "ECA" },
     { id: "blog", label: "Blog" },
-    { id: "contact", label: "Contact" },
   ];
 
   return (
@@ -175,6 +177,17 @@ export default function Portfolio() {
                       <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Role</span>
                       <span className="font-medium">Student & Tech Enthusiast</span>
                    </div>
+                   <div className="flex flex-col gap-2">
+                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Socials</span>
+                      <div className="flex gap-4">
+                        <a href="https://github.com/maheeb" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors">
+                          <Github className="w-6 h-6" />
+                        </a>
+                        <span className="text-gray-400 hover:text-neon-purple transition-colors flex items-center gap-2 cursor-pointer" title="Discord: maheeb#0000">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0"/><path d="M7 16.5c3.5 1 5.5 1 9 0"/><path d="M2 17l2.5-11.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2L22 17"/></svg>
+                        </span>
+                      </div>
+                   </div>
                 </div>
               </CardContent>
             </Card>
@@ -182,7 +195,7 @@ export default function Portfolio() {
         </section>
 
         {/* PROJECTS SECTION */}
-        <section id="projects" className="scroll-mt-24">
+        <section id="projects" className="scroll-mt-24 mb-24">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -212,17 +225,19 @@ export default function Portfolio() {
                 },
                 {
                   title: "Graphic Design Portfolio",
-                  desc: "Collection of posters and banners designed for school events.",
-                  tags: ["Photoshop", "Illustrator"]
+                  desc: "Collection of designs including 'Making Artwork with AI' presentation.",
+                  tags: ["Photoshop", "Illustrator", "AI Art"],
+                  link: aiArtPdf,
+                  linkText: "View Presentation (PDF)"
                 }
               ].map((project, i) => (
-                <Card key={i} className="bg-zinc-950 border-zinc-800 hover:border-neon-purple transition-colors duration-300 group">
+                <Card key={i} className="bg-zinc-950 border-zinc-800 hover:border-neon-purple transition-colors duration-300 group flex flex-col">
                   <CardHeader>
                     <CardTitle className="text-xl font-bold group-hover:text-neon-purple transition-colors">{project.title}</CardTitle>
                     <CardDescription>{project.desc}</CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
+                  <CardContent className="flex-grow">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags.map(tag => (
                         <Badge key={tag} variant="secondary" className="bg-zinc-900 text-zinc-400 border border-zinc-800">
                           {tag}
@@ -230,6 +245,15 @@ export default function Portfolio() {
                       ))}
                     </div>
                   </CardContent>
+                  {project.link && (
+                    <CardFooter>
+                      <Button asChild variant="outline" size="sm" className="w-full border-zinc-700 hover:border-neon-purple hover:text-neon-purple hover:bg-transparent">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                          {project.linkText} <FileText className="w-4 h-4 ml-2" />
+                        </a>
+                      </Button>
+                    </CardFooter>
+                  )}
                 </Card>
               ))}
             </div>
@@ -283,7 +307,7 @@ export default function Portfolio() {
         </section>
 
         {/* BLOG SECTION */}
-        <section id="blog" className="scroll-mt-24">
+        <section id="blog" className="scroll-mt-24 mb-24">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -324,69 +348,6 @@ export default function Portfolio() {
                   </Card>
                 </a>
               ))}
-            </div>
-          </motion.div>
-        </section>
-
-        {/* CONTACT SECTION */}
-        <section id="contact" className="scroll-mt-24 mb-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
-              <Mail className="w-8 h-8" /> Contact
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-black border border-neon-purple/30">
-                <CardHeader>
-                  <CardTitle>Get in Touch</CardTitle>
-                  <CardDescription>Have a question or want to work together?</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Name</label>
-                    <Input placeholder="Your name" className="bg-zinc-900 border-zinc-800 focus-visible:ring-neon-purple" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Email</label>
-                    <Input type="email" placeholder="your@email.com" className="bg-zinc-900 border-zinc-800 focus-visible:ring-neon-purple" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Message</label>
-                    <Textarea placeholder="How can I help you?" className="bg-zinc-900 border-zinc-800 focus-visible:ring-neon-purple min-h-[120px]" />
-                  </div>
-                  <Button className="w-full bg-neon-purple text-white hover:bg-purple-700">
-                    Send Message <Send className="w-4 h-4 ml-2" />
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <div className="flex flex-col justify-center space-y-6">
-                <div className="p-6 rounded-lg border border-zinc-800 bg-zinc-950">
-                  <h3 className="text-lg font-bold mb-4">Connect with me</h3>
-                  <div className="space-y-4">
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-neon-purple transition-colors p-3 rounded-md hover:bg-zinc-900">
-                      <Github className="w-6 h-6" /> 
-                      <span className="text-lg">github.com/maheeb</span>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 text-gray-400 hover:text-neon-purple transition-colors p-3 rounded-md hover:bg-zinc-900">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0"/><path d="M7 16.5c3.5 1 5.5 1 9 0"/><path d="M2 17l2.5-11.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2L22 17"/></svg>
-                      <span className="text-lg">Discord: maheeb#0000</span>
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="p-6 rounded-lg bg-neon-purple/5 border border-neon-purple/20">
-                  <p className="text-sm text-neon-purple font-mono">
-                    "Learning never exhausts the mind."
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-2">— Leonardo da Vinci</p>
-                </div>
-              </div>
             </div>
           </motion.div>
         </section>
