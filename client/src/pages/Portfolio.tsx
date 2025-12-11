@@ -1,6 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,6 @@ import {
   Cpu, 
   BookOpen, 
   Award,
-  ExternalLink,
   Send
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
@@ -122,9 +121,6 @@ export default function Portfolio() {
               <h1 className="text-4xl md:text-7xl font-display font-bold tracking-tighter text-glow">
                 Hi! I am Maheeb <span className="inline-block animate-wave">👋</span>
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground font-mono">
-                I build this site. I am a Data science learner.
-              </p>
             </motion.div>
 
             {/* Badges */}
@@ -163,11 +159,11 @@ export default function Portfolio() {
             </h2>
             <Card className="bg-black border border-neon-purple/50 shadow-[0_0_15px_rgba(168,85,247,0.1)] relative overflow-hidden">
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-neon-purple/10 rounded-full blur-3xl"></div>
-              <CardContent className="p-8 text-lg leading-relaxed text-gray-300 font-sans">
+              <CardContent className="p-8 text-xl md:text-2xl leading-relaxed text-gray-300 font-sans">
                 <p>
                   My name is Maheeb. I am from Bangladesh. I am a representative of my school’s ICT club called Cyber Hub. I am a SCPSCIAN.
                 </p>
-                <div className="mt-6 flex gap-4">
+                <div className="mt-6 flex gap-4 text-base md:text-lg">
                    <div className="flex flex-col gap-1">
                       <span className="text-sm text-neon-purple font-mono uppercase">Location</span>
                       <span>Bangladesh 🇧🇩</span>
@@ -199,7 +195,7 @@ export default function Portfolio() {
                 {
                   title: "Data Viz Dashboard",
                   desc: "Interactive visualization of school data using Python and Pandas.",
-                  tags: ["Python", "Pandas", "Matplotlib"]
+                  tags: ["Python"]
                 },
                 {
                   title: "School Club Portal",
@@ -231,11 +227,6 @@ export default function Portfolio() {
                       ))}
                     </div>
                   </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" size="sm" className="w-full border-zinc-700 hover:border-neon-purple hover:text-neon-purple hover:bg-transparent">
-                      View Project <ExternalLink className="w-4 h-4 ml-2" />
-                    </Button>
-                  </CardFooter>
                 </Card>
               ))}
             </div>
@@ -269,12 +260,6 @@ export default function Portfolio() {
                       org: "National Math Olympiad",
                       year: "2023",
                       desc: "Regional finalist in junior category."
-                    },
-                    {
-                      role: "Debater",
-                      org: "School Debate Team",
-                      year: "2022 - Present",
-                      desc: "Participated in inter-school debate championships."
                     }
                   ].map((eca, i) => (
                     <div key={i} className="flex flex-col md:flex-row gap-4 pb-6 last:pb-0 border-b border-zinc-900 last:border-0">
