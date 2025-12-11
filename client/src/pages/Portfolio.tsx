@@ -56,10 +56,10 @@ export default function Portfolio() {
   };
 
   const navItems = [
-    { id: "about", label: "About" },
     { id: "projects", label: "Projects" },
     { id: "eca", label: "ECA" },
     { id: "blog", label: "Blog" },
+    { id: "about", label: "About" },
   ];
 
   return (
@@ -147,55 +147,8 @@ export default function Portfolio() {
 
         <Separator className="bg-neon-purple/20" />
 
-        {/* ABOUT SECTION */}
-        <section id="about" className="scroll-mt-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
-              <Terminal className="w-8 h-8" /> About Me
-            </h2>
-            <Card className="bg-black border border-neon-purple/50 shadow-[0_0_20px_rgba(168,85,247,0.2)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-40 h-40 bg-neon-purple/15 rounded-full blur-3xl"></div>
-              <CardContent className="p-8 md:p-12 text-xl md:text-3xl leading-relaxed text-gray-200 font-sans font-light">
-                <p>
-                  I am <span className="text-neon-purple font-medium">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As a key representative of the <span className="text-white font-medium">'Cyber Hub'</span> ICT club, I lead initiatives to foster technological curiosity among peers.
-                </p>
-                <p className="mt-6">
-                  My journey is defined by a relentless drive to learn—exploring the realms of <span className="text-white">Data Science</span>, <span className="text-white">Ethical Hacking</span>, and <span className="text-white">Creative Design</span> to build meaningful solutions.
-                </p>
-                <div className="mt-10 flex flex-wrap gap-8 text-lg">
-                   <div className="flex flex-col gap-2">
-                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Location</span>
-                      <span className="font-medium">Bangladesh 🇧🇩</span>
-                   </div>
-                   <div className="flex flex-col gap-2">
-                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Role</span>
-                      <span className="font-medium">Student & Tech Enthusiast</span>
-                   </div>
-                   <div className="flex flex-col gap-2">
-                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Socials</span>
-                      <div className="flex gap-4">
-                        <a href="https://github.com/maheeb" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors">
-                          <Github className="w-6 h-6" />
-                        </a>
-                        <span className="text-gray-400 hover:text-neon-purple transition-colors flex items-center gap-2 cursor-pointer" title="Discord: maheeb#0000">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0"/><path d="M7 16.5c3.5 1 5.5 1 9 0"/><path d="M2 17l2.5-11.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2L22 17"/></svg>
-                        </span>
-                      </div>
-                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </section>
-
         {/* PROJECTS SECTION */}
-        <section id="projects" className="scroll-mt-24 mb-24">
+        <section id="projects" className="scroll-mt-24">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -307,7 +260,7 @@ export default function Portfolio() {
         </section>
 
         {/* BLOG SECTION */}
-        <section id="blog" className="scroll-mt-24 mb-24">
+        <section id="blog" className="scroll-mt-24">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -349,6 +302,53 @@ export default function Portfolio() {
                 </a>
               ))}
             </div>
+          </motion.div>
+        </section>
+
+        {/* ABOUT SECTION - MOVED TO BOTTOM */}
+        <section id="about" className="scroll-mt-24 mb-24">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
+              <Terminal className="w-8 h-8" /> About Me
+            </h2>
+            <Card className="bg-black border border-neon-purple/50 shadow-[0_0_20px_rgba(168,85,247,0.2)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-40 h-40 bg-neon-purple/15 rounded-full blur-3xl"></div>
+              <CardContent className="p-8 md:p-12 text-xl md:text-3xl leading-relaxed text-gray-200 font-sans font-light">
+                <p>
+                  I am <span className="text-neon-purple font-medium">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As a key representative of the <span className="text-white font-medium">'Cyber Hub'</span> ICT club, I lead initiatives to foster technological curiosity among peers.
+                </p>
+                <p className="mt-6">
+                  My journey is defined by a relentless drive to learn—exploring the realms of <span className="text-white">Data Science</span>, <span className="text-white">Ethical Hacking</span>, and <span className="text-white">Creative Design</span> to build meaningful solutions.
+                </p>
+                <div className="mt-10 flex flex-wrap gap-8 text-lg">
+                   <div className="flex flex-col gap-2">
+                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Location</span>
+                      <span className="font-medium">Bangladesh 🇧🇩</span>
+                   </div>
+                   <div className="flex flex-col gap-2">
+                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Role</span>
+                      <span className="font-medium">Student & Tech Enthusiast</span>
+                   </div>
+                   <div className="flex flex-col gap-2">
+                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Socials</span>
+                      <div className="flex gap-4">
+                        <a href="https://github.com/maheeb-cyber" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors">
+                          <Github className="w-6 h-6" />
+                        </a>
+                        <a href="https://discord.gg/3eukqzF2r" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors flex items-center gap-2 cursor-pointer" title="Join my Discord">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0"/><path d="M7 16.5c3.5 1 5.5 1 9 0"/><path d="M2 17l2.5-11.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2L22 17"/></svg>
+                        </a>
+                      </div>
+                   </div>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </section>
 
