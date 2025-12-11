@@ -157,20 +157,23 @@ export default function Portfolio() {
             <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
               <Terminal className="w-8 h-8" /> About Me
             </h2>
-            <Card className="bg-black border border-neon-purple/50 shadow-[0_0_15px_rgba(168,85,247,0.1)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-neon-purple/10 rounded-full blur-3xl"></div>
-              <CardContent className="p-8 text-xl md:text-2xl leading-relaxed text-gray-300 font-sans">
+            <Card className="bg-black border border-neon-purple/50 shadow-[0_0_20px_rgba(168,85,247,0.2)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-40 h-40 bg-neon-purple/15 rounded-full blur-3xl"></div>
+              <CardContent className="p-8 md:p-12 text-xl md:text-3xl leading-relaxed text-gray-200 font-sans font-light">
                 <p>
-                  My name is Maheeb. I am from Bangladesh. I am a representative of my school’s ICT club called Cyber Hub. I am a SCPSCIAN.
+                  I am <span className="text-neon-purple font-medium">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As a key representative of the <span className="text-white font-medium">'Cyber Hub'</span> ICT club, I lead initiatives to foster technological curiosity among peers.
                 </p>
-                <div className="mt-6 flex gap-4 text-base md:text-lg">
-                   <div className="flex flex-col gap-1">
-                      <span className="text-sm text-neon-purple font-mono uppercase">Location</span>
-                      <span>Bangladesh 🇧🇩</span>
+                <p className="mt-6">
+                  My journey is defined by a relentless drive to learn—exploring the realms of <span className="text-white">Data Science</span>, <span className="text-white">Ethical Hacking</span>, and <span className="text-white">Creative Design</span> to build meaningful solutions.
+                </p>
+                <div className="mt-10 flex flex-wrap gap-8 text-lg">
+                   <div className="flex flex-col gap-2">
+                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Location</span>
+                      <span className="font-medium">Bangladesh 🇧🇩</span>
                    </div>
-                   <div className="flex flex-col gap-1">
-                      <span className="text-sm text-neon-purple font-mono uppercase">Role</span>
-                      <span>Student & Tech Enthusiast</span>
+                   <div className="flex flex-col gap-2">
+                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Role</span>
+                      <span className="font-medium">Student & Tech Enthusiast</span>
                    </div>
                 </div>
               </CardContent>
@@ -366,14 +369,13 @@ export default function Portfolio() {
                 <div className="p-6 rounded-lg border border-zinc-800 bg-zinc-950">
                   <h3 className="text-lg font-bold mb-4">Connect with me</h3>
                   <div className="space-y-4">
-                    <a href="#" className="flex items-center gap-3 text-gray-400 hover:text-neon-purple transition-colors">
-                      <Github className="w-5 h-5" /> github.com/maheeb
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-neon-purple transition-colors p-3 rounded-md hover:bg-zinc-900">
+                      <Github className="w-6 h-6" /> 
+                      <span className="text-lg">github.com/maheeb</span>
                     </a>
-                    <a href="#" className="flex items-center gap-3 text-gray-400 hover:text-neon-purple transition-colors">
-                      <Linkedin className="w-5 h-5" /> linkedin.com/in/maheeb
-                    </a>
-                    <a href="#" className="flex items-center gap-3 text-gray-400 hover:text-neon-purple transition-colors">
-                      <Mail className="w-5 h-5" /> maheeb@example.com
+                    <a href="#" className="flex items-center gap-3 text-gray-400 hover:text-neon-purple transition-colors p-3 rounded-md hover:bg-zinc-900">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0"/><path d="M7 16.5c3.5 1 5.5 1 9 0"/><path d="M2 17l2.5-11.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2L22 17"/></svg>
+                      <span className="text-lg">Discord: maheeb#0000</span>
                     </a>
                   </div>
                 </div>
