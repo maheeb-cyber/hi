@@ -2,7 +2,7 @@ import { motion, Variants } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import avatarImage from "@assets/generated_images/cyberpunk_avatar_for_portfolio.png";
+import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 
 export default function Portfolio() {
   const containerVariants: Variants = {
