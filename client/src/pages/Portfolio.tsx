@@ -232,7 +232,7 @@ export default function Portfolio() {
                     {
                       role: "Club Representative",
                       org: "Cyber Hub (ICT Club)",
-                      year: "2024 - Present",
+                      year: "2025 - Present",
                       desc: "Leading workshops and organizing tech events for students."
                     },
                     {
