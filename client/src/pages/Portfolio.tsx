@@ -131,7 +131,7 @@ export default function Portfolio() {
                 "Beginner Python developer",
                 "Graphic designer",
                 "Video editor",
-                "Beginner ethical hacker"
+                "Ethical hacker"
               ].map((skill) => (
                 <Badge 
                   key={skill} 
@@ -340,6 +340,9 @@ export default function Portfolio() {
                       <div className="flex gap-4">
                         <a href="https://github.com/maheeb-cyber" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors">
                           <Github className="w-6 h-6" />
+                        </a>
+                        <a href="mailto:maheebhossain900@gmail.com" className="text-gray-400 hover:text-neon-purple transition-colors" title="Send me an email">
+                          <Mail className="w-6 h-6" />
                         </a>
                         <a href="https://discord.gg/3eukqzF2r" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors flex items-center gap-2 cursor-pointer" title="Join my Discord">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0"/><path d="M7 16.5c3.5 1 5.5 1 9 0"/><path d="M2 17l2.5-11.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2L22 17"/></svg>
