@@ -128,7 +128,7 @@ export default function Portfolio() {
             {/* Badges */}
             <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3">
               {[
-                "Beginner Python developer",
+                "Data Science learner",
                 "Graphic designer",
                 "Video editor",
                 "Cybersecurity",
