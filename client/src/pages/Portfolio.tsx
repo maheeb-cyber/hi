@@ -128,10 +128,8 @@ export default function Portfolio() {
             {/* Badges */}
             <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3">
               {[
-                "Beginner Python developer",
-                "Graphic designer",
-                "Video editor",
-                "Ethical hacker"
+                "Cybersecurity",
+                "Robotics"
               ].map((skill) => (
                 <Badge 
                   key={skill} 
@@ -324,7 +322,7 @@ export default function Portfolio() {
                   I am <span className="text-neon-purple font-medium">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As a key representative of the <span className="text-white font-medium">'Cyber Hub'</span> ICT club, I lead initiatives to foster technological curiosity among peers.
                 </p>
                 <p className="mt-6">
-                  My journey is defined by a relentless drive to learn—exploring the realms of <span className="text-white">Data Science</span>, <span className="text-white">Ethical Hacking</span>, and <span className="text-white">Creative Design</span> to build meaningful solutions.
+                  My journey is defined by a relentless drive to learn—exploring the realms of <span className="text-white">Cybersecurity</span>, <span className="text-white">Robotics</span>, and <span className="text-white">Creative Design</span> to build meaningful solutions.
                 </p>
                 <div className="mt-10 flex flex-wrap gap-8 text-lg">
                    <div className="flex flex-col gap-2">
