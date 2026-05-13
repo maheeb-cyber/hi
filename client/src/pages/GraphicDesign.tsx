@@ -5,8 +5,6 @@ import cyberHubPoster from "@assets/25408c66b3ca4fc8915959ef5e525011_17786550189
 import slashHealthBrochure from "@assets/IMG-eb6cac53d1b6e118ec5c2d7f05734b5c-V_1778655018945.jpg";
 import medicalGuide from "@assets/IMG-7eac76b2a34d9b3b929507892ec9e6b9-V_1778655018957.jpg";
 import doctorMuFeatures from "@assets/IMG-3b48c5457e1c1de0f163ec28d3882c91-V_1778655018972.jpg";
-import creativeDesigner from "@assets/IMG-a6c625a880fce041ec73ef28ed717937-V_1778655018985.jpg";
-import portrait from "@assets/IMG-614d080ce9f5dfcaa7f6fe20cd3a26fb-V_1778655019002.jpg";
 import slashHealthLogo from "@assets/Blue_Modern_Medical_Logo_20260426_162011_0000_1778655019019.png";
 import slashLogo from "@assets/IMG-30eed32a03fb652c27596bf2cea89b08-V_1778655019031.jpg";
 import fcPalashJersey from "@assets/IMG_20260220_224413~2_1778655019041.png";
@@ -61,18 +59,6 @@ const designs = [
     title: "FC Palash Jersey Design",
     category: "Apparel Design",
     description: "Custom football kit design featuring front and back views.",
-  },
-  {
-    src: creativeDesigner,
-    title: "Creative Designer – Portrait",
-    category: "Photo Design",
-    description: "Styled portrait design for creative professional Abrar Sikder Tahir.",
-  },
-  {
-    src: portrait,
-    title: "Professional Portrait",
-    category: "Photo Design",
-    description: "Clean professional portrait composition.",
   },
 ];
 
