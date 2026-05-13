@@ -15,11 +15,13 @@ import {
   Award,
   ExternalLink,
   Send,
-  FileText
+  FileText,
+  Palette
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
 import { useState } from "react";
+import { Link } from "wouter";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
@@ -128,20 +130,32 @@ export default function Portfolio() {
             {/* Badges */}
             <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3">
               {[
-                "Data Science learner",
-                "Graphic designer",
-                "Video editor",
-                "Cybersecurity",
-                "Robotics"
-              ].map((skill) => (
-                <Badge 
-                  key={skill} 
-                  variant="outline" 
-                  className="px-4 py-2 text-sm border-neon-purple text-foreground hover:bg-neon-purple hover:text-black transition-all duration-300 font-mono"
-                >
-                  {skill}
-                </Badge>
-              ))}
+                { label: "Data Science learner", link: null },
+                { label: "Graphic designer", link: "/graphic-design" },
+                { label: "Video editor", link: null },
+                { label: "Cybersecurity", link: null },
+                { label: "Robotics", link: null },
+              ].map((skill) =>
+                skill.link ? (
+                  <Link key={skill.label} href={skill.link} data-testid="link-graphic-designer-badge">
+                    <Badge
+                      variant="outline"
+                      className="px-4 py-2 text-sm border-neon-purple text-foreground hover:bg-neon-purple hover:text-black transition-all duration-300 font-mono cursor-pointer flex items-center gap-1.5"
+                    >
+                      <Palette className="w-3.5 h-3.5" />
+                      {skill.label}
+                    </Badge>
+                  </Link>
+                ) : (
+                  <Badge
+                    key={skill.label}
+                    variant="outline"
+                    className="px-4 py-2 text-sm border-neon-purple text-foreground hover:bg-neon-purple hover:text-black transition-all duration-300 font-mono"
+                  >
+                    {skill.label}
+                  </Badge>
+                )
+              )}
             </motion.div>
           </motion.div>
         </section>
