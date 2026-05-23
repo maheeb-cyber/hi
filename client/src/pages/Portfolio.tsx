@@ -1,63 +1,66 @@
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useScroll, useSpring } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  Terminal, 
-  Cpu, 
-  BookOpen, 
+import {
+  Github,
+  Mail,
+  Terminal,
+  Cpu,
+  BookOpen,
   Award,
   ExternalLink,
-  Send,
   FileText,
   Palette,
   Trophy,
   Star,
-  Shield
+  Shield,
+  ArrowDown,
+  MapPin,
+  User,
+  Code2,
+  Zap,
+  ChevronRight,
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
 import { useState } from "react";
 import { Link } from "wouter";
 
+const fadeUp: Variants = {
+  hidden: { y: 32, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 80, damping: 16 } },
+};
+
+const stagger: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const SectionHeading = ({ icon, label, number }: { icon: React.ReactNode; label: string; number: string }) => (
+  <div className="flex items-center gap-4 mb-10">
+    <span className="text-xs font-mono text-neon-purple/40 select-none">{number}</span>
+    <div className="flex items-center gap-3">
+      <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-neon-purple/10 border border-neon-purple/20 text-neon-purple">
+        {icon}
+      </div>
+      <h2 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-white via-white to-neon-purple bg-clip-text text-transparent">
+        {label}
+      </h2>
+    </div>
+    <div className="flex-1 h-px bg-gradient-to-r from-neon-purple/30 to-transparent" />
+  </div>
+);
+
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
-    },
+    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   const navItems = [
@@ -68,431 +71,524 @@ export default function Portfolio() {
     { id: "about", label: "About" },
   ];
 
+  const projects = [
+    {
+      num: "01",
+      title: "Data Viz Dashboard",
+      desc: "Interactive visualization of school data using Python and Pandas.",
+      tags: ["Python", "Pandas"],
+      color: "from-blue-500/10 to-cyan-500/5",
+      border: "hover:border-blue-500/50",
+    },
+    {
+      num: "02",
+      title: "School Club Portal",
+      desc: "A landing page for Cyber Hub ICT club with member registration.",
+      tags: ["HTML/CSS", "JavaScript", "React"],
+      color: "from-neon-purple/10 to-pink-500/5",
+      border: "hover:border-neon-purple/50",
+    },
+    {
+      num: "03",
+      title: "Auto-Reply Bot",
+      desc: "Simple automation script for handling email queries.",
+      tags: ["Python", "Automation"],
+      color: "from-emerald-500/10 to-teal-500/5",
+      border: "hover:border-emerald-500/50",
+    },
+    {
+      num: "04",
+      title: "Graphic Design Portfolio",
+      desc: "Collection of designs including 'Making Artwork with AI' presentation.",
+      tags: ["Photoshop", "Illustrator", "AI Art"],
+      color: "from-orange-500/10 to-yellow-500/5",
+      border: "hover:border-orange-500/50",
+      link: aiArtPdf,
+      linkText: "View Presentation (PDF)",
+    },
+  ];
+
   return (
-    <div className="min-h-screen w-full bg-background flex flex-col items-center overflow-x-hidden font-sans text-foreground selection:bg-neon-purple selection:text-white">
-      
-      {/* Sticky Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-neon-purple/20">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div 
-            className="text-xl font-display font-bold text-neon-purple cursor-pointer hover:text-white transition-colors"
+    <div className="min-h-screen w-full bg-black text-white overflow-x-hidden font-sans selection:bg-neon-purple/40">
+
+      {/* Scroll progress bar */}
+      <motion.div
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-purple via-pink-500 to-neon-purple origin-left z-[60]"
+      />
+
+      {/* ── NAV ── */}
+      <nav className="fixed top-[2px] left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-5xl mx-auto px-5 py-4 flex justify-between items-center">
+          <button
             onClick={() => scrollToSection("home")}
+            className="text-lg font-display font-bold tracking-tight group"
           >
-            MAHEEB<span className="text-white">.DEV</span>
-          </div>
-          <div className="hidden md:flex gap-6">
+            <span className="text-neon-purple group-hover:text-white transition-colors">MAHEEB</span>
+            <span className="text-white group-hover:text-neon-purple transition-colors">.DEV</span>
+          </button>
+
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-mono transition-colors hover:text-neon-purple ${
-                  activeSection === item.id ? "text-neon-purple underline underline-offset-4" : "text-muted-foreground"
+                className={`relative px-4 py-1.5 text-sm font-mono rounded-lg transition-all duration-200 ${
+                  activeSection === item.id
+                    ? "text-neon-purple bg-neon-purple/10"
+                    : "text-zinc-400 hover:text-white hover:bg-white/5"
                 }`}
+              >
+                {item.label}
+                {activeSection === item.id && (
+                  <motion.div layoutId="nav-dot" className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-neon-purple" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden flex flex-col gap-1.5 p-1.5"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span className={`block w-5 h-0.5 bg-white transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-white transition-all ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-white transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
+
+        {/* Mobile dropdown */}
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden border-t border-white/5 bg-black/90 backdrop-blur-xl px-5 py-4 flex flex-col gap-1"
+          >
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-left px-4 py-2.5 rounded-lg text-sm font-mono text-zinc-300 hover:text-white hover:bg-white/5 transition-all"
               >
                 {item.label}
               </button>
             ))}
-          </div>
-          {/* Mobile Menu Button - Simplified for mockup */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="icon" className="text-neon-purple">
-              <Terminal size={24} />
-            </Button>
-          </div>
-        </div>
+          </motion.div>
+        )}
       </nav>
 
-      <main className="w-full max-w-4xl px-4 pt-24 pb-12 flex flex-col gap-20">
-        
-        {/* HERO SECTION */}
-        <section id="home" className="min-h-[80vh] flex flex-col items-center justify-center text-center gap-8">
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col items-center gap-6"
-          >
-            {/* Profile Picture */}
-            <motion.div variants={itemVariants} className="relative group">
-              <div className="absolute -inset-1 bg-neon-purple rounded-full opacity-75 blur group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-              <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-neon-purple bg-black">
-                <img 
-                  src={avatarImage} 
-                  alt="Maheeb" 
-                  className="w-full h-full object-cover"
-                />
+      <main className="w-full max-w-4xl mx-auto px-4 pt-20 pb-12 flex flex-col gap-24">
+
+        {/* ── HERO ── */}
+        <section id="home" className="relative min-h-[92vh] flex flex-col items-center justify-center text-center gap-8 overflow-hidden">
+          {/* Animated background orbs */}
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <motion.div
+              animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 left-1/4 w-72 h-72 bg-neon-purple/20 rounded-full blur-[80px]"
+            />
+            <motion.div
+              animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px]"
+            />
+            <motion.div
+              animate={{ x: [0, 20, 0], y: [0, 20, 0] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+              className="absolute top-1/2 right-1/3 w-48 h-48 bg-pink-500/10 rounded-full blur-[60px]"
+            />
+          </div>
+
+          <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col items-center gap-7">
+            {/* Avatar */}
+            <motion.div variants={fadeUp} className="relative group cursor-pointer">
+              <div className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-neon-purple via-pink-500 to-blue-500 opacity-70 blur-md group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-neon-purple to-blue-500 opacity-80" />
+              <div className="relative w-36 h-36 md:w-52 md:h-52 rounded-full overflow-hidden border-2 border-black">
+                <img src={avatarImage} alt="Maheeb" className="w-full h-full object-cover" />
               </div>
+              {/* Online indicator */}
+              <div className="absolute bottom-2 right-2 w-4 h-4 bg-emerald-400 rounded-full border-2 border-black shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
             </motion.div>
 
-            {/* Introduction Text */}
-            <motion.div variants={itemVariants} className="space-y-4">
-              <h1 className="text-4xl md:text-7xl font-display font-bold tracking-tighter text-glow">
-                Hi! I am Maheeb <span className="inline-block animate-wave">👋</span>
+            {/* Name & title */}
+            <motion.div variants={fadeUp} className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/20 text-neon-purple text-xs font-mono tracking-widest uppercase mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-neon-purple animate-pulse" />
+                Open to opportunities
+              </div>
+              <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight leading-none">
+                <span className="bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">
+                  Hi! I'm{" "}
+                </span>
+                <span className="bg-gradient-to-r from-neon-purple via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                  Maheeb
+                </span>{" "}
+                <span className="inline-block animate-wave">👋</span>
               </h1>
+              <p className="text-zinc-400 text-lg md:text-xl font-light max-w-md mx-auto leading-relaxed">
+                Student · Tech Enthusiast · Club Representative at{" "}
+                <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-neon-purple hover:text-white transition-colors">
+                  Cyber Hub
+                </a>
+              </p>
             </motion.div>
 
-            {/* Badges */}
-            <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3">
+            {/* Skill badges */}
+            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-2.5">
               {[
-                { label: "Data Science learner", link: null },
-                { label: "Graphic designer", link: "/graphic-design" },
-                { label: "Video editor", link: null },
-                { label: "Cybersecurity", link: null },
-                { label: "Robotics", link: null },
-              ].map((skill) =>
-                skill.link ? (
-                  <Link key={skill.label} href={skill.link} data-testid="link-graphic-designer-badge">
-                    <Badge
-                      variant="outline"
-                      className="px-4 py-2 text-sm border-neon-purple text-foreground hover:bg-neon-purple hover:text-black transition-all duration-300 font-mono cursor-pointer flex items-center gap-1.5"
-                    >
-                      <Palette className="w-3.5 h-3.5" />
-                      {skill.label}
-                    </Badge>
+                { label: "Data Science", icon: <Zap className="w-3 h-3" />, link: null },
+                { label: "Graphic Designer", icon: <Palette className="w-3 h-3" />, link: "/graphic-design" },
+                { label: "Video Editor", icon: <Code2 className="w-3 h-3" />, link: null },
+                { label: "Cybersecurity", icon: <Shield className="w-3 h-3" />, link: null },
+                { label: "Robotics", icon: <Cpu className="w-3 h-3" />, link: null },
+              ].map((skill) => {
+                const cls =
+                  "flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm font-mono transition-all duration-300 cursor-pointer";
+                const inner = (
+                  <>
+                    <span className="text-neon-purple">{skill.icon}</span>
+                    {skill.label}
+                  </>
+                );
+                return skill.link ? (
+                  <Link key={skill.label} href={skill.link}>
+                    <span className={`${cls} border-neon-purple/40 bg-neon-purple/5 text-zinc-200 hover:bg-neon-purple/15 hover:border-neon-purple hover:text-white`}>
+                      {inner}
+                    </span>
                   </Link>
                 ) : (
-                  <Badge
-                    key={skill.label}
-                    variant="outline"
-                    className="px-4 py-2 text-sm border-neon-purple text-foreground hover:bg-neon-purple hover:text-black transition-all duration-300 font-mono"
-                  >
-                    {skill.label}
-                  </Badge>
-                )
-              )}
+                  <span key={skill.label} className={`${cls} border-white/10 bg-white/5 text-zinc-400 hover:border-neon-purple/40 hover:text-zinc-200`}>
+                    {inner}
+                  </span>
+                );
+              })}
+            </motion.div>
+
+            {/* CTA buttons */}
+            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-3">
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neon-purple text-black font-semibold text-sm hover:bg-neon-purple/90 active:scale-95 transition-all duration-200 shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+              >
+                View Projects <ChevronRight className="w-4 h-4" />
+              </button>
+              <a
+                href="mailto:maheebhossain900@gmail.com"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl border border-white/15 text-zinc-300 font-semibold text-sm hover:border-neon-purple/50 hover:text-white hover:bg-white/5 active:scale-95 transition-all duration-200"
+              >
+                <Mail className="w-4 h-4" /> Contact Me
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* Scroll hint */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="absolute bottom-10 flex flex-col items-center gap-2 text-zinc-600"
+          >
+            <span className="text-xs font-mono tracking-widest">SCROLL</span>
+            <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+              <ArrowDown className="w-4 h-4" />
             </motion.div>
           </motion.div>
         </section>
 
-        <Separator className="bg-neon-purple/20" />
-
-        {/* PROJECTS SECTION */}
+        {/* ── PROJECTS ── */}
         <section id="projects" className="scroll-mt-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
-              <Cpu className="w-8 h-8" /> Projects
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                {
-                  title: "Data Viz Dashboard",
-                  desc: "Interactive visualization of school data using Python and Pandas.",
-                  tags: ["Python"]
-                },
-                {
-                  title: "School Club Portal",
-                  desc: "A landing page for Cyber Hub ICT club with member registration.",
-                  tags: ["HTML/CSS", "JavaScript", "React"]
-                },
-                {
-                  title: "Auto-Reply Bot",
-                  desc: "Simple automation script for handling email queries.",
-                  tags: ["Python", "Automation"]
-                },
-                {
-                  title: "Graphic Design Portfolio",
-                  desc: "Collection of designs including 'Making Artwork with AI' presentation.",
-                  tags: ["Photoshop", "Illustrator", "AI Art"],
-                  link: aiArtPdf,
-                  linkText: "View Presentation (PDF)"
-                }
-              ].map((project, i) => (
-                <Card key={i} className="bg-zinc-950 border-zinc-800 hover:border-neon-purple transition-colors duration-300 group flex flex-col">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-bold group-hover:text-neon-purple transition-colors">{project.title}</CardTitle>
-                    <CardDescription>{project.desc}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map(tag => (
-                        <Badge key={tag} variant="secondary" className="bg-zinc-900 text-zinc-400 border border-zinc-800">
-                          {tag}
-                        </Badge>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp}>
+              <SectionHeading icon={<Cpu className="w-5 h-5" />} label="Projects" number="01" />
+            </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {projects.map((p) => (
+                <motion.div
+                  key={p.num}
+                  variants={fadeUp}
+                  className={`group relative rounded-2xl border border-white/8 bg-gradient-to-br ${p.color} ${p.border} hover:shadow-[0_0_30px_rgba(168,85,247,0.1)] transition-all duration-400 overflow-hidden`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+                  <div className="p-6 flex flex-col gap-4 h-full">
+                    <div className="flex items-start justify-between">
+                      <span className="text-3xl font-display font-bold text-white/8 group-hover:text-white/15 transition-colors select-none">
+                        {p.num}
+                      </span>
+                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-neon-purple/30 transition-colors">
+                        <Code2 className="w-4 h-4 text-zinc-500 group-hover:text-neon-purple transition-colors" />
+                      </div>
+                    </div>
+                    <div className="space-y-2 flex-1">
+                      <h3 className="text-lg font-bold text-white group-hover:text-neon-purple transition-colors leading-snug">
+                        {p.title}
+                      </h3>
+                      <p className="text-zinc-500 text-sm leading-relaxed">{p.desc}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {p.tags.map((t) => (
+                        <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400 font-mono">
+                          {t}
+                        </span>
                       ))}
                     </div>
-                  </CardContent>
-                  {project.link && (
-                    <CardFooter>
-                      <Button asChild variant="outline" size="sm" className="w-full border-zinc-700 hover:border-neon-purple hover:text-neon-purple hover:bg-transparent">
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">
-                          {project.linkText} <FileText className="w-4 h-4 ml-2" />
-                        </a>
-                      </Button>
-                    </CardFooter>
-                  )}
-                </Card>
+                    {p.link && (
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 mt-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-zinc-300 hover:border-neon-purple/40 hover:text-neon-purple hover:bg-neon-purple/5 transition-all duration-200"
+                      >
+                        <FileText className="w-3.5 h-3.5" /> {p.linkText}
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
         </section>
 
-        {/* ECA SECTION */}
+        {/* ── ECA ── */}
         <section id="eca" className="scroll-mt-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
-              <Award className="w-8 h-8" /> ECA
-            </h2>
-            <Card className="bg-black border border-neon-purple/30">
-              <CardContent className="p-6">
-                <div className="space-y-6">
-                  {[
-                    {
-                      role: "Club Representative",
-                      org: "Cyber Hub (ICT Club)",
-                      year: "2025 - Present",
-                      desc: "Leading workshops and organizing tech events for students.",
-                      link: "https://www.scpscch.tech/"
-                    },
-                    {
-                      role: "Participant",
-                      org: "National Math Olympiad",
-                      year: "2023",
-                      desc: "Regional finalist in junior category."
-                    }
-                  ].map((eca, i) => (
-                    <div key={i} className="flex flex-col md:flex-row gap-4 pb-6 last:pb-0 border-b border-zinc-900 last:border-0">
-                      <div className="w-full md:w-32 text-neon-purple font-mono text-sm pt-1">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp}>
+              <SectionHeading icon={<Award className="w-5 h-5" />} label="Extracurricular" number="02" />
+            </motion.div>
+            <div className="relative pl-6 border-l border-neon-purple/20 space-y-8">
+              {[
+                {
+                  role: "Club Representative",
+                  org: "Cyber Hub (ICT Club)",
+                  year: "2025 – Present",
+                  desc: "Leading workshops and organizing tech events for students.",
+                  link: "https://www.scpscch.tech/",
+                  active: true,
+                },
+                {
+                  role: "Participant",
+                  org: "National Math Olympiad",
+                  year: "2023",
+                  desc: "Regional finalist in junior category.",
+                  active: false,
+                },
+              ].map((eca, i) => (
+                <motion.div key={i} variants={fadeUp} className="relative group">
+                  {/* Timeline dot */}
+                  <div className={`absolute -left-[30px] top-2 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 ${
+                    eca.active
+                      ? "bg-neon-purple border-neon-purple shadow-[0_0_10px_rgba(168,85,247,0.8)] group-hover:shadow-[0_0_16px_rgba(168,85,247,1)]"
+                      : "bg-zinc-800 border-zinc-600 group-hover:border-neon-purple/50"
+                  }`} />
+                  <div className="bg-zinc-950/60 backdrop-blur-sm border border-white/6 rounded-2xl p-5 group-hover:border-neon-purple/20 transition-all duration-300">
+                    <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+                      <h3 className="text-lg font-bold text-white">{eca.role}</h3>
+                      <span className={`text-xs font-mono px-2.5 py-1 rounded-full border ${
+                        eca.active
+                          ? "bg-neon-purple/10 text-neon-purple border-neon-purple/20"
+                          : "bg-white/5 text-zinc-500 border-white/10"
+                      }`}>
                         {eca.year}
-                      </div>
-                      <div className="flex-1 space-y-2">
-                        <h3 className="text-xl font-bold">{eca.role}</h3>
-                        {eca.link ? (
-                          <a href={eca.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground font-medium hover:text-neon-purple transition-colors flex items-center gap-1.5 w-fit">
-                            {eca.org} <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
-                        ) : (
-                          <p className="text-muted-foreground font-medium">{eca.org}</p>
-                        )}
-                        <p className="text-sm text-gray-400">{eca.desc}</p>
-                      </div>
+                      </span>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    {eca.link ? (
+                      <a href={eca.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-neon-purple transition-colors mb-2 font-medium">
+                        {eca.org} <ExternalLink className="w-3 h-3" />
+                      </a>
+                    ) : (
+                      <p className="text-sm text-zinc-400 mb-2 font-medium">{eca.org}</p>
+                    )}
+                    <p className="text-sm text-zinc-500 leading-relaxed">{eca.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </section>
 
-        {/* AWARDS SECTION */}
+        {/* ── AWARDS ── */}
         <section id="awards" className="scroll-mt-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
-              <Trophy className="w-8 h-8" /> Awards
-            </h2>
-
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp}>
+              <SectionHeading icon={<Trophy className="w-5 h-5" />} label="Awards" number="03" />
+            </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              {/* Award 1 — Programming Contest Winner */}
-              <div className="relative group rounded-2xl overflow-hidden border border-yellow-500/30 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 hover:border-yellow-400/60 transition-all duration-500 shadow-[0_0_30px_rgba(234,179,8,0.07)] hover:shadow-[0_0_40px_rgba(234,179,8,0.18)]">
-                {/* Glow blob */}
-                <div className="absolute -top-6 -left-6 w-32 h-32 bg-yellow-500/10 rounded-full blur-2xl group-hover:bg-yellow-400/20 transition-all duration-500" />
+              {/* Award 1 */}
+              <motion.div variants={fadeUp} className="relative group rounded-2xl overflow-hidden border border-yellow-500/20 bg-gradient-to-br from-yellow-950/30 via-zinc-950 to-zinc-950 hover:border-yellow-400/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(234,179,8,0.15)]">
+                <div className="absolute -top-8 -left-8 w-40 h-40 bg-yellow-500/8 rounded-full blur-3xl group-hover:bg-yellow-400/15 transition-all duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent" />
                 <div className="relative p-7 flex flex-col gap-5">
-                  {/* Trophy icon badge */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-yellow-500/10 border border-yellow-500/30 group-hover:bg-yellow-500/20 transition-all duration-300">
+                    <div className="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center group-hover:bg-yellow-500/20 transition-all duration-300">
                       <Trophy className="w-7 h-7 text-yellow-400" />
                     </div>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 tracking-widest uppercase">
-                      1st Place
+                    <span className="text-xs font-mono px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 tracking-widest uppercase font-bold">
+                      🥇 1st Place
                     </span>
                   </div>
-                  {/* Title */}
-                  <div className="space-y-1">
-                    <h3 className="text-xl font-display font-bold text-white leading-snug group-hover:text-yellow-300 transition-colors duration-300">
+                  <div>
+                    <h3 className="text-xl font-display font-bold text-white group-hover:text-yellow-300 transition-colors duration-300 mb-1">
                       SCPSC IT Intra Fest
                     </h3>
-                    <p className="text-yellow-400/80 font-mono text-sm font-medium tracking-wide">
-                      Programming Contest — Winner
-                    </p>
+                    <p className="text-yellow-500/70 font-mono text-sm tracking-wide">Programming Contest — Winner</p>
                   </div>
-                  {/* Divider */}
-                  <div className="h-px bg-gradient-to-r from-yellow-500/30 via-yellow-400/10 to-transparent" />
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Secured <span className="text-yellow-300 font-medium">1st place</span> in the intra-school IT fest programming competition at SCPSC, showcasing problem-solving and coding skills.
+                  <div className="h-px bg-gradient-to-r from-yellow-500/20 to-transparent" />
+                  <p className="text-zinc-500 text-sm leading-relaxed">
+                    Secured <span className="text-yellow-300 font-semibold">1st place</span> in the intra-school IT fest programming competition at SCPSC, showcasing problem-solving and coding skills.
                   </p>
-                  {/* Stars */}
                   <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Award 2 — Club Representative */}
-              <div className="relative group rounded-2xl overflow-hidden border border-neon-purple/30 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 hover:border-neon-purple/60 transition-all duration-500 shadow-[0_0_30px_rgba(168,85,247,0.07)] hover:shadow-[0_0_40px_rgba(168,85,247,0.18)]">
-                {/* Glow blob */}
-                <div className="absolute -top-6 -right-6 w-32 h-32 bg-neon-purple/10 rounded-full blur-2xl group-hover:bg-neon-purple/20 transition-all duration-500" />
+              {/* Award 2 */}
+              <motion.div variants={fadeUp} className="relative group rounded-2xl overflow-hidden border border-neon-purple/20 bg-gradient-to-br from-purple-950/30 via-zinc-950 to-zinc-950 hover:border-neon-purple/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(168,85,247,0.15)]">
+                <div className="absolute -top-8 -right-8 w-40 h-40 bg-neon-purple/8 rounded-full blur-3xl group-hover:bg-neon-purple/15 transition-all duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-purple/40 to-transparent" />
                 <div className="relative p-7 flex flex-col gap-5">
-                  {/* Shield icon badge */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-neon-purple/10 border border-neon-purple/30 group-hover:bg-neon-purple/20 transition-all duration-300">
+                    <div className="w-14 h-14 rounded-2xl bg-neon-purple/10 border border-neon-purple/20 flex items-center justify-center group-hover:bg-neon-purple/20 transition-all duration-300">
                       <Shield className="w-7 h-7 text-neon-purple" />
                     </div>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20 tracking-widest uppercase">
+                    <span className="text-xs font-mono px-3 py-1.5 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20 tracking-widest uppercase font-bold">
                       2025 – 2026
                     </span>
                   </div>
-                  {/* Title */}
-                  <div className="space-y-1">
-                    <h3 className="text-xl font-display font-bold text-white leading-snug group-hover:text-neon-purple transition-colors duration-300">
+                  <div>
+                    <h3 className="text-xl font-display font-bold text-white group-hover:text-neon-purple transition-colors duration-300 mb-1">
                       Club Representative
                     </h3>
-                    <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-neon-purple/80 font-mono text-sm font-medium tracking-wide hover:text-neon-purple transition-colors flex items-center gap-1.5 w-fit">
+                    <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-neon-purple/60 font-mono text-sm hover:text-neon-purple transition-colors">
                       Cyber Hub — ICT Club · SCPSC <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
-                  {/* Divider */}
-                  <div className="h-px bg-gradient-to-r from-neon-purple/30 via-neon-purple/10 to-transparent" />
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Elected as <span className="text-neon-purple font-medium">Club Representative</span> for the Cyber Hub ICT Club, leading workshops, organizing tech events, and representing the club for the academic year 2025–2026.
+                  <div className="h-px bg-gradient-to-r from-neon-purple/20 to-transparent" />
+                  <p className="text-zinc-500 text-sm leading-relaxed">
+                    Elected as <span className="text-neon-purple font-semibold">Club Representative</span> for Cyber Hub ICT Club, leading workshops, organizing tech events, and representing the club.
                   </p>
-                  {/* Badge row */}
                   <div className="flex flex-wrap gap-2">
-                    {["Leadership", "Tech Events", "Workshops"].map((tag) => (
-                      <span key={tag} className="text-xs font-mono px-2.5 py-1 rounded-full bg-neon-purple/10 text-neon-purple/80 border border-neon-purple/20">
-                        {tag}
-                      </span>
+                    {["Leadership", "Tech Events", "Workshops"].map((t) => (
+                      <span key={t} className="text-xs font-mono px-2.5 py-1 rounded-full bg-neon-purple/8 text-neon-purple/70 border border-neon-purple/15">{t}</span>
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
             </div>
           </motion.div>
         </section>
 
-        {/* BLOG SECTION */}
+        {/* ── BLOG ── */}
         <section id="blog" className="scroll-mt-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
-              <BookOpen className="w-8 h-8" /> Blog
-            </h2>
-            <div className="grid gap-4">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp}>
+              <SectionHeading icon={<BookOpen className="w-5 h-5" />} label="Blog" number="04" />
+            </motion.div>
+            <div className="flex flex-col gap-3">
               {[
-                {
-                  title: "Starting My Journey in Data Science",
-                  date: "Dec 10, 2025",
-                  excerpt: "Why I chose Python as my first language and how I'm learning data visualization."
-                },
-                {
-                  title: "Cyber Security Basics for Students",
-                  date: "Nov 25, 2025",
-                  excerpt: "Simple steps every student should take to stay safe online."
-                },
-                {
-                  title: "Designing for Impact",
-                  date: "Oct 15, 2025",
-                  excerpt: "How I use graphic design principles in my school presentations."
-                }
+                { title: "Starting My Journey in Data Science", date: "Dec 10, 2025", read: "4 min", tag: "Data Science", excerpt: "Why I chose Python as my first language and how I'm learning data visualization." },
+                { title: "Cyber Security Basics for Students", date: "Nov 25, 2025", read: "3 min", tag: "Cybersecurity", excerpt: "Simple steps every student should take to stay safe online." },
+                { title: "Designing for Impact", date: "Oct 15, 2025", read: "5 min", tag: "Design", excerpt: "How I use graphic design principles in my school presentations." },
               ].map((post, i) => (
-                <a key={i} href="#" className="block group">
-                  <Card className="bg-zinc-950 border-zinc-800 group-hover:border-neon-purple transition-all duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold group-hover:text-neon-purple transition-colors">{post.title}</h3>
-                        <span className="text-xs font-mono text-zinc-500">{post.date}</span>
+                <motion.a key={i} href="#" variants={fadeUp} className="group block">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-2xl border border-white/6 bg-zinc-950/40 hover:border-neon-purple/25 hover:bg-zinc-900/60 transition-all duration-300">
+                    <div className="flex-1 space-y-1.5">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/15">{post.tag}</span>
+                        <span className="text-xs text-zinc-600 font-mono">{post.date} · {post.read} read</span>
                       </div>
-                      <p className="text-gray-400">{post.excerpt}</p>
-                    </CardContent>
-                  </Card>
-                </a>
+                      <h3 className="font-bold text-zinc-200 group-hover:text-white transition-colors">{post.title}</h3>
+                      <p className="text-sm text-zinc-500 leading-relaxed">{post.excerpt}</p>
+                    </div>
+                    <div className="shrink-0 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-zinc-600 group-hover:border-neon-purple/40 group-hover:text-neon-purple group-hover:bg-neon-purple/5 transition-all duration-300">
+                      <ChevronRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </motion.a>
               ))}
             </div>
           </motion.div>
         </section>
 
-        {/* ABOUT SECTION - MOVED TO BOTTOM */}
-        <section id="about" className="scroll-mt-24 mb-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
-              <Terminal className="w-8 h-8" /> About Me
-            </h2>
-            <Card className="bg-black border border-neon-purple/50 shadow-[0_0_20px_rgba(168,85,247,0.2)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-40 h-40 bg-neon-purple/15 rounded-full blur-3xl"></div>
-              <CardContent className="p-8 md:p-12 text-xl md:text-3xl leading-relaxed text-gray-200 font-sans font-light">
-                <p>
-                  I am <span className="text-neon-purple font-medium">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As a key representative of the <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-neon-purple transition-colors inline-flex items-center gap-1">'Cyber Hub' <ExternalLink className="w-4 h-4" /></a> ICT club, I lead initiatives to foster technological curiosity among peers.
-                </p>
-                <p className="mt-6">
-                  My journey is defined by a relentless drive to learn—exploring the realms of <span className="text-white">Cybersecurity</span>, <span className="text-white">Robotics</span>, and <span className="text-white">Creative Design</span> to build meaningful solutions.
-                </p>
-                <div className="mt-10 flex flex-wrap gap-8 text-lg">
-                   <div className="flex flex-col gap-2">
-                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Location</span>
-                      <span className="font-medium">Bangladesh 🇧🇩</span>
-                   </div>
-                   <div className="flex flex-col gap-2">
-                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Role</span>
-                      <span className="font-medium">Student & Tech Enthusiast</span>
-                   </div>
-                   <div className="flex flex-col gap-2">
-                      <span className="text-sm text-neon-purple font-mono uppercase tracking-widest">Socials</span>
-                      <div className="flex gap-4">
-                        <a href="https://github.com/maheeb-cyber" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors">
-                          <Github className="w-6 h-6" />
-                        </a>
-                        <a href="mailto:maheebhossain900@gmail.com" className="text-gray-400 hover:text-neon-purple transition-colors" title="Send me an email">
-                          <Mail className="w-6 h-6" />
-                        </a>
-                        <a href="https://discord.gg/3eukqzF2r" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-neon-purple transition-colors flex items-center gap-2 cursor-pointer" title="Join my Discord">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0"/><path d="M7 16.5c3.5 1 5.5 1 9 0"/><path d="M2 17l2.5-11.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2L22 17"/></svg>
-                        </a>
-                      </div>
-                   </div>
+        {/* ── ABOUT ── */}
+        <section id="about" className="scroll-mt-24 mb-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp}>
+              <SectionHeading icon={<User className="w-5 h-5" />} label="About Me" number="05" />
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              {/* Main bio */}
+              <motion.div variants={fadeUp} className="md:col-span-3 relative rounded-2xl border border-white/8 bg-gradient-to-br from-neon-purple/5 to-transparent p-7 overflow-hidden">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-neon-purple/8 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="relative space-y-4 text-zinc-300 text-base leading-relaxed">
+                  <p>
+                    I'm <span className="text-white font-semibold">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As Club Representative of{" "}
+                    <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-neon-purple hover:text-white transition-colors inline-flex items-center gap-1 font-medium">
+                      Cyber Hub <ExternalLink className="w-3.5 h-3.5" />
+                    </a>{" "}
+                    ICT club, I lead initiatives to foster tech curiosity among peers.
+                  </p>
+                  <p>
+                    My journey explores <span className="text-white font-medium">Cybersecurity</span>, <span className="text-white font-medium">Robotics</span>, <span className="text-white font-medium">Data Science</span>, and <span className="text-white font-medium">Creative Design</span> — building meaningful things along the way.
+                  </p>
+                  <div className="flex flex-wrap gap-4 pt-2">
+                    <a href="https://github.com/maheeb-cyber" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-zinc-500 hover:text-white transition-colors">
+                      <Github className="w-5 h-5" /> GitHub
+                    </a>
+                    <a href="mailto:maheebhossain900@gmail.com" className="flex items-center gap-2 text-sm text-zinc-500 hover:text-white transition-colors">
+                      <Mail className="w-5 h-5" /> Email
+                    </a>
+                    <a href="https://discord.gg/3eukqzF2r" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-zinc-500 hover:text-white transition-colors">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+                      Discord
+                    </a>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </motion.div>
+
+              {/* Stats cards */}
+              <motion.div variants={fadeUp} className="md:col-span-2 flex flex-col gap-4">
+                {[
+                  { icon: <MapPin className="w-4 h-4" />, label: "Location", value: "Bangladesh 🇧🇩" },
+                  { icon: <User className="w-4 h-4" />, label: "Role", value: "Student & Tech Enthusiast" },
+                  { icon: <Trophy className="w-4 h-4" />, label: "Award", value: "IT Intra Fest Winner" },
+                  { icon: <Shield className="w-4 h-4" />, label: "Club", value: "Cyber Hub Rep 2025–26" },
+                ].map((stat, i) => (
+                  <div key={i} className="flex items-center gap-3.5 p-4 rounded-xl border border-white/6 bg-zinc-950/50 hover:border-neon-purple/20 transition-all duration-300 group">
+                    <div className="w-8 h-8 rounded-lg bg-neon-purple/10 border border-neon-purple/15 flex items-center justify-center text-neon-purple shrink-0">
+                      {stat.icon}
+                    </div>
+                    <div>
+                      <p className="text-xs text-zinc-600 font-mono uppercase tracking-wider">{stat.label}</p>
+                      <p className="text-sm text-zinc-200 font-medium mt-0.5">{stat.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
           </motion.div>
         </section>
 
       </main>
 
-      <footer className="w-full py-8 border-t border-zinc-900 bg-black text-center text-sm text-muted-foreground font-mono">
-        <p>© {new Date().getFullYear()} Maheeb. Built with ❤️ and Code.</p>
+      <footer className="border-t border-white/5 bg-zinc-950/50 py-8 text-center">
+        <p className="text-xs text-zinc-600 font-mono">
+          © {new Date().getFullYear()} Maheeb Hossain · Built with React &amp; TypeScript
+        </p>
       </footer>
 
       <style>{`
         @keyframes wave {
           0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(-10deg); }
-          75% { transform: rotate(10deg); }
+          25% { transform: rotate(-12deg); }
+          75% { transform: rotate(12deg); }
         }
-        .animate-wave {
-          animation: wave 1.5s infinite;
-        }
+        .animate-wave { animation: wave 1.5s infinite; display: inline-block; }
       `}</style>
     </div>
   );
