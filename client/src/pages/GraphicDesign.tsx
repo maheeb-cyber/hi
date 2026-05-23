@@ -9,6 +9,10 @@ import slashHealthLogo from "@assets/Blue_Modern_Medical_Logo_20260426_162011_00
 import slashLogo from "@assets/IMG-30eed32a03fb652c27596bf2cea89b08-V_1778655019031.jpg";
 import fcPalashJersey from "@assets/IMG_20260220_224413~2_1778655019041.png";
 import protofoliathon from "@assets/IMG-9252b69196566f97634981d7f7cb44cd-V_1778655019054.jpg";
+import moonLure from "@assets/Moon.lure(2)_1779557194978.png";
+import maheebPresentation from "@assets/Yellow_and_White_Modern_Abstract_Creative_Project_Presentation_1779557217682.png";
+import slashLogoNew from "@assets/slash.logo_1779557254717.jpg";
+import slashHealthLogoDark from "@assets/Blue_Modern_Medical_Logo-removebg-preview_1779557305916.png";
 import { useState } from "react";
 
 const designs = [
@@ -59,6 +63,30 @@ const designs = [
     title: "FC Palash Jersey Design",
     category: "Apparel Design",
     description: "Custom football kit design featuring front and back views.",
+  },
+  {
+    src: moonLure,
+    title: "Moon Lure Logo",
+    category: "Logo Design",
+    description: "Elegant candle brand logo with crescent moon and botanical elements.",
+  },
+  {
+    src: maheebPresentation,
+    title: "Md. Maheeb Hossain – Title Slide",
+    category: "Presentation Design",
+    description: "Abstract dark presentation title card with fluid shapes.",
+  },
+  {
+    src: slashLogoNew,
+    title: "Slash© Logo – Gradient",
+    category: "Logo Design",
+    description: "Modern gradient brand mark for Slash© on purple-to-green background.",
+  },
+  {
+    src: slashHealthLogoDark,
+    title: "Slash Health Care Logo – Dark",
+    category: "Logo Design",
+    description: "Dark-background variant of the Slash Health Care medical logo.",
   },
 ];
 
