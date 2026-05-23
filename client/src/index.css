@@ -26,9 +26,9 @@
   
   --color-neon-purple: hsl(var(--neon-purple));
   
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Outfit', sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'Fira Code', monospace;
   
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
