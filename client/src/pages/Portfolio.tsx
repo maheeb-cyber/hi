@@ -252,7 +252,8 @@ export default function Portfolio() {
                       role: "Club Representative",
                       org: "Cyber Hub (ICT Club)",
                       year: "2025 - Present",
-                      desc: "Leading workshops and organizing tech events for students."
+                      desc: "Leading workshops and organizing tech events for students.",
+                      link: "https://www.scpscch.tech/"
                     },
                     {
                       role: "Participant",
@@ -267,7 +268,13 @@ export default function Portfolio() {
                       </div>
                       <div className="flex-1 space-y-2">
                         <h3 className="text-xl font-bold">{eca.role}</h3>
-                        <p className="text-muted-foreground font-medium">{eca.org}</p>
+                        {eca.link ? (
+                          <a href={eca.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground font-medium hover:text-neon-purple transition-colors flex items-center gap-1.5 w-fit">
+                            {eca.org} <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        ) : (
+                          <p className="text-muted-foreground font-medium">{eca.org}</p>
+                        )}
                         <p className="text-sm text-gray-400">{eca.desc}</p>
                       </div>
                     </div>
@@ -350,9 +357,9 @@ export default function Portfolio() {
                     <h3 className="text-xl font-display font-bold text-white leading-snug group-hover:text-neon-purple transition-colors duration-300">
                       Club Representative
                     </h3>
-                    <p className="text-neon-purple/80 font-mono text-sm font-medium tracking-wide">
-                      Cyber Hub — ICT Club · SCPSC
-                    </p>
+                    <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-neon-purple/80 font-mono text-sm font-medium tracking-wide hover:text-neon-purple transition-colors flex items-center gap-1.5 w-fit">
+                      Cyber Hub — ICT Club · SCPSC <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                   {/* Divider */}
                   <div className="h-px bg-gradient-to-r from-neon-purple/30 via-neon-purple/10 to-transparent" />
@@ -437,7 +444,7 @@ export default function Portfolio() {
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-40 h-40 bg-neon-purple/15 rounded-full blur-3xl"></div>
               <CardContent className="p-8 md:p-12 text-xl md:text-3xl leading-relaxed text-gray-200 font-sans font-light">
                 <p>
-                  I am <span className="text-neon-purple font-medium">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As a key representative of the <span className="text-white font-medium">'Cyber Hub'</span> ICT club, I lead initiatives to foster technological curiosity among peers.
+                  I am <span className="text-neon-purple font-medium">Maheeb</span>, a passionate tech enthusiast from Bangladesh and a proud SCPSCIAN. As a key representative of the <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-neon-purple transition-colors inline-flex items-center gap-1">'Cyber Hub' <ExternalLink className="w-4 h-4" /></a> ICT club, I lead initiatives to foster technological curiosity among peers.
                 </p>
                 <p className="mt-6">
                   My journey is defined by a relentless drive to learn—exploring the realms of <span className="text-white">Cybersecurity</span>, <span className="text-white">Robotics</span>, and <span className="text-white">Creative Design</span> to build meaningful solutions.
