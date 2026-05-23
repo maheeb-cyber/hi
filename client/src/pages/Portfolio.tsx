@@ -276,13 +276,6 @@ export default function Portfolio() {
             </motion.a>
           </motion.div>
 
-          {/* scroll hint */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.5 }} className="absolute bottom-8 flex flex-col items-center gap-1.5 text-zinc-600">
-            <span className="text-[10px] font-mono tracking-widest">SCROLL</span>
-            <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-              <ArrowDown className="w-3.5 h-3.5" />
-            </motion.div>
-          </motion.div>
         </section>
 
         {/* ── PROJECTS ── */}
@@ -452,46 +445,119 @@ export default function Portfolio() {
         <section id="about" className="scroll-mt-24 mb-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp}><SectionHeading icon={<Terminal className="w-4 h-4" />} label="About Me" number="05" /></motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
-              <motion.div variants={fadeUp} className="md:col-span-3 relative rounded-2xl border border-white/8 p-6 overflow-hidden" style={{ background: "linear-gradient(135deg, hsla(var(--neon-purple),0.05), transparent)" }}>
-                <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" style={{ background: "hsla(var(--neon-purple),0.07)" }} />
-                <div className="relative space-y-3 text-zinc-300 text-sm leading-relaxed">
-                  <p>
-                    I'm <span className="text-white font-semibold">Maheeb</span> (Md. Maheeb Hossain), a passionate tech enthusiast from Bangladesh. Club Representative of{" "}
-                    <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium hover:text-white transition-colors" style={{ color: "hsl(var(--neon-purple))" }}>
-                      Cyber Hub <ExternalLink className="w-3 h-3" />
-                    </a>{" "}ICT club — leading initiatives to foster tech curiosity.
-                  </p>
-                  <p>Exploring <span className="text-white font-medium">Cybersecurity</span>, <span className="text-white font-medium">Robotics</span>, <span className="text-white font-medium">Data Science</span>, and <span className="text-white font-medium">Creative Design</span>.</p>
-                  <div className="flex flex-wrap gap-4 pt-1">
-                    {[
-                      { href: "https://github.com/maheeb-cyber", icon: <Github className="w-4 h-4" />, label: "GitHub" },
-                      { href: "mailto:maheebhossain900@gmail.com", icon: <Mail className="w-4 h-4" />, label: "Email" },
-                      { href: "https://discord.gg/3eukqzF2r", icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>, label: "Discord" },
-                    ].map((s) => (
-                      <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05, y: -2 }} className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-white transition-colors">
-                        {s.icon} {s.label}
-                      </motion.a>
-                    ))}
+
+            <div className="flex flex-col gap-6">
+
+              {/* Top row — bio + stats */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
+
+                {/* Main bio */}
+                <motion.div variants={fadeUp} className="md:col-span-3 relative rounded-2xl border border-white/8 p-6 overflow-hidden" style={{ background: "linear-gradient(135deg, hsla(var(--neon-purple),0.05), transparent)" }}>
+                  <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" style={{ background: "hsla(var(--neon-purple),0.07)" }} />
+                  <div className="relative space-y-3 text-zinc-300 text-sm leading-relaxed">
+                    <p>
+                      I'm <span className="text-white font-semibold">Md. Maheeb Hossain</span>, a 
+                      passionate tech enthusiast, student, and proud SCPSCIAN from Bangladesh 🇧🇩. 
+                      From a young age I've been deeply fascinated by the way technology shapes the 
+                      world — and that curiosity has driven me to explore everything from 
+                      <span className="text-white font-medium"> Ethical Hacking</span> to{" "}
+                      <span className="text-white font-medium">Graphic Design</span>.
+                    </p>
+                    <p>
+                      As the elected <span className="text-white font-medium">Club Representative</span> of{" "}
+                      <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium hover:text-white transition-colors" style={{ color: "hsl(var(--neon-purple))" }}>
+                        Cyber Hub <ExternalLink className="w-3 h-3" />
+                      </a>{" "}
+                      — the ICT club of SCPSC — I organise workshops, tech events, and seminars 
+                      to spark technological curiosity among my fellow students. Leading this 
+                      club has taught me teamwork, communication, and real-world problem-solving 
+                      in ways no classroom ever could.
+                    </p>
+                    <p>
+                      On the technical side, I'm actively learning <span className="text-white font-medium">Python</span> for 
+                      data science and automation, diving into the fundamentals of{" "}
+                      <span className="text-white font-medium">Cybersecurity</span> and ethical hacking, 
+                      and building projects that combine code with creative thinking. I believe 
+                      that the best solutions sit at the intersection of logic and design.
+                    </p>
+                    <p>
+                      Beyond the screen, I'm passionate about <span className="text-white font-medium">Robotics</span>, 
+                      where hardware meets software in the most exciting ways. I also express 
+                      myself through <span className="text-white font-medium">Graphic Design</span> and{" "}
+                      <span className="text-white font-medium">Video Editing</span> — crafting visuals 
+                      that tell stories and leave an impression.
+                    </p>
+                    <p>
+                      My goal is simple: keep learning, keep building, and use technology to 
+                      make a meaningful difference — starting right here in Bangladesh and 
+                      reaching as far as possible. I'm always open to collaboration, new ideas, 
+                      and connecting with like-minded people around the world.
+                    </p>
                   </div>
+                </motion.div>
+
+                {/* Stats */}
+                <motion.div variants={stagger} className="md:col-span-2 flex flex-col gap-3">
+                  {[
+                    { icon: <MapPin className="w-3.5 h-3.5" />, label: "Location", value: "Bangladesh 🇧🇩" },
+                    { icon: <User className="w-3.5 h-3.5" />, label: "Role", value: "Student & Tech Enthusiast" },
+                    { icon: <Trophy className="w-3.5 h-3.5" />, label: "Award", value: "IT Intra Fest Winner" },
+                    { icon: <Shield className="w-3.5 h-3.5" />, label: "Club", value: "Cyber Hub Rep 2025–26" },
+                  ].map((stat, i) => (
+                    <motion.div key={i} variants={fadeUp} whileHover={{ x: 4, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-3 p-3.5 rounded-xl border border-white/6 bg-zinc-950/50 hover:border-neon-purple/20 transition-all group">
+                      <div className="w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 group-hover:bg-neon-purple/15 transition-all" style={{ background: "hsla(var(--neon-purple),0.08)", borderColor: "hsla(var(--neon-purple),0.15)", color: "hsl(var(--neon-purple))" }}>{stat.icon}</div>
+                      <div>
+                        <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-wider">{stat.label}</p>
+                        <p className="text-xs text-zinc-200 font-medium mt-0.5">{stat.value}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Skills grid */}
+              <motion.div variants={fadeUp} className="rounded-2xl border border-white/8 p-6" style={{ background: "linear-gradient(135deg, hsla(var(--neon-purple),0.04), transparent)" }}>
+                <h3 className="text-sm font-display font-bold text-white mb-4 tracking-wide">Skills & Interests</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {[
+                    { area: "Python & Data Science", detail: "Pandas, data viz, scripting" },
+                    { area: "Cybersecurity", detail: "Ethical hacking fundamentals, CTF" },
+                    { area: "Graphic Design", detail: "Photoshop, Illustrator, AI Art" },
+                    { area: "Video Editing", detail: "Motion graphics, storytelling" },
+                    { area: "Web Development", detail: "HTML/CSS, JavaScript, React" },
+                    { area: "Robotics", detail: "Hardware + software integration" },
+                    { area: "Leadership", detail: "Club rep, event organiser" },
+                    { area: "Creative Writing", detail: "Tech blogs, school publications" },
+                  ].map((s, i) => (
+                    <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} whileHover={{ y: -2 }} className="p-3 rounded-xl border border-white/6 bg-white/[0.02] hover:border-neon-purple/20 transition-all">
+                      <p className="text-xs font-semibold text-zinc-200 mb-0.5">{s.area}</p>
+                      <p className="text-[11px] text-zinc-500">{s.detail}</p>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
-              <motion.div variants={stagger} className="md:col-span-2 flex flex-col gap-3">
-                {[
-                  { icon: <MapPin className="w-3.5 h-3.5" />, label: "Location", value: "Bangladesh 🇧🇩" },
-                  { icon: <User className="w-3.5 h-3.5" />, label: "Role", value: "Student & Tech Enthusiast" },
-                  { icon: <Trophy className="w-3.5 h-3.5" />, label: "Award", value: "IT Intra Fest Winner" },
-                  { icon: <Shield className="w-3.5 h-3.5" />, label: "Club", value: "Cyber Hub Rep 2025–26" },
-                ].map((stat, i) => (
-                  <motion.div key={i} variants={fadeUp} whileHover={{ x: 4, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-3 p-3.5 rounded-xl border border-white/6 bg-zinc-950/50 hover:border-neon-purple/20 transition-all group">
-                    <div className="w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 group-hover:bg-neon-purple/15 transition-all" style={{ background: "hsla(var(--neon-purple),0.08)", borderColor: "hsla(var(--neon-purple),0.15)", color: "hsl(var(--neon-purple))" }}>{stat.icon}</div>
-                    <div>
-                      <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-wider">{stat.label}</p>
-                      <p className="text-xs text-zinc-200 font-medium mt-0.5">{stat.value}</p>
-                    </div>
-                  </motion.div>
-                ))}
+
+              {/* Contact row */}
+              <motion.div variants={fadeUp} className="rounded-2xl border border-white/8 p-6" style={{ background: "linear-gradient(135deg, hsla(var(--neon-purple),0.04), transparent)" }}>
+                <h3 className="text-sm font-display font-bold text-white mb-4 tracking-wide">Get In Touch</h3>
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    { href: "https://github.com/maheeb-cyber", icon: <Github className="w-4 h-4" />, label: "GitHub", sub: "maheeb-cyber" },
+                    { href: "mailto:maheebhossain900@gmail.com", icon: <Mail className="w-4 h-4" />, label: "Email", sub: "maheebhossain900@gmail.com" },
+                    { href: "https://discord.gg/3eukqzF2r", icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>, label: "Discord", sub: "Join my server" },
+                    { href: "viber://chat?number=%2B8801756975275", icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M11.4 0C5.5.1 1.1 4.6.9 10.5c-.1 2.7.7 5.2 2.3 7.2L2 21.4c-.1.4.3.8.7.7l3.8-1.1c1.9 1.2 4.1 1.9 6.5 1.9 6-.1 10.5-4.7 10.5-10.7S17.4-.1 11.4 0zm5.5 15.8c-.3.8-1.5 1.5-2.1 1.6-.5.1-1.2.1-1.9-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.5-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.3-.3.6-.4.8-.4h.6c.2 0 .4.1.5.4.2.4.7 1.7.8 1.8.1.1.1.3 0 .4l-.3.5c-.1.1-.2.3-.1.5.3.5.7 1.1 1.2 1.5.6.5 1.1.8 1.7 1 .2.1.3 0 .4-.1l.4-.5c.1-.2.3-.2.5-.1l1.7.8c.2.1.3.2.4.3-.1.5-.1.9-.3 1.5z"/></svg>, label: "Viber", sub: "+880 1756975275" },
+                  ].map((s) => (
+                    <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.03, y: -2 }} className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/[0.02] hover:border-neon-purple/25 hover:bg-neon-purple/5 transition-all group">
+                      <span style={{ color: "hsl(var(--neon-purple))" }}>{s.icon}</span>
+                      <div>
+                        <p className="text-xs font-semibold text-zinc-200 group-hover:text-white transition-colors">{s.label}</p>
+                        <p className="text-[11px] text-zinc-500 font-mono">{s.sub}</p>
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
               </motion.div>
+
             </div>
           </motion.div>
         </section>
