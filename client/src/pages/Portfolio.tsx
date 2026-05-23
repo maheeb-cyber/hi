@@ -16,7 +16,10 @@ import {
   ExternalLink,
   Send,
   FileText,
-  Palette
+  Palette,
+  Trophy,
+  Star,
+  Shield
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
@@ -60,6 +63,7 @@ export default function Portfolio() {
   const navItems = [
     { id: "projects", label: "Projects" },
     { id: "eca", label: "ECA" },
+    { id: "awards", label: "Awards" },
     { id: "blog", label: "Blog" },
     { id: "about", label: "About" },
   ];
@@ -271,6 +275,103 @@ export default function Portfolio() {
                 </div>
               </CardContent>
             </Card>
+          </motion.div>
+        </section>
+
+        {/* AWARDS SECTION */}
+        <section id="awards" className="scroll-mt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-neon-purple flex items-center gap-3">
+              <Trophy className="w-8 h-8" /> Awards
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              {/* Award 1 — Programming Contest Winner */}
+              <div className="relative group rounded-2xl overflow-hidden border border-yellow-500/30 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 hover:border-yellow-400/60 transition-all duration-500 shadow-[0_0_30px_rgba(234,179,8,0.07)] hover:shadow-[0_0_40px_rgba(234,179,8,0.18)]">
+                {/* Glow blob */}
+                <div className="absolute -top-6 -left-6 w-32 h-32 bg-yellow-500/10 rounded-full blur-2xl group-hover:bg-yellow-400/20 transition-all duration-500" />
+                <div className="relative p-7 flex flex-col gap-5">
+                  {/* Trophy icon badge */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-yellow-500/10 border border-yellow-500/30 group-hover:bg-yellow-500/20 transition-all duration-300">
+                      <Trophy className="w-7 h-7 text-yellow-400" />
+                    </div>
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 tracking-widest uppercase">
+                      1st Place
+                    </span>
+                  </div>
+                  {/* Title */}
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-display font-bold text-white leading-snug group-hover:text-yellow-300 transition-colors duration-300">
+                      SCPSC IT Intra Fest
+                    </h3>
+                    <p className="text-yellow-400/80 font-mono text-sm font-medium tracking-wide">
+                      Programming Contest — Winner
+                    </p>
+                  </div>
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-yellow-500/30 via-yellow-400/10 to-transparent" />
+                  {/* Description */}
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Secured <span className="text-yellow-300 font-medium">1st place</span> in the intra-school IT fest programming competition at SCPSC, showcasing problem-solving and coding skills.
+                  </p>
+                  {/* Stars */}
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Award 2 — Club Representative */}
+              <div className="relative group rounded-2xl overflow-hidden border border-neon-purple/30 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 hover:border-neon-purple/60 transition-all duration-500 shadow-[0_0_30px_rgba(168,85,247,0.07)] hover:shadow-[0_0_40px_rgba(168,85,247,0.18)]">
+                {/* Glow blob */}
+                <div className="absolute -top-6 -right-6 w-32 h-32 bg-neon-purple/10 rounded-full blur-2xl group-hover:bg-neon-purple/20 transition-all duration-500" />
+                <div className="relative p-7 flex flex-col gap-5">
+                  {/* Shield icon badge */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-neon-purple/10 border border-neon-purple/30 group-hover:bg-neon-purple/20 transition-all duration-300">
+                      <Shield className="w-7 h-7 text-neon-purple" />
+                    </div>
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20 tracking-widest uppercase">
+                      2025 – 2026
+                    </span>
+                  </div>
+                  {/* Title */}
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-display font-bold text-white leading-snug group-hover:text-neon-purple transition-colors duration-300">
+                      Club Representative
+                    </h3>
+                    <p className="text-neon-purple/80 font-mono text-sm font-medium tracking-wide">
+                      Cyber Hub — ICT Club · SCPSC
+                    </p>
+                  </div>
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-neon-purple/30 via-neon-purple/10 to-transparent" />
+                  {/* Description */}
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Elected as <span className="text-neon-purple font-medium">Club Representative</span> for the Cyber Hub ICT Club, leading workshops, organizing tech events, and representing the club for the academic year 2025–2026.
+                  </p>
+                  {/* Badge row */}
+                  <div className="flex flex-wrap gap-2">
+                    {["Leadership", "Tech Events", "Workshops"].map((tag) => (
+                      <span key={tag} className="text-xs font-mono px-2.5 py-1 rounded-full bg-neon-purple/10 text-neon-purple/80 border border-neon-purple/20">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </motion.div>
         </section>
 
