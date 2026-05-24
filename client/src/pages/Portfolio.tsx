@@ -457,7 +457,11 @@ export default function Portfolio() {
                   <div className="relative space-y-3 text-zinc-300 text-sm leading-relaxed">
                     <p>
                       I'm <span className="text-white font-semibold">Md. Maheeb Hossain</span>, a 
-                      passionate tech enthusiast, student, and proud SCPSCIAN from Bangladesh 🇧🇩. 
+                      passionate tech enthusiast, student, and proud student of{" "}
+                      <span className="highlight-animate text-white font-semibold">
+                        Savar Cantonment Public School &amp; College
+                      </span>{" "}
+                      <span className="text-zinc-500 font-mono text-xs">(SCPSC)</span> from Bangladesh 🇧🇩.
                       From a young age I've been deeply fascinated by the way technology shapes the 
                       world — and that curiosity has driven me to explore everything from 
                       <span className="text-white font-medium"> Ethical Hacking</span> to{" "}
@@ -468,7 +472,11 @@ export default function Portfolio() {
                       <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium hover:text-white transition-colors" style={{ color: "hsl(var(--neon-purple))" }}>
                         Cyber Hub <ExternalLink className="w-3 h-3" />
                       </a>{" "}
-                      — the ICT club of SCPSC — I organise workshops, tech events, and seminars 
+                      — the ICT club of{" "}
+                      <span className="highlight-animate text-white font-semibold" style={{ animationDelay: "0.9s" }}>
+                        Savar Cantonment Public School &amp; College
+                      </span>{" "}
+                      — I organise workshops, tech events, and seminars 
                       to spark technological curiosity among my fellow students. Leading this 
                       club has taught me teamwork, communication, and real-world problem-solving 
                       in ways no classroom ever could.
