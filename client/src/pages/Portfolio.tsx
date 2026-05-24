@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
+import slashLogo from "@assets/slash.logo_1779607963883.jpg";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 
@@ -276,6 +277,73 @@ export default function Portfolio() {
             </motion.a>
           </motion.div>
 
+        </section>
+
+        {/* ── SLASH AGENCY ── */}
+        <section id="agency" className="scroll-mt-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp}>
+              <SectionHeading icon={<Palette className="w-4 h-4" />} label="My Agency" number="00" />
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 260, damping: 18 } }}
+              className="relative rounded-2xl overflow-hidden border border-white/10 p-6 md:p-8"
+              style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.1), rgba(16,185,129,0.07), rgba(0,0,0,0))" }}
+            >
+              {/* Background blobs */}
+              <div className="absolute -top-10 -left-10 w-56 h-56 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-10 -right-10 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="relative flex flex-col md:flex-row items-center md:items-start gap-6">
+                {/* Logo */}
+                <motion.img
+                  src={slashLogo}
+                  alt="Slash Web & Design"
+                  whileHover={{ rotate: 3, scale: 1.05 }}
+                  className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover shadow-[0_0_28px_rgba(99,102,241,0.35)] shrink-0"
+                />
+
+                {/* Info */}
+                <div className="flex-1 space-y-3 text-center md:text-left">
+                  <div className="flex flex-wrap justify-center md:justify-start items-center gap-2">
+                    <h3 className="text-2xl md:text-3xl font-display font-bold text-white">Slash Web &amp; Design</h3>
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 tracking-widest uppercase">Own Agency</span>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
+                    My personal creative agency delivering brand identities, digital design, web interfaces, 
+                    and visual storytelling. Built on the belief that every great brand starts with a sharp idea 
+                    and even sharper execution.
+                  </p>
+                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                    {["Brand Identity", "Logo Design", "Web Design", "Infographics", "UI/UX"].map((tag, i) => (
+                      <motion.span
+                        key={tag}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.07 }}
+                        className="text-xs px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 font-mono"
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
+                  <div className="pt-1">
+                    <Link href="/graphic-design">
+                      <motion.span
+                        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold cursor-pointer"
+                        style={{ background: "linear-gradient(135deg, #6366f1, #10b981)", color: "#fff" }}
+                      >
+                        <Palette className="w-4 h-4" /> View Design Work
+                      </motion.span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* ── PROJECTS ── */}
