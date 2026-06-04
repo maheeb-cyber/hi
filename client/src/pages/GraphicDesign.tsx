@@ -12,6 +12,14 @@ import moonLure from "@assets/Moon.lure(2)_1779557194978.png";
 import maheebPresentation from "@assets/Yellow_and_White_Modern_Abstract_Creative_Project_Presentation_1779557217682.png";
 import slashHealthLogoDark from "@assets/Blue_Modern_Medical_Logo-removebg-preview_1779557305916.png";
 import slashLogo from "@assets/slash.logo_1779607963883.jpg";
+import palashLogo from "@assets/Vintage_and_Luxury_Tailor_Decorative_Ornamental_Logo_20260412__1780559467911.png";
+import palashPrefectCert from "@assets/IMG-11b58d443747b47d940c9ecac600e8d7-V_1780559467937.jpg";
+import droneIcon from "@assets/sdhj_20250830_175148_0000_1780559467952.png";
+import eidCard from "@assets/IMG-8271abab70b6bd4192093ff5ce6cbb4a-V_1780559467973.jpg";
+import guitarLogo from "@assets/Black_White_Simple_Classic_Acoustic_Guitar_Logo_20250627_13210_1780559467995.png";
+import badmintonCert from "@assets/IMG-240a3dc5ac30f12c36ccd057a475bf57-V_1780559468019.jpg";
+import palashBadmintonBadge from "@assets/IMG_20251111_214655_1780559468041.jpg";
+import badmintonRunnerUpCert from "@assets/IMG-35912479dc6afa0f012955f8fd61f0ab-V_1780559468064.jpg";
 import { useState } from "react";
 
 const designs = [
@@ -80,6 +88,54 @@ const designs = [
     title: "Slash Health Care Logo – Dark",
     category: "Logo Design",
     description: "Dark-background variant of the Slash Health Care medical logo.",
+  },
+  {
+    src: palashLogo,
+    title: "Palash – Vintage Tailor Logo",
+    category: "Logo Design",
+    description: "Vintage & luxury ornamental logo design for Palash brand with gold detailing.",
+  },
+  {
+    src: palashPrefectCert,
+    title: "Palash Prefect Approval Certificate",
+    category: "Certificate Design",
+    description: "Official certificate design for SCPSC Palash section prefect approval.",
+  },
+  {
+    src: droneIcon,
+    title: "3D Printed Modern Drone – Icon",
+    category: "Logo Design",
+    description: "Minimalist black-and-white icon concept for a 3D printed modern drone — created by M.M.S.",
+  },
+  {
+    src: eidCard,
+    title: "Eid Mubarak Greeting Card",
+    category: "Greeting Card",
+    description: "Personal Eid Mubarak greeting card design by Maheeb Hossain with crescent moon motif.",
+  },
+  {
+    src: guitarLogo,
+    title: "TGM Acoustic Guitar Logo",
+    category: "Logo Design",
+    description: "Classic black-and-white acoustic guitar logo for Maheeb Hossain — TGM branding.",
+  },
+  {
+    src: palashBadmintonBadge,
+    title: "Palash Badminton Championship Badge",
+    category: "Badge / Emblem",
+    description: "Neon-styled badge emblem for the Palash Section Badminton Championship.",
+  },
+  {
+    src: badmintonCert,
+    title: "Badminton Championship 2025 – Certificate",
+    category: "Certificate Design",
+    description: "Certificate template for the Provincial High School Badminton Championship 2025.",
+  },
+  {
+    src: badmintonRunnerUpCert,
+    title: "Palash Badminton 2024 – Runner-Up Certificate",
+    category: "Certificate Design",
+    description: "Certificate of Achievement for Palash Badminton Championship 2024 Runner-Up.",
   },
 ];
 
