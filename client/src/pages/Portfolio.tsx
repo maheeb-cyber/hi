@@ -61,21 +61,21 @@ function AnimatedWords({ text, className, delay = 0 }: { text: string; className
 }
 
 /* ── section heading ── */
-function SectionHeading({ icon, label, number }: { icon: React.ReactNode; label: string; number: string }) {
+function SectionHeading({ icon, label, number, accent = "hsl(var(--neon-purple))", lineColor }: { icon: React.ReactNode; label: string; number: string; accent?: string; lineColor?: string }) {
   return (
     <div className="flex items-center gap-4 mb-10">
-      <motion.span initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }} className="text-xs font-mono opacity-40 select-none" style={{ color: "hsl(var(--neon-purple))" }}>
+      <motion.span initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }} className="text-xs font-mono opacity-40 select-none" style={{ color: accent }}>
         {number}
       </motion.span>
       <motion.div initial={{ opacity: 0, x: -14 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.05 }} className="flex items-center gap-3">
-        <div className="flex items-center justify-center w-10 h-10 rounded-xl border" style={{ background: "hsla(var(--neon-purple),0.08)", borderColor: "hsla(var(--neon-purple),0.2)", color: "hsl(var(--neon-purple))" }}>
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl border" style={{ background: `${accent}18`, borderColor: `${accent}40`, color: accent }}>
           {icon}
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+        <h2 className="text-2xl md:text-3xl font-display font-bold" style={{ color: accent }}>
           <AnimatedWords text={label} />
         </h2>
       </motion.div>
-      <motion.div initial={{ scaleX: 0, opacity: 0 }} whileInView={{ scaleX: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} style={{ originX: 0 }} className="flex-1 h-px bg-gradient-to-r from-[hsla(var(--neon-purple),0.35)] to-transparent" />
+      <motion.div initial={{ scaleX: 0, opacity: 0 }} whileInView={{ scaleX: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} style={{ originX: 0, background: `linear-gradient(to right, ${lineColor ?? accent}60, transparent)` }} className="flex-1 h-px" />
     </div>
   );
 }
@@ -133,8 +133,20 @@ export default function Portfolio() {
   ];
 
   const projects = [
-    { num: "01", title: "Slash Health Care", desc: "Smart AI assistant featuring 10,000+ doctor tips and comprehensive health care guidance — making quality health information accessible to everyone.", tags: ["AI", "Health Tech", "Python", "Web"], gFrom: "from-emerald-500/10", gTo: "to-teal-500/5", hoverBorder: "hover:border-emerald-500/40", link: null as string | null, linkText: "" },
-    { num: "02", title: "Slash Sports", desc: "All kinds of sports gear and equipment — a platform dedicated to SCPSC students, making quality sports essentials easy to find.", tags: ["Sports", "E-commerce", "Web Design"], gFrom: "from-blue-500/10", gTo: "to-cyan-500/5", hoverBorder: "hover:border-blue-500/40", link: null as string | null, linkText: "" },
+    {
+      num: "01", title: "Slash Health Care",
+      desc: "Smart AI assistant featuring 10,000+ doctor tips and comprehensive health care guidance — making quality health information accessible to everyone.",
+      tags: ["AI", "Health Tech", "Python", "Web"],
+      gradient: "linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(6,182,212,0.1) 50%, rgba(0,0,0,0) 100%)",
+      glow: "rgba(16,185,129,0.25)", accent: "#10b981", border: "rgba(16,185,129,0.3)",
+    },
+    {
+      num: "02", title: "Slash Sports",
+      desc: "All kinds of sports gear and equipment — a platform dedicated to SCPSC students, making quality sports essentials easy to find.",
+      tags: ["Sports", "E-commerce", "Web Design"],
+      gradient: "linear-gradient(135deg, rgba(59,130,246,0.18) 0%, rgba(99,102,241,0.1) 50%, rgba(0,0,0,0) 100%)",
+      glow: "rgba(59,130,246,0.25)", accent: "#3b82f6", border: "rgba(59,130,246,0.3)",
+    },
   ];
 
   return (
@@ -253,22 +265,19 @@ export default function Portfolio() {
           {/* Skill badges */}
           <motion.div variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 2.6 } } }} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-2">
             {[
-              { label: "Data Science", icon: <Zap className="w-3 h-3" />, link: null },
-              { label: "Graphic Designer", icon: <Palette className="w-3 h-3" />, link: "/graphic-design" },
-              { label: "Video Editor", icon: <Code2 className="w-3 h-3" />, link: null },
-              { label: "Cybersecurity", icon: <Shield className="w-3 h-3" />, link: null },
-              { label: "Robotics", icon: <Cpu className="w-3 h-3" />, link: null },
+              { label: "Data Science", icon: <Zap className="w-3 h-3" />, link: null, color: "#f59e0b", bg: "rgba(245,158,11,0.1)", border: "rgba(245,158,11,0.35)" },
+              { label: "Graphic Designer", icon: <Palette className="w-3 h-3" />, link: "/graphic-design", color: "#a855f7", bg: "rgba(168,85,247,0.1)", border: "rgba(168,85,247,0.45)" },
+              { label: "Video Editor", icon: <Code2 className="w-3 h-3" />, link: null, color: "#f43f5e", bg: "rgba(244,63,94,0.08)", border: "rgba(244,63,94,0.3)" },
+              { label: "Cybersecurity", icon: <Shield className="w-3 h-3" />, link: null, color: "#10b981", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.3)" },
+              { label: "Robotics", icon: <Cpu className="w-3 h-3" />, link: null, color: "#38bdf8", bg: "rgba(56,189,248,0.08)", border: "rgba(56,189,248,0.3)" },
             ].map((skill) => {
               const pill = (
                 <motion.span
                   variants={{ hidden: { opacity: 0, scale: 0.7, y: 8 }, visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 12 } } }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono transition-all duration-300 cursor-pointer hover:scale-105"
-                  style={skill.link
-                    ? { borderColor: "hsla(var(--neon-purple),0.45)", background: "hsla(var(--neon-purple),0.07)", color: "#e4e4e7" }
-                    : { borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)", color: "#a1a1aa" }
-                  }
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono transition-all duration-300 cursor-pointer hover:scale-105 hover:brightness-125"
+                  style={{ borderColor: skill.border, background: skill.bg, color: "#e4e4e7" }}
                 >
-                  <span style={{ color: "hsl(var(--neon-purple))" }}>{skill.icon}</span>
+                  <span style={{ color: skill.color }}>{skill.icon}</span>
                   {skill.label}
                 </motion.span>
               );
@@ -303,40 +312,64 @@ export default function Portfolio() {
         {/* ── PROJECTS ── */}
         <section id="projects" className="scroll-mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp}><SectionHeading icon={<Cpu className="w-4 h-4" />} label="Projects" number="01" /></motion.div>
+            <motion.div variants={fadeUp}><SectionHeading icon={<Cpu className="w-4 h-4" />} label="Projects" number="01" accent="#10b981" /></motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {projects.map((p, idx) => (
                 <motion.div
                   key={p.num} variants={fadeUp}
-                  whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                  className={`group relative rounded-2xl border border-white/8 bg-gradient-to-br ${p.gFrom} ${p.gTo} ${p.hoverBorder} transition-all duration-300 overflow-hidden hover:shadow-lg`}
+                  whileHover={{ y: -5, boxShadow: `0 0 36px ${p.glow}`, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                  className="group relative rounded-2xl border overflow-hidden transition-all duration-300"
+                  style={{ background: p.gradient, borderColor: p.border }}
                 >
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: `linear-gradient(to right, transparent, ${p.accent}, transparent)` }} />
                   <div className="p-5 flex flex-col gap-3.5 h-full">
                     <div className="flex items-start justify-between">
-                      <span className="text-2xl font-display font-bold text-white/8 group-hover:text-white/14 transition-colors select-none">{p.num}</span>
-                      <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-neon-purple/30 transition-colors">
-                        <Code2 className="w-3.5 h-3.5 text-zinc-500 group-hover:text-neon-purple transition-colors" />
+                      <span className="text-3xl font-display font-black select-none opacity-20 group-hover:opacity-40 transition-all" style={{ color: p.accent }}>{p.num}</span>
+                      <div className="w-8 h-8 rounded-xl border flex items-center justify-center transition-all" style={{ background: `${p.accent}18`, borderColor: `${p.accent}40`, color: p.accent }}>
+                        <Code2 className="w-4 h-4" />
                       </div>
                     </div>
                     <div className="flex-1 space-y-1.5">
-                      <h3 className="text-base font-display font-bold text-white group-hover:text-neon-purple transition-colors">
+                      <h3 className="text-base font-display font-bold text-white group-hover:brightness-125 transition-all" style={{ textShadow: `0 0 20px ${p.accent}40` }}>
                         <AnimatedWords text={p.title} delay={idx * 0.05} />
                       </h3>
-                      <p className="text-zinc-500 text-sm leading-relaxed">{p.desc}</p>
+                      <p className="text-zinc-400 text-sm leading-relaxed">{p.desc}</p>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {p.tags.map((t) => (
-                        <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 font-mono">{t}</span>
+                        <span key={t} className="text-xs px-2.5 py-0.5 rounded-full border font-mono" style={{ background: `${p.accent}12`, borderColor: `${p.accent}35`, color: p.accent }}>{t}</span>
                       ))}
                     </div>
-                    {p.link && (
-                      <motion.a href={p.link} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-zinc-300 hover:border-neon-purple/40 hover:text-neon-purple hover:bg-neon-purple/5 transition-all">
-                        <FileText className="w-3.5 h-3.5" /> {p.linkText}
-                      </motion.a>
-                    )}
                   </div>
                 </motion.div>
               ))}
+
+              {/* View Designs card */}
+              <motion.div variants={fadeUp} className="md:col-span-2">
+                <Link href="/graphic-design">
+                  <motion.div
+                    whileHover={{ y: -3, transition: { type: "spring", stiffness: 280, damping: 18 } }}
+                    className="group relative rounded-2xl border overflow-hidden cursor-pointer p-5 flex items-center justify-between gap-4"
+                    style={{ background: "linear-gradient(135deg, rgba(168,85,247,0.12) 0%, rgba(236,72,153,0.08) 50%, rgba(99,102,241,0.06) 100%)", borderColor: "rgba(168,85,247,0.3)" }}
+                  >
+                    <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: "linear-gradient(to right, transparent, #a855f7, #ec4899, transparent)" }} />
+                    <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(168,85,247,0.1)" }} />
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl border flex items-center justify-center shrink-0" style={{ background: "rgba(168,85,247,0.15)", borderColor: "rgba(168,85,247,0.4)", color: "#a855f7" }}>
+                        <Palette className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-display font-bold text-white">Browse My Design Work</p>
+                        <p className="text-xs text-zinc-400 mt-0.5">Logos · Posters · Certificates · Branding &amp; more</p>
+                      </div>
+                    </div>
+                    <motion.div whileHover={{ x: 4 }} className="shrink-0 flex items-center gap-1.5 text-xs font-mono px-4 py-2 rounded-xl border" style={{ background: "rgba(168,85,247,0.1)", borderColor: "rgba(168,85,247,0.35)", color: "#a855f7" }}>
+                      View All <ChevronRight className="w-3.5 h-3.5" />
+                    </motion.div>
+                  </motion.div>
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </section>
@@ -344,26 +377,26 @@ export default function Portfolio() {
         {/* ── ECA ── */}
         <section id="eca" className="scroll-mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp}><SectionHeading icon={<Award className="w-4 h-4" />} label="Extracurricular" number="02" /></motion.div>
+            <motion.div variants={fadeUp}><SectionHeading icon={<Award className="w-4 h-4" />} label="Extracurricular" number="02" accent="#38bdf8" /></motion.div>
             <div className="relative pl-6 border-l space-y-7" style={{ borderColor: "hsla(var(--neon-purple),0.2)" }}>
               {[
-                { role: "Club Representative", org: "Cyber Hub (ICT Club)", year: "2025 – Present", desc: "Leading workshops and organizing tech events for students.", link: "https://www.scpscch.tech/", active: true },
-                { role: "Member", org: "SCPSC Science Club", year: "2024 – Present", desc: "Active member exploring scientific concepts and participating in school science events and experiments.", link: "", active: true },
-                { role: "Participant", org: "National Math Olympiad", year: "2023", desc: "Regional finalist in junior category.", link: "", active: false },
+                { role: "Club Representative", org: "Cyber Hub (ICT Club)", year: "2025 – Present", desc: "Leading workshops and organizing tech events for students.", link: "https://www.scpscch.tech/", active: true, accent: "#a855f7", dot: "#a855f7" },
+                { role: "Member", org: "SCPSC Science Club", year: "2024 – Present", desc: "Active member exploring scientific concepts and participating in school science events and experiments.", link: "", active: true, accent: "#10b981", dot: "#10b981" },
+                { role: "Participant", org: "National Math Olympiad", year: "2023", desc: "Regional finalist in junior category.", link: "", active: false, accent: "#f59e0b", dot: "#52525b" },
               ].map((eca, i) => (
                 <motion.div key={i} variants={fadeUp} className="relative group">
-                  <div className="absolute -left-[30px] top-4 w-3 h-3 rounded-full border-2 transition-all duration-300" style={eca.active ? { background: "hsl(var(--neon-purple))", borderColor: "hsl(var(--neon-purple))", boxShadow: "0 0 10px hsla(var(--neon-purple),0.8)" } : { background: "#27272a", borderColor: "#52525b" }} />
-                  <motion.div whileHover={{ x: 4, transition: { type: "spring", stiffness: 300, damping: 20 } }} className="bg-zinc-950/50 border border-white/6 rounded-2xl p-4 group-hover:border-neon-purple/20 transition-all duration-300">
+                  <div className="absolute -left-[30px] top-4 w-3 h-3 rounded-full border-2 transition-all duration-300" style={eca.active ? { background: eca.dot, borderColor: eca.dot, boxShadow: `0 0 10px ${eca.dot}cc` } : { background: "#27272a", borderColor: "#52525b" }} />
+                  <motion.div whileHover={{ x: 4, transition: { type: "spring", stiffness: 300, damping: 20 } }} className="rounded-2xl p-4 border transition-all duration-300" style={{ background: `${eca.accent}08`, borderColor: `${eca.accent}25` }}>
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-1.5">
                       <h3 className="text-base font-display font-bold text-white"><AnimatedWords text={eca.role} delay={i * 0.1} /></h3>
-                      <span className="text-xs font-mono px-2.5 py-0.5 rounded-full border" style={eca.active ? { background: "hsla(var(--neon-purple),0.1)", color: "hsl(var(--neon-purple))", borderColor: "hsla(var(--neon-purple),0.2)" } : { background: "rgba(255,255,255,0.04)", color: "#71717a", borderColor: "rgba(255,255,255,0.1)" }}>{eca.year}</span>
+                      <span className="text-xs font-mono px-2.5 py-0.5 rounded-full border" style={{ background: `${eca.accent}15`, color: eca.accent, borderColor: `${eca.accent}35` }}>{eca.year}</span>
                     </div>
                     {eca.link ? (
-                      <a href={eca.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-zinc-400 hover:text-neon-purple transition-colors mb-2 font-medium">{eca.org} <ExternalLink className="w-3 h-3" /></a>
+                      <a href={eca.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs mb-2 font-medium transition-colors hover:brightness-125" style={{ color: eca.accent }}>{eca.org} <ExternalLink className="w-3 h-3" /></a>
                     ) : (
-                      <p className="text-xs text-zinc-400 mb-2 font-medium">{eca.org}</p>
+                      <p className="text-xs mb-2 font-medium" style={{ color: eca.accent }}>{eca.org}</p>
                     )}
-                    <p className="text-xs text-zinc-500 leading-relaxed">{eca.desc}</p>
+                    <p className="text-xs text-zinc-400 leading-relaxed">{eca.desc}</p>
                   </motion.div>
                 </motion.div>
               ))}
@@ -374,7 +407,7 @@ export default function Portfolio() {
         {/* ── AWARDS ── */}
         <section id="awards" className="scroll-mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp}><SectionHeading icon={<Trophy className="w-4 h-4" />} label="Awards" number="03" /></motion.div>
+            <motion.div variants={fadeUp}><SectionHeading icon={<Trophy className="w-4 h-4" />} label="Awards" number="03" accent="#f59e0b" /></motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
               {/* Gold */}
@@ -437,24 +470,26 @@ export default function Portfolio() {
         {/* ── BLOG ── */}
         <section id="blog" className="scroll-mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp}><SectionHeading icon={<BookOpen className="w-4 h-4" />} label="Blog" number="04" /></motion.div>
+            <motion.div variants={fadeUp}><SectionHeading icon={<BookOpen className="w-4 h-4" />} label="Blog" number="04" accent="#f43f5e" /></motion.div>
             <div className="flex flex-col gap-2.5">
               {[
-                { title: "Starting My Journey in Data Science", date: "Dec 10, 2025", read: "4 min", tag: "Data Science", excerpt: "Why I chose Python as my first language and how I'm learning data visualization." },
-                { title: "Cyber Security Basics for Students", date: "Nov 25, 2025", read: "3 min", tag: "Cybersecurity", excerpt: "Simple steps every student should take to stay safe online." },
-                { title: "Designing for Impact", date: "Oct 15, 2025", read: "5 min", tag: "Design", excerpt: "How I use graphic design principles in my school presentations." },
+                { title: "Starting My Journey in Data Science", date: "Dec 10, 2025", read: "4 min", tag: "Data Science", excerpt: "Why I chose Python as my first language and how I'm learning data visualization.", accent: "#f59e0b" },
+                { title: "Cyber Security Basics for Students", date: "Nov 25, 2025", read: "3 min", tag: "Cybersecurity", excerpt: "Simple steps every student should take to stay safe online.", accent: "#10b981" },
+                { title: "Designing for Impact", date: "Oct 15, 2025", read: "5 min", tag: "Design", excerpt: "How I use graphic design principles in my school presentations.", accent: "#a855f7" },
               ].map((post, i) => (
                 <motion.a key={i} href="#" variants={fadeUp} whileHover={{ x: 5, transition: { type: "spring", stiffness: 300, damping: 20 } }} className="group block">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-2xl border border-white/6 bg-zinc-950/40 hover:border-neon-purple/25 hover:bg-zinc-900/60 transition-all duration-300">
-                    <div className="flex-1 space-y-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-2xl border transition-all duration-300 overflow-hidden relative" style={{ borderColor: `${post.accent}25`, background: `${post.accent}07` }}>
+                    {/* Left colour bar */}
+                    <div className="absolute left-0 top-0 bottom-0 w-0.5" style={{ background: post.accent }} />
+                    <div className="flex-1 space-y-1 pl-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-mono px-2 py-0.5 rounded-full border" style={{ background: "hsla(var(--neon-purple),0.08)", color: "hsl(var(--neon-purple))", borderColor: "hsla(var(--neon-purple),0.15)" }}>{post.tag}</span>
-                        <span className="text-xs text-zinc-600 font-mono">{post.date} · {post.read} read</span>
+                        <span className="text-xs font-mono px-2 py-0.5 rounded-full border" style={{ background: `${post.accent}15`, color: post.accent, borderColor: `${post.accent}35` }}>{post.tag}</span>
+                        <span className="text-xs text-zinc-500 font-mono">{post.date} · {post.read} read</span>
                       </div>
                       <h3 className="text-sm font-display font-bold text-zinc-200 group-hover:text-white transition-colors"><AnimatedWords text={post.title} delay={i * 0.05} /></h3>
                       <p className="text-xs text-zinc-500 leading-relaxed">{post.excerpt}</p>
                     </div>
-                    <motion.div whileHover={{ x: 3 }} className="shrink-0 w-7 h-7 rounded-full border border-white/10 flex items-center justify-center text-zinc-600 group-hover:border-neon-purple/40 group-hover:text-neon-purple group-hover:bg-neon-purple/5 transition-all">
+                    <motion.div whileHover={{ x: 3 }} className="shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all" style={{ borderColor: `${post.accent}35`, color: post.accent, background: `${post.accent}10` }}>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </motion.div>
                   </div>
@@ -468,7 +503,7 @@ export default function Portfolio() {
         <section id="agency" className="scroll-mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp}>
-              <SectionHeading icon={<Palette className="w-4 h-4" />} label="My Agency" number="05" />
+              <SectionHeading icon={<Palette className="w-4 h-4" />} label="My Agency" number="05" accent="#a855f7" />
             </motion.div>
             <motion.div
               variants={fadeUp}
@@ -509,17 +544,6 @@ export default function Portfolio() {
                       </motion.span>
                     ))}
                   </div>
-                  <div className="pt-1">
-                    <Link href="/graphic-design">
-                      <motion.span
-                        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold cursor-pointer"
-                        style={{ background: "linear-gradient(135deg, #6366f1, #10b981)", color: "#fff" }}
-                      >
-                        <Palette className="w-4 h-4" /> View Design Work
-                      </motion.span>
-                    </Link>
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -529,7 +553,7 @@ export default function Portfolio() {
         {/* ── ABOUT ── */}
         <section id="about" className="scroll-mt-24 mb-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp}><SectionHeading icon={<Terminal className="w-4 h-4" />} label="About Me" number="06" /></motion.div>
+            <motion.div variants={fadeUp}><SectionHeading icon={<Terminal className="w-4 h-4" />} label="About Me" number="06" accent="#6366f1" /></motion.div>
 
             <div className="flex flex-col gap-6">
 
