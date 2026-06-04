@@ -128,14 +128,13 @@ export default function Portfolio() {
     { id: "eca", label: "ECA" },
     { id: "awards", label: "Awards" },
     { id: "blog", label: "Blog" },
+    { id: "agency", label: "Agency" },
     { id: "about", label: "About" },
   ];
 
   const projects = [
-    { num: "01", title: "Data Viz Dashboard", desc: "Interactive visualization of school data using Python and Pandas.", tags: ["Python", "Pandas"], gFrom: "from-blue-500/10", gTo: "to-cyan-500/5", hoverBorder: "hover:border-blue-500/40" },
-    { num: "02", title: "School Club Portal", desc: "A landing page for Cyber Hub ICT club with member registration.", tags: ["HTML/CSS", "JavaScript", "React"], gFrom: "from-purple-500/10", gTo: "to-pink-500/5", hoverBorder: "hover:border-purple-500/40" },
-    { num: "03", title: "Auto-Reply Bot", desc: "Simple automation script for handling email queries.", tags: ["Python", "Automation"], gFrom: "from-emerald-500/10", gTo: "to-teal-500/5", hoverBorder: "hover:border-emerald-500/40" },
-    { num: "04", title: "Graphic Design Portfolio", desc: "Collection of designs including 'Making Artwork with AI' presentation.", tags: ["Photoshop", "Illustrator", "AI Art"], gFrom: "from-orange-500/10", gTo: "to-yellow-500/5", hoverBorder: "hover:border-orange-500/40", link: aiArtPdf, linkText: "View Presentation (PDF)" },
+    { num: "01", title: "Slash Health Care", desc: "Smart AI assistant featuring 10,000+ doctor tips and comprehensive health care guidance — making quality health information accessible to everyone.", tags: ["AI", "Health Tech", "Python", "Web"], gFrom: "from-emerald-500/10", gTo: "to-teal-500/5", hoverBorder: "hover:border-emerald-500/40", link: null as string | null, linkText: "" },
+    { num: "02", title: "Slash Sports", desc: "All kinds of sports gear and equipment — a platform dedicated to SCPSC students, making quality sports essentials easy to find.", tags: ["Sports", "E-commerce", "Web Design"], gFrom: "from-blue-500/10", gTo: "to-cyan-500/5", hoverBorder: "hover:border-blue-500/40", link: null as string | null, linkText: "" },
   ];
 
   return (
@@ -203,9 +202,31 @@ export default function Portfolio() {
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="absolute -inset-1.5 rounded-full opacity-60 blur-sm" style={{ background: "conic-gradient(from 0deg, hsl(var(--neon-purple)), #ec4899, hsl(var(--neon-purple)))" }} />
             <div className="absolute -inset-0.5 rounded-full" style={{ background: "linear-gradient(135deg, hsl(var(--neon-purple)), #3b82f6)" }} />
             <div className="relative w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-black">
-              <img src={avatarImage} alt="Maheeb" className="w-full h-full object-cover" />
+              <img src={avatarImage} alt="Maheeb" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              {/* Hover overlay */}
+              <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75))" }}>
+                <span className="absolute bottom-3 text-[10px] font-mono text-white/90 tracking-wider">hover ✦</span>
+              </div>
             </div>
+            {/* Online dot */}
             <div className="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-black shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
+            {/* Hover tooltip card */}
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.9 }}
+              whileHover={{ opacity: 1, y: 0, scale: 1 }}
+              className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-52 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 z-20"
+            >
+              <div className="rounded-xl border border-white/10 bg-black/90 backdrop-blur-md px-4 py-3 text-center shadow-xl">
+                <p className="text-xs font-bold text-white">Md. Maheeb Hossain</p>
+                <p className="text-[10px] font-mono mt-0.5" style={{ color: "hsl(var(--neon-purple))" }}>Student · Designer · Dev</p>
+                <div className="flex items-center justify-center gap-1.5 mt-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[10px] text-emerald-400 font-mono">Available for work</span>
+                </div>
+                <p className="text-[10px] text-zinc-500 mt-1">📍 Bangladesh</p>
+              </div>
+              <div className="w-2 h-2 bg-black/90 border-t border-l border-white/10 rotate-45 mx-auto -mt-1" />
+            </motion.div>
           </motion.div>
 
           {/* Signature typewriter */}
@@ -279,73 +300,6 @@ export default function Portfolio() {
 
         </section>
 
-        {/* ── SLASH AGENCY ── */}
-        <section id="agency" className="scroll-mt-24">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp}>
-              <SectionHeading icon={<Palette className="w-4 h-4" />} label="My Agency" number="00" />
-            </motion.div>
-            <motion.div
-              variants={fadeUp}
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 260, damping: 18 } }}
-              className="relative rounded-2xl overflow-hidden border border-white/10 p-6 md:p-8"
-              style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.1), rgba(16,185,129,0.07), rgba(0,0,0,0))" }}
-            >
-              {/* Background blobs */}
-              <div className="absolute -top-10 -left-10 w-56 h-56 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-10 -right-10 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
-              <div className="relative flex flex-col md:flex-row items-center md:items-start gap-6">
-                {/* Logo */}
-                <motion.img
-                  src={slashLogo}
-                  alt="Slash Web & Design"
-                  whileHover={{ rotate: 3, scale: 1.05 }}
-                  className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover shadow-[0_0_28px_rgba(99,102,241,0.35)] shrink-0"
-                />
-
-                {/* Info */}
-                <div className="flex-1 space-y-3 text-center md:text-left">
-                  <div className="flex flex-wrap justify-center md:justify-start items-center gap-2">
-                    <h3 className="text-2xl md:text-3xl font-display font-bold text-white">Slash Web &amp; Design</h3>
-                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 tracking-widest uppercase">Own Agency</span>
-                  </div>
-                  <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
-                    My personal creative agency delivering brand identities, digital design, web interfaces, 
-                    and visual storytelling. Built on the belief that every great brand starts with a sharp idea 
-                    and even sharper execution.
-                  </p>
-                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                    {["Brand Identity", "Logo Design", "Web Design", "Infographics", "UI/UX"].map((tag, i) => (
-                      <motion.span
-                        key={tag}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.07 }}
-                        className="text-xs px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 font-mono"
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
-                  <div className="pt-1">
-                    <Link href="/graphic-design">
-                      <motion.span
-                        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold cursor-pointer"
-                        style={{ background: "linear-gradient(135deg, #6366f1, #10b981)", color: "#fff" }}
-                      >
-                        <Palette className="w-4 h-4" /> View Design Work
-                      </motion.span>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </section>
-
         {/* ── PROJECTS ── */}
         <section id="projects" className="scroll-mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
@@ -394,7 +348,8 @@ export default function Portfolio() {
             <div className="relative pl-6 border-l space-y-7" style={{ borderColor: "hsla(var(--neon-purple),0.2)" }}>
               {[
                 { role: "Club Representative", org: "Cyber Hub (ICT Club)", year: "2025 – Present", desc: "Leading workshops and organizing tech events for students.", link: "https://www.scpscch.tech/", active: true },
-                { role: "Participant", org: "National Math Olympiad", year: "2023", desc: "Regional finalist in junior category.", active: false },
+                { role: "Member", org: "SCPSC Science Club", year: "2024 – Present", desc: "Active member exploring scientific concepts and participating in school science events and experiments.", link: "", active: true },
+                { role: "Participant", org: "National Math Olympiad", year: "2023", desc: "Regional finalist in junior category.", link: "", active: false },
               ].map((eca, i) => (
                 <motion.div key={i} variants={fadeUp} className="relative group">
                   <div className="absolute -left-[30px] top-4 w-3 h-3 rounded-full border-2 transition-all duration-300" style={eca.active ? { background: "hsl(var(--neon-purple))", borderColor: "hsl(var(--neon-purple))", boxShadow: "0 0 10px hsla(var(--neon-purple),0.8)" } : { background: "#27272a", borderColor: "#52525b" }} />
@@ -509,10 +464,72 @@ export default function Portfolio() {
           </motion.div>
         </section>
 
+        {/* ── SLASH AGENCY ── */}
+        <section id="agency" className="scroll-mt-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp}>
+              <SectionHeading icon={<Palette className="w-4 h-4" />} label="My Agency" number="05" />
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 260, damping: 18 } }}
+              className="relative rounded-2xl overflow-hidden border border-white/10 p-6 md:p-8"
+              style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.1), rgba(16,185,129,0.07), rgba(0,0,0,0))" }}
+            >
+              <div className="absolute -top-10 -left-10 w-56 h-56 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-10 -right-10 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="relative flex flex-col md:flex-row items-center md:items-start gap-6">
+                <motion.img
+                  src={slashLogo}
+                  alt="Slash Web & Design"
+                  whileHover={{ rotate: 3, scale: 1.05 }}
+                  className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover shadow-[0_0_28px_rgba(99,102,241,0.35)] shrink-0"
+                />
+                <div className="flex-1 space-y-3 text-center md:text-left">
+                  <div className="flex flex-wrap justify-center md:justify-start items-center gap-2">
+                    <h3 className="text-2xl md:text-3xl font-display font-bold text-white">Slash Web &amp; Design</h3>
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 tracking-widest uppercase">Own Agency</span>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
+                    My personal creative agency delivering brand identities, digital design, web interfaces,
+                    and visual storytelling. Built on the belief that every great brand starts with a sharp idea
+                    and even sharper execution.
+                  </p>
+                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                    {["Brand Identity", "Logo Design", "Web Design", "Infographics", "UI/UX"].map((tag, i) => (
+                      <motion.span
+                        key={tag}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.07 }}
+                        className="text-xs px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 font-mono"
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
+                  <div className="pt-1">
+                    <Link href="/graphic-design">
+                      <motion.span
+                        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold cursor-pointer"
+                        style={{ background: "linear-gradient(135deg, #6366f1, #10b981)", color: "#fff" }}
+                      >
+                        <Palette className="w-4 h-4" /> View Design Work
+                      </motion.span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
+
         {/* ── ABOUT ── */}
         <section id="about" className="scroll-mt-24 mb-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp}><SectionHeading icon={<Terminal className="w-4 h-4" />} label="About Me" number="05" /></motion.div>
+            <motion.div variants={fadeUp}><SectionHeading icon={<Terminal className="w-4 h-4" />} label="About Me" number="06" /></motion.div>
 
             <div className="flex flex-col gap-6">
 
