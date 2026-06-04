@@ -1,7 +1,7 @@
 import { motion, Variants, useScroll, useSpring } from "framer-motion";
 import {
   Github, Mail, ExternalLink, FileText, Palette, Trophy,
-  Star, Shield, ArrowDown, MapPin, User, Code2, Zap,
+  Star, Shield, ArrowDown, MapPin, User, Code2, Zap, Film,
   ChevronRight, Cpu, Award, BookOpen, Terminal, Moon, Leaf,
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
@@ -150,7 +150,7 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden font-sans selection:bg-neon-purple/40" style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
+    <div className="min-h-screen w-full overflow-x-hidden font-sans selection:bg-neon-purple/40" style={{ color: "hsl(var(--foreground))" }}>
 
       {/* scroll progress */}
       <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[60]" css={{ background: "linear-gradient(to right, hsl(var(--neon-purple)), hsl(var(--neon-purple)/0.5))" }} />
@@ -267,7 +267,7 @@ export default function Portfolio() {
             {[
               { label: "Data Science", icon: <Zap className="w-3 h-3" />, link: null, color: "#f59e0b", bg: "rgba(245,158,11,0.1)", border: "rgba(245,158,11,0.35)" },
               { label: "Graphic Designer", icon: <Palette className="w-3 h-3" />, link: "/graphic-design", color: "#a855f7", bg: "rgba(168,85,247,0.1)", border: "rgba(168,85,247,0.45)" },
-              { label: "Video Editor", icon: <Code2 className="w-3 h-3" />, link: null, color: "#f43f5e", bg: "rgba(244,63,94,0.08)", border: "rgba(244,63,94,0.3)" },
+              { label: "Video Editor", icon: <Film className="w-3 h-3" />, link: null, color: "#f43f5e", bg: "rgba(244,63,94,0.08)", border: "rgba(244,63,94,0.3)" },
               { label: "Cybersecurity", icon: <Shield className="w-3 h-3" />, link: null, color: "#10b981", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.3)" },
               { label: "Robotics", icon: <Cpu className="w-3 h-3" />, link: null, color: "#38bdf8", bg: "rgba(56,189,248,0.08)", border: "rgba(56,189,248,0.3)" },
             ].map((skill) => {
@@ -523,7 +523,7 @@ export default function Portfolio() {
                 <div className="flex-1 space-y-3 text-center md:text-left">
                   <div className="flex flex-wrap justify-center md:justify-start items-center gap-2">
                     <h3 className="text-2xl md:text-3xl font-display font-bold text-white">Slash Web &amp; Design</h3>
-                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 tracking-widest uppercase">Own Agency</span>
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 tracking-widest uppercase">Co-Founder &amp; CEO</span>
                   </div>
                   <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
                     My personal creative agency delivering brand identities, digital design, web interfaces,
@@ -662,6 +662,7 @@ export default function Portfolio() {
                     { href: "https://github.com/maheeb-cyber", icon: <Github className="w-4 h-4" />, label: "GitHub", sub: "maheeb-cyber" },
                     { href: "mailto:maheebhossain900@gmail.com", icon: <Mail className="w-4 h-4" />, label: "Email", sub: "maheebhossain900@gmail.com" },
                     { href: "https://discord.gg/3eukqzF2r", icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>, label: "Discord", sub: "Join my server" },
+                    { href: "https://wa.me/8801756975275", icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.847L.057 23.57a.5.5 0 0 0 .614.612l5.927-1.556A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.914a9.907 9.907 0 0 1-5.022-1.368l-.36-.214-3.733.98.999-3.645-.235-.374A9.868 9.868 0 0 1 2.086 12C2.086 6.507 6.507 2.086 12 2.086S21.914 6.507 21.914 12 17.493 21.914 12 21.914z"/></svg>, label: "WhatsApp", sub: "+880 1756975275" },
                     { href: "viber://chat?number=%2B8801756975275", icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M11.4 0C5.5.1 1.1 4.6.9 10.5c-.1 2.7.7 5.2 2.3 7.2L2 21.4c-.1.4.3.8.7.7l3.8-1.1c1.9 1.2 4.1 1.9 6.5 1.9 6-.1 10.5-4.7 10.5-10.7S17.4-.1 11.4 0zm5.5 15.8c-.3.8-1.5 1.5-2.1 1.6-.5.1-1.2.1-1.9-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.5-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.3-.3.6-.4.8-.4h.6c.2 0 .4.1.5.4.2.4.7 1.7.8 1.8.1.1.1.3 0 .4l-.3.5c-.1.1-.2.3-.1.5.3.5.7 1.1 1.2 1.5.6.5 1.1.8 1.7 1 .2.1.3 0 .4-.1l.4-.5c.1-.2.3-.2.5-.1l1.7.8c.2.1.3.2.4.3-.1.5-.1.9-.3 1.5z"/></svg>, label: "Viber", sub: "+880 1756975275" },
                   ].map((s) => (
                     <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.03, y: -2 }} className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/[0.02] hover:border-neon-purple/25 hover:bg-neon-purple/5 transition-all group">

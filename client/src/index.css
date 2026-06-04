@@ -71,9 +71,9 @@
   --radius: 0.5rem;
 
   /* orb colors for dark */
-  --orb1: rgba(168, 85, 247, 0.18);
-  --orb2: rgba(59, 130, 246, 0.10);
-  --orb3: rgba(236, 72, 153, 0.09);
+  --orb1: rgba(168, 85, 247, 0.40);
+  --orb2: rgba(59, 130, 246, 0.28);
+  --orb3: rgba(236, 72, 153, 0.24);
 }
 
 /* ── GREEN MODE ── */
@@ -118,6 +118,22 @@ body {
   color: hsl(var(--foreground));
   font-family: var(--font-sans);
 }
+
+/* Colourful page glow layer */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 10%, rgba(124,58,237,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 90% 30%, rgba(37,99,235,0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 50% 90%, rgba(236,72,153,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 35% at 80% 80%, rgba(16,185,129,0.13) 0%, transparent 65%);
+}
+
+body > * { position: relative; z-index: 1; }
 
 .glow-border {
   box-shadow: 0 0 10px hsla(var(--neon-purple), 0.3), inset 0 0 5px hsla(var(--neon-purple), 0.1);
