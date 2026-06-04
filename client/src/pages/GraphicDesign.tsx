@@ -168,52 +168,14 @@ export default function GraphicDesign() {
             </button>
           </Link>
           <div className="w-px h-5 bg-zinc-700" />
-          <div className="flex items-center gap-2">
-            <img src={slashLogo} alt="Slash" className="w-6 h-6 rounded object-cover" />
-            <span className="text-sm font-display font-bold text-white">Slash Web &amp; Design</span>
+          <div className="text-xl font-display font-bold">
+            <span className="text-neon-purple">MAHEEB</span>
+            <span className="text-white">.DEV</span>
           </div>
         </div>
       </nav>
 
       <main className="max-w-5xl mx-auto px-4 pt-28 pb-16">
-
-        {/* Agency Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-10 relative rounded-2xl overflow-hidden border border-white/10 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6"
-          style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.12), rgba(16,185,129,0.08), rgba(0,0,0,0))" }}
-        >
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl" />
-          </div>
-          <motion.img
-            src={slashLogo}
-            alt="Slash Web & Design"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, type: "spring" }}
-            className="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover shadow-[0_0_30px_rgba(99,102,241,0.3)] shrink-0"
-          />
-          <div className="text-center md:text-left space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-400 mb-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Own Agency
-            </div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-white">Slash Web &amp; Design</h2>
-            <p className="text-zinc-400 text-sm leading-relaxed max-w-lg">
-              My personal creative agency focused on web development, brand identity, and digital design.
-              From logos to full product interfaces — built with purpose and precision.
-            </p>
-            <div className="flex flex-wrap justify-center md:justify-start gap-2 pt-1">
-              {["Brand Identity", "Logo Design", "Web Design", "Infographics", "UI/UX"].map((tag) => (
-                <span key={tag} className="text-xs px-2.5 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-400 font-mono">{tag}</span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mb-8 space-y-3">
@@ -299,7 +261,7 @@ export default function GraphicDesign() {
       )}
 
       <footer className="w-full py-8 border-t border-zinc-900 bg-black text-center text-sm text-muted-foreground font-mono">
-        <p>© {new Date().getFullYear()} Md. Maheeb Hossain · All designs are my own work.</p>
+        <p>© {new Date().getFullYear()} <span className="text-zinc-300">Md. Maheeb Hossain</span> · All designs are my own personal work.</p>
       </footer>
     </div>
   );
