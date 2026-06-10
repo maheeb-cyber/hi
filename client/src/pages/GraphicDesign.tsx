@@ -25,6 +25,8 @@ import slashAppUI from "@assets/0-02-03-189652ff7f9a8a5700bae7aaf5f0d4c0d1d8027d
 import diorMockup from "@assets/0-02-03-529cfba435811e9b39464d0de5b4b68845e72bcf926d0a16c4902f_1781107386066.jpg";
 import slashPerfumeVideo from "@assets/Slash_Perfume_vedio_1781110570725.mp4";
 import maheebCar from "@assets/Maheeb_car_1781112647520.png";
+import cyberHubTshirt from "@assets/viber_image_2026-05-17_08-05-09-711_1781112759397.jpg";
+import eidAlAdhaCard from "@assets/viber_image_2026-05-28_15-09-29-010_1781112775786.jpg";
 import { useState } from "react";
 import { Play } from "lucide-react";
 
@@ -160,6 +162,18 @@ const designs = [
     title: "Dior Sauvage × Md. Maheeb Hossain",
     category: "Brand Mockup",
     description: "Exclusive Dior Sauvage perfume packaging mockup exclusively designed for Md. Maheeb Hossain.",
+  },
+  {
+    src: cyberHubTshirt,
+    title: "SCPSC Cyber Hub – T-Shirt Design",
+    category: "Apparel Design",
+    description: "Official black jersey design for the SCPSC Cyber Hub Photography Department — front, back, and sleeve branding.",
+  },
+  {
+    src: eidAlAdhaCard,
+    title: "Eid al-Adha 2026 Greeting Card",
+    category: "Greeting Card",
+    description: "Happy Eid al-Adha 2026 greeting card design with mosque silhouette and desert landscape — From Maheeb.",
   },
   {
     src: maheebCar,
