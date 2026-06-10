@@ -20,6 +20,9 @@ import guitarLogo from "@assets/Black_White_Simple_Classic_Acoustic_Guitar_Logo_
 import badmintonCert from "@assets/IMG-240a3dc5ac30f12c36ccd057a475bf57-V_1780559468019.jpg";
 import palashBadmintonBadge from "@assets/IMG_20251111_214655_1780559468041.jpg";
 import badmintonRunnerUpCert from "@assets/IMG-35912479dc6afa0f012955f8fd61f0ab-V_1780559468064.jpg";
+import ferrariMockup from "@assets/0-02-03-bb730989540627b1b25d8568a4160e78b73b63d7a26cc6e499ba5d_1781107316355.jpg";
+import slashAppUI from "@assets/0-02-03-189652ff7f9a8a5700bae7aaf5f0d4c0d1d8027d00f0234c15cfd2_1781107330997.jpg";
+import diorMockup from "@assets/0-02-03-529cfba435811e9b39464d0de5b4b68845e72bcf926d0a16c4902f_1781107386066.jpg";
 import { useState } from "react";
 
 const designs = [
@@ -136,6 +139,24 @@ const designs = [
     title: "Palash Badminton 2024 – Runner-Up Certificate",
     category: "Certificate Design",
     description: "Certificate of Achievement for Palash Badminton Championship 2024 Runner-Up.",
+  },
+  {
+    src: ferrariMockup,
+    title: "Ferrari × Md. Maheeb Hossain",
+    category: "Brand Mockup",
+    description: "Premium Ferrari supercar brand mockup featuring custom Md. Maheeb Hossain livery — Driven by Passion, Built to Inspire.",
+  },
+  {
+    src: slashAppUI,
+    title: "Slash – App UI Design",
+    category: "UI / App Design",
+    description: "Dark luxury e-commerce app UI concept for the Slash brand — Shop more, Pay smarter.",
+  },
+  {
+    src: diorMockup,
+    title: "Dior Sauvage × Md. Maheeb Hossain",
+    category: "Brand Mockup",
+    description: "Exclusive Dior Sauvage perfume packaging mockup exclusively designed for Md. Maheeb Hossain.",
   },
 ];
 
