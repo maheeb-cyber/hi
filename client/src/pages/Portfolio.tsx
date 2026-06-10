@@ -503,7 +503,7 @@ export default function Portfolio() {
         <section id="agency" className="scroll-mt-24">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp}>
-              <SectionHeading icon={<Palette className="w-4 h-4" />} label="My Agency" number="05" accent="#a855f7" />
+              <SectionHeading icon={<Palette className="w-4 h-4" />} label="Agency" number="05" accent="#a855f7" />
             </motion.div>
             <motion.div
               variants={fadeUp}
