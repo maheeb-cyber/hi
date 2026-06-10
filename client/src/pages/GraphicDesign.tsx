@@ -23,7 +23,7 @@ import badmintonRunnerUpCert from "@assets/IMG-35912479dc6afa0f012955f8fd61f0ab-
 import ferrariMockup from "@assets/0-02-03-bb730989540627b1b25d8568a4160e78b73b63d7a26cc6e499ba5d_1781107316355.jpg";
 import slashAppUI from "@assets/0-02-03-189652ff7f9a8a5700bae7aaf5f0d4c0d1d8027d00f0234c15cfd2_1781107330997.jpg";
 import diorMockup from "@assets/0-02-03-529cfba435811e9b39464d0de5b4b68845e72bcf926d0a16c4902f_1781107386066.jpg";
-import slashPerfumeVideo from "@assets/Slash_Perfume_vedio_1781110570725.mp4";
+
 import maheebCar from "@assets/Maheeb_car_1781112647520.png";
 import cyberHubTshirt from "@assets/viber_image_2026-05-17_08-05-09-711_1781112759397.jpg";
 import eidAlAdhaCard from "@assets/viber_image_2026-05-28_15-09-29-010_1781112775786.jpg";
@@ -180,13 +180,6 @@ const designs = [
     title: "MAHEEB MMH – Supercar Design",
     category: "Brand Mockup",
     description: "Custom supercar concept design featuring bold MAHEEB MMH branding in signature amber and black.",
-  },
-  {
-    src: slashPerfumeVideo,
-    title: "Slash Perfume – Motion Design",
-    category: "Motion Design",
-    description: "Cinematic motion design video for the Slash perfume brand — animated visual storytelling.",
-    type: "video" as const,
   },
 ];
 
