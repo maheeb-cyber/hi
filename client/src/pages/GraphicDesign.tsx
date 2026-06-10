@@ -23,7 +23,9 @@ import badmintonRunnerUpCert from "@assets/IMG-35912479dc6afa0f012955f8fd61f0ab-
 import ferrariMockup from "@assets/0-02-03-bb730989540627b1b25d8568a4160e78b73b63d7a26cc6e499ba5d_1781107316355.jpg";
 import slashAppUI from "@assets/0-02-03-189652ff7f9a8a5700bae7aaf5f0d4c0d1d8027d00f0234c15cfd2_1781107330997.jpg";
 import diorMockup from "@assets/0-02-03-529cfba435811e9b39464d0de5b4b68845e72bcf926d0a16c4902f_1781107386066.jpg";
+import slashPerfumeVideo from "@assets/Slash_Perfume_vedio_1781110570725.mp4";
 import { useState } from "react";
+import { Play } from "lucide-react";
 
 const designs = [
   {
@@ -158,6 +160,13 @@ const designs = [
     category: "Brand Mockup",
     description: "Exclusive Dior Sauvage perfume packaging mockup exclusively designed for Md. Maheeb Hossain.",
   },
+  {
+    src: slashPerfumeVideo,
+    title: "Slash Perfume – Motion Design",
+    category: "Motion Design",
+    description: "Cinematic motion design video for the Slash perfume brand — animated visual storytelling.",
+    type: "video" as const,
+  },
 ];
 
 const categories = ["All", ...Array.from(new Set(designs.map((d) => d.category)))];
@@ -238,7 +247,18 @@ export default function GraphicDesign() {
               data-testid={`card-design-${i}`}
             >
               <div className="relative overflow-hidden aspect-square bg-zinc-900">
-                <img src={design.src} alt={design.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                {(design as any).type === "video" ? (
+                  <>
+                    <video src={design.src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" muted playsInline preload="metadata" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-black/60 border border-white/20 flex items-center justify-center group-hover:bg-neon-purple/80 group-hover:border-neon-purple transition-all duration-300">
+                        <Play className="w-5 h-5 text-white ml-0.5" />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <img src={design.src} alt={design.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                )}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end p-3 opacity-0 group-hover:opacity-100">
                   <span className="text-xs font-mono text-neon-purple bg-black/70 px-2 py-1 rounded">{design.category}</span>
                 </div>
@@ -266,7 +286,11 @@ export default function GraphicDesign() {
             className="relative max-w-3xl w-full bg-zinc-950 rounded-2xl overflow-hidden border border-neon-purple/30 shadow-[0_0_40px_rgba(168,85,247,0.2)]"
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={selected.src} alt={selected.title} className="w-full max-h-[70vh] object-contain bg-zinc-900" data-testid="lightbox-image" />
+            {(selected as any).type === "video" ? (
+              <video src={selected.src} className="w-full max-h-[70vh] bg-zinc-900" controls autoPlay loop data-testid="lightbox-video" />
+            ) : (
+              <img src={selected.src} alt={selected.title} className="w-full max-h-[70vh] object-contain bg-zinc-900" data-testid="lightbox-image" />
+            )}
             <div className="p-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
