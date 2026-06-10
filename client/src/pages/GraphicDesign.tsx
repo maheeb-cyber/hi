@@ -24,6 +24,7 @@ import ferrariMockup from "@assets/0-02-03-bb730989540627b1b25d8568a4160e78b73b6
 import slashAppUI from "@assets/0-02-03-189652ff7f9a8a5700bae7aaf5f0d4c0d1d8027d00f0234c15cfd2_1781107330997.jpg";
 import diorMockup from "@assets/0-02-03-529cfba435811e9b39464d0de5b4b68845e72bcf926d0a16c4902f_1781107386066.jpg";
 import slashPerfumeVideo from "@assets/Slash_Perfume_vedio_1781110570725.mp4";
+import maheebCar from "@assets/Maheeb_car_1781112647520.png";
 import { useState } from "react";
 import { Play } from "lucide-react";
 
@@ -159,6 +160,12 @@ const designs = [
     title: "Dior Sauvage × Md. Maheeb Hossain",
     category: "Brand Mockup",
     description: "Exclusive Dior Sauvage perfume packaging mockup exclusively designed for Md. Maheeb Hossain.",
+  },
+  {
+    src: maheebCar,
+    title: "MAHEEB MMH – Supercar Design",
+    category: "Brand Mockup",
+    description: "Custom supercar concept design featuring bold MAHEEB MMH branding in signature amber and black.",
   },
   {
     src: slashPerfumeVideo,
