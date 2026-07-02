@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
-import slashLogo from "@assets/slash.logo_1779607963883.jpg";
+import slashLogo from "@assets/IMG-f784f2f230c5f92a58249a1d054379ac-V_1783016314442.jpg";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 

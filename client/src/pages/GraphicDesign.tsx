@@ -11,7 +11,7 @@ import protofoliathon from "@assets/IMG-9252b69196566f97634981d7f7cb44cd-V_17786
 import moonLure from "@assets/Moon.lure(2)_1779557194978.png";
 import maheebPresentation from "@assets/Yellow_and_White_Modern_Abstract_Creative_Project_Presentation_1779557217682.png";
 import slashHealthLogoDark from "@assets/Blue_Modern_Medical_Logo-removebg-preview_1779557305916.png";
-import slashLogo from "@assets/slash.logo_1779607963883.jpg";
+import slashLogo from "@assets/IMG-f784f2f230c5f92a58249a1d054379ac-V_1783016314442.jpg";
 import palashLogo from "@assets/Vintage_and_Luxury_Tailor_Decorative_Ornamental_Logo_20260412__1780559467911.png";
 import palashPrefectCert from "@assets/IMG-11b58d443747b47d940c9ecac600e8d7-V_1780559467937.jpg";
 import droneIcon from "@assets/sdhj_20250830_175148_0000_1780559467952.png";
