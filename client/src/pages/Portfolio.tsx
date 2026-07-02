@@ -84,10 +84,11 @@ function SectionHeading({ icon, label, number, accent = "hsl(var(--neon-purple))
 function Card3D({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const rotateX = useMotionSpring(useTransform(y, [-80, 80], [12, -12]), { stiffness: 300, damping: 30 });
-  const rotateY = useMotionSpring(useTransform(x, [-80, 80], [-12, 12]), { stiffness: 300, damping: 30 });
-  const glowX = useTransform(x, [-80, 80], [0, 100]);
-  const glowY = useTransform(y, [-80, 80], [0, 100]);
+  const rotateX = useMotionSpring(useTransform(y, [-120, 120], [22, -22]), { stiffness: 450, damping: 28 });
+  const rotateY = useMotionSpring(useTransform(x, [-120, 120], [-22, 22]), { stiffness: 450, damping: 28 });
+  const glowX = useTransform(x, [-120, 120], [0, 100]);
+  const glowY = useTransform(y, [-120, 120], [0, 100]);
+  const dist = useTransform([x, y], ([xv, yv]: number[]) => Math.min(1, Math.sqrt((xv as number) ** 2 + (yv as number) ** 2) / 100));
 
   function handleMouse(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -100,12 +101,25 @@ function Card3D({ children, className, style }: { children: React.ReactNode; cla
     <motion.div
       onMouseMove={handleMouse}
       onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 800, ...style }}
+      whileHover={{ scale: 1.03 }}
+      transition={{ scale: { type: "spring", stiffness: 300, damping: 22 } }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 1100, ...style }}
       className={className}
     >
+      {/* White shimmer glare */}
       <motion.div
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: useTransform([glowX, glowY], ([gx, gy]) => `radial-gradient(circle at ${gx}% ${gy}%, rgba(168,85,247,0.18) 0%, transparent 65%)`) }}
+        className="pointer-events-none absolute inset-0 rounded-2xl z-20"
+        style={{
+          background: useTransform([glowX, glowY], ([gx, gy]) =>
+            `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.14) 0%, transparent 52%)`
+          ),
+          opacity: dist,
+        }}
+      />
+      {/* Coloured glow */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        style={{ background: useTransform([glowX, glowY], ([gx, gy]) => `radial-gradient(circle at ${gx}% ${gy}%, rgba(168,85,247,0.26) 0%, transparent 62%)`) }}
       />
       {children}
     </motion.div>
@@ -203,7 +217,7 @@ export default function Portfolio() {
       <main className="w-full max-w-4xl mx-auto px-4 pt-20 pb-12 flex flex-col gap-24">
 
         {/* ── HERO ── */}
-        <section id="home" className="relative min-h-[92vh] flex flex-col items-center justify-center text-center gap-6 overflow-hidden">
+        <section id="home" className="relative min-h-[92vh] flex flex-col items-center justify-start pt-28 md:pt-36 text-center gap-6 overflow-hidden">
           {/* 3D floating background orbs */}
           <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" style={{ perspective: "600px" }}>
             <motion.div animate={{ x: [0, 60, -20, 0], y: [0, -50, 20, 0], scale: [1, 1.2, 0.9, 1] }} transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }} className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full blur-[90px]" style={{ background: "rgba(168,85,247,0.55)" }} />
