@@ -1,8 +1,8 @@
-import { motion, Variants, useScroll, useSpring } from "framer-motion";
+import { motion, Variants, useScroll, useSpring, useMotionValue, useTransform, useSpring as useMotionSpring } from "framer-motion";
 import {
   Github, Mail, ExternalLink, FileText, Palette, Trophy,
   Star, Shield, ArrowDown, MapPin, User, Code2, Zap, Film,
-  ChevronRight, Cpu, Award, BookOpen, Terminal, Moon, Leaf,
+  ChevronRight, Cpu, Award, BookOpen, Terminal,
 } from "lucide-react";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
@@ -80,39 +80,43 @@ function SectionHeading({ icon, label, number, accent = "hsl(var(--neon-purple))
   );
 }
 
-/* ── theme toggle button ── */
-function ThemeToggle({ theme, setTheme }: { theme: "dark" | "green"; setTheme: (t: "dark" | "green") => void }) {
+/* ── 3D tilt card ── */
+function Card3D({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useMotionSpring(useTransform(y, [-80, 80], [12, -12]), { stiffness: 300, damping: 30 });
+  const rotateY = useMotionSpring(useTransform(x, [-80, 80], [-12, 12]), { stiffness: 300, damping: 30 });
+  const glowX = useTransform(x, [-80, 80], [0, 100]);
+  const glowY = useTransform(y, [-80, 80], [0, 100]);
+
+  function handleMouse(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  }
+  function handleLeave() { x.set(0); y.set(0); }
+
   return (
-    <div className="flex items-center gap-1 p-1 rounded-xl border border-white/10 bg-white/5">
-      <button
-        onClick={() => setTheme("dark")}
-        title="Dark mode"
-        className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 ${theme === "dark" ? "bg-neon-purple text-black font-bold shadow-[0_0_10px_hsla(var(--neon-purple),0.5)]" : "text-zinc-400 hover:text-white"}`}
-      >
-        <Moon className="w-3.5 h-3.5" /> Dark
-      </button>
-      <button
-        onClick={() => setTheme("green")}
-        title="Green mode"
-        className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 ${theme === "green" ? "bg-neon-purple text-black font-bold shadow-[0_0_10px_hsla(var(--neon-purple),0.5)]" : "text-zinc-400 hover:text-white"}`}
-      >
-        <Leaf className="w-3.5 h-3.5" /> Green
-      </button>
-    </div>
+    <motion.div
+      onMouseMove={handleMouse}
+      onMouseLeave={handleLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 800, ...style }}
+      className={className}
+    >
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: useTransform([glowX, glowY], ([gx, gy]) => `radial-gradient(circle at ${gx}% ${gy}%, rgba(168,85,247,0.18) 0%, transparent 65%)`) }}
+      />
+      {children}
+    </motion.div>
   );
 }
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "green">("dark");
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-  /* apply theme class to body */
-  useEffect(() => {
-    document.body.classList.toggle("green-mode", theme === "green");
-  }, [theme]);
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -176,11 +180,9 @@ export default function Portfolio() {
                 </button>
               ))}
             </div>
-            <ThemeToggle theme={theme} setTheme={setTheme} />
           </div>
 
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle theme={theme} setTheme={setTheme} />
             <button className="flex flex-col gap-1.5 p-1.5" onClick={() => setMenuOpen(!menuOpen)}>
               <span className={`block w-5 h-0.5 bg-white transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
               <span className={`block w-5 h-0.5 bg-white transition-all ${menuOpen ? "opacity-0" : ""}`} />
@@ -202,11 +204,17 @@ export default function Portfolio() {
 
         {/* ── HERO ── */}
         <section id="home" className="relative min-h-[92vh] flex flex-col items-center justify-center text-center gap-6 overflow-hidden">
-          {/* background orbs */}
-          <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-            <motion.div animate={{ x: [0, 40, 0], y: [0, -30, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full blur-[80px]" style={{ background: "var(--orb1)" }} />
-            <motion.div animate={{ x: [0, -30, 0], y: [0, 40, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-[100px]" style={{ background: "var(--orb2)" }} />
-            <motion.div animate={{ x: [0, 20, 0], y: [0, 20, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 4 }} className="absolute top-1/2 right-1/3 w-40 h-40 rounded-full blur-[60px]" style={{ background: "var(--orb3)" }} />
+          {/* 3D floating background orbs */}
+          <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" style={{ perspective: "600px" }}>
+            <motion.div animate={{ x: [0, 60, -20, 0], y: [0, -50, 20, 0], scale: [1, 1.2, 0.9, 1] }} transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }} className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full blur-[90px]" style={{ background: "rgba(168,85,247,0.55)" }} />
+            <motion.div animate={{ x: [0, -40, 30, 0], y: [0, 50, -30, 0], scale: [1, 0.85, 1.15, 1] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[110px]" style={{ background: "rgba(59,130,246,0.40)" }} />
+            <motion.div animate={{ x: [0, 30, -15, 0], y: [0, 25, -20, 0], scale: [1, 1.3, 0.8, 1] }} transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 4 }} className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full blur-[70px]" style={{ background: "rgba(236,72,153,0.38)" }} />
+            <motion.div animate={{ x: [0, -20, 40, 0], y: [0, -40, 10, 0] }} transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute top-1/3 right-1/5 w-44 h-44 rounded-full blur-[65px]" style={{ background: "rgba(16,185,129,0.32)" }} />
+            <motion.div animate={{ x: [0, 25, -30, 0], y: [0, 30, -15, 0] }} transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 6 }} className="absolute bottom-1/3 left-1/5 w-36 h-36 rounded-full blur-[55px]" style={{ background: "rgba(245,158,11,0.30)" }} />
+            {/* 3D floating geometric shapes */}
+            <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute top-[15%] right-[15%] w-16 h-16 opacity-20 border-2 border-purple-400 rounded-lg" style={{ transformStyle: "preserve-3d" }} />
+            <motion.div animate={{ rotate: [360, 0], y: [0, -20, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-[20%] left-[12%] w-12 h-12 opacity-15 border-2 border-pink-400" style={{ borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%" }} />
+            <motion.div animate={{ rotate: [0, 180, 360], scale: [1, 1.2, 1] }} transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }} className="absolute top-[60%] left-[8%] w-10 h-10 opacity-20 border-2 border-cyan-400 rounded-full" />
           </div>
 
           {/* Avatar */}
@@ -244,9 +252,9 @@ export default function Portfolio() {
           {/* Signature typewriter */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex flex-col items-center gap-1">
             <p className="text-xs font-mono tracking-widest uppercase opacity-50 mb-1">Hi, I'm</p>
-            <div className="text-4xl md:text-5xl font-signature leading-tight" style={{ color: "hsl(var(--neon-purple))", filter: "drop-shadow(0 0 12px hsla(var(--neon-purple),0.5))" }}>
+            <div className="text-4xl md:text-6xl font-signature leading-tight rainbow-text" style={{ filter: "drop-shadow(0 0 18px rgba(168,85,247,0.6))" }}>
               {typedName}
-              <span className={`inline-block w-0.5 h-9 md:h-11 ml-1 align-middle rounded-sm cursor-blink ${typeDone ? "opacity-0" : ""}`} style={{ background: "hsl(var(--neon-purple))" }} />
+              <span className={`inline-block w-0.5 h-9 md:h-12 ml-1 align-middle rounded-sm cursor-blink ${typeDone ? "opacity-0" : ""}`} style={{ background: "hsl(var(--neon-purple))" }} />
             </div>
           </motion.div>
 
@@ -292,7 +300,7 @@ export default function Portfolio() {
               onClick={() => scrollToSection("projects")}
               whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold"
-              style={{ background: "hsl(var(--neon-purple))", color: theme === "green" ? "#030f06" : "#000", boxShadow: "0 0 22px hsla(var(--neon-purple),0.45)" }}
+              style={{ background: "hsl(var(--neon-purple))", color: "#000", boxShadow: "0 0 22px hsla(var(--neon-purple),0.45)" }}
             >
               View Projects <ChevronRight className="w-4 h-4" />
             </motion.button>
@@ -315,33 +323,32 @@ export default function Portfolio() {
             <motion.div variants={fadeUp}><SectionHeading icon={<Cpu className="w-4 h-4" />} label="Projects" number="01" accent="#10b981" /></motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {projects.map((p, idx) => (
-                <motion.div
-                  key={p.num} variants={fadeUp}
-                  whileHover={{ y: -5, boxShadow: `0 0 36px ${p.glow}`, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                  className="group relative rounded-2xl border overflow-hidden transition-all duration-300"
-                  style={{ background: p.gradient, borderColor: p.border }}
-                >
-                  {/* Top accent line */}
-                  <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: `linear-gradient(to right, transparent, ${p.accent}, transparent)` }} />
-                  <div className="p-5 flex flex-col gap-3.5 h-full">
-                    <div className="flex items-start justify-between">
-                      <span className="text-3xl font-display font-black select-none opacity-20 group-hover:opacity-40 transition-all" style={{ color: p.accent }}>{p.num}</span>
-                      <div className="w-8 h-8 rounded-xl border flex items-center justify-center transition-all" style={{ background: `${p.accent}18`, borderColor: `${p.accent}40`, color: p.accent }}>
-                        <Code2 className="w-4 h-4" />
+                <motion.div key={p.num} variants={fadeUp}>
+                  <Card3D className="group relative rounded-2xl border overflow-hidden card-3d h-full" style={{ background: p.gradient, borderColor: p.border }}>
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: `linear-gradient(to right, transparent, ${p.accent}, transparent)` }} />
+                    {/* Glow orb */}
+                    <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full blur-3xl pointer-events-none opacity-40" style={{ background: p.glow }} />
+                    <div className="p-5 flex flex-col gap-3.5 h-full relative">
+                      <div className="flex items-start justify-between">
+                        <span className="text-3xl font-display font-black select-none opacity-25 group-hover:opacity-50 transition-all" style={{ color: p.accent }}>{p.num}</span>
+                        <div className="w-8 h-8 rounded-xl border flex items-center justify-center transition-all" style={{ background: `${p.accent}18`, borderColor: `${p.accent}40`, color: p.accent }}>
+                          <Code2 className="w-4 h-4" />
+                        </div>
+                      </div>
+                      <div className="flex-1 space-y-1.5">
+                        <h3 className="text-base font-display font-bold text-white group-hover:brightness-125 transition-all" style={{ textShadow: `0 0 20px ${p.accent}60` }}>
+                          <AnimatedWords text={p.title} delay={idx * 0.05} />
+                        </h3>
+                        <p className="text-zinc-400 text-sm leading-relaxed">{p.desc}</p>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {p.tags.map((t) => (
+                          <span key={t} className="text-xs px-2.5 py-0.5 rounded-full border font-mono" style={{ background: `${p.accent}12`, borderColor: `${p.accent}35`, color: p.accent }}>{t}</span>
+                        ))}
                       </div>
                     </div>
-                    <div className="flex-1 space-y-1.5">
-                      <h3 className="text-base font-display font-bold text-white group-hover:brightness-125 transition-all" style={{ textShadow: `0 0 20px ${p.accent}40` }}>
-                        <AnimatedWords text={p.title} delay={idx * 0.05} />
-                      </h3>
-                      <p className="text-zinc-400 text-sm leading-relaxed">{p.desc}</p>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {p.tags.map((t) => (
-                        <span key={t} className="text-xs px-2.5 py-0.5 rounded-full border font-mono" style={{ background: `${p.accent}12`, borderColor: `${p.accent}35`, color: p.accent }}>{t}</span>
-                      ))}
-                    </div>
-                  </div>
+                  </Card3D>
                 </motion.div>
               ))}
 
@@ -386,7 +393,7 @@ export default function Portfolio() {
               ].map((eca, i) => (
                 <motion.div key={i} variants={fadeUp} className="relative group">
                   <div className="absolute -left-[30px] top-4 w-3 h-3 rounded-full border-2 transition-all duration-300" style={eca.active ? { background: eca.dot, borderColor: eca.dot, boxShadow: `0 0 10px ${eca.dot}cc` } : { background: "#27272a", borderColor: "#52525b" }} />
-                  <motion.div whileHover={{ x: 4, transition: { type: "spring", stiffness: 300, damping: 20 } }} className="rounded-2xl p-4 border transition-all duration-300" style={{ background: `${eca.accent}08`, borderColor: `${eca.accent}25` }}>
+                  <Card3D className="rounded-2xl p-4 border card-3d transition-all duration-300" style={{ background: `${eca.accent}08`, borderColor: `${eca.accent}25` }}>
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-1.5">
                       <h3 className="text-base font-display font-bold text-white"><AnimatedWords text={eca.role} delay={i * 0.1} /></h3>
                       <span className="text-xs font-mono px-2.5 py-0.5 rounded-full border" style={{ background: `${eca.accent}15`, color: eca.accent, borderColor: `${eca.accent}35` }}>{eca.year}</span>
@@ -397,7 +404,7 @@ export default function Portfolio() {
                       <p className="text-xs mb-2 font-medium" style={{ color: eca.accent }}>{eca.org}</p>
                     )}
                     <p className="text-xs text-zinc-400 leading-relaxed">{eca.desc}</p>
-                  </motion.div>
+                  </Card3D>
                 </motion.div>
               ))}
             </div>
@@ -411,7 +418,8 @@ export default function Portfolio() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
               {/* Gold */}
-              <motion.div variants={fadeUp} whileHover={{ y: -5, transition: { type: "spring", stiffness: 260, damping: 18 } }} className="relative group rounded-2xl overflow-hidden border border-yellow-500/20 bg-gradient-to-br from-yellow-950/30 via-zinc-950 to-zinc-950 hover:border-yellow-400/50 hover:shadow-[0_0_36px_rgba(234,179,8,0.16)] transition-all duration-400">
+              <motion.div variants={fadeUp}>
+              <Card3D className="relative group rounded-2xl overflow-hidden border border-yellow-500/20 bg-gradient-to-br from-yellow-950/30 via-zinc-950 to-zinc-950 hover:border-yellow-400/50 card-3d transition-all duration-400">
                 <div className="absolute -top-6 -left-6 w-36 h-36 bg-yellow-500/8 rounded-full blur-3xl group-hover:bg-yellow-400/15 transition-all duration-500" />
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent" />
                 <div className="relative p-6 flex flex-col gap-4">
@@ -435,10 +443,12 @@ export default function Portfolio() {
                     ))}
                   </div>
                 </div>
+              </Card3D>
               </motion.div>
 
               {/* Purple */}
-              <motion.div variants={fadeUp} whileHover={{ y: -5, transition: { type: "spring", stiffness: 260, damping: 18 } }} className="relative group rounded-2xl overflow-hidden border border-neon-purple/20 bg-gradient-to-br from-purple-950/20 via-zinc-950 to-zinc-950 hover:border-neon-purple/50 hover:shadow-[0_0_36px_rgba(168,85,247,0.16)] transition-all duration-400">
+              <motion.div variants={fadeUp}>
+              <Card3D className="relative group rounded-2xl overflow-hidden border border-neon-purple/20 bg-gradient-to-br from-purple-950/20 via-zinc-950 to-zinc-950 card-3d transition-all duration-400">
                 <div className="absolute -top-6 -right-6 w-36 h-36 rounded-full blur-3xl transition-all duration-500" style={{ background: "hsla(var(--neon-purple),0.08)" }} />
                 <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, hsla(var(--neon-purple),0.4), transparent)" }} />
                 <div className="relative p-6 flex flex-col gap-4">
@@ -462,6 +472,7 @@ export default function Portfolio() {
                     ))}
                   </div>
                 </div>
+              </Card3D>
               </motion.div>
             </div>
           </motion.div>

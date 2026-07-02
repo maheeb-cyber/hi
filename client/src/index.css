@@ -76,41 +76,77 @@
   --orb3: rgba(236, 72, 153, 0.24);
 }
 
-/* ── GREEN MODE ── */
-.green-mode {
-  --background: 150 30% 3%;
-  --foreground: 140 60% 95%;
+/* ── Animated background shift ── */
+@keyframes bg-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  --card: 150 25% 5%;
-  --card-foreground: 140 60% 95%;
+/* ── Rainbow text animation ── */
+@keyframes rainbow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.rainbow-text {
+  background: linear-gradient(270deg, #a855f7, #ec4899, #f59e0b, #10b981, #38bdf8, #6366f1, #a855f7);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow 6s ease infinite;
+}
 
-  --popover: 150 25% 5%;
-  --popover-foreground: 140 60% 95%;
+/* ── Floating 3D orb animation ── */
+@keyframes float3d {
+  0%, 100% { transform: translateY(0px) translateZ(0px) rotateX(0deg); }
+  33%       { transform: translateY(-20px) translateZ(30px) rotateX(8deg); }
+  66%       { transform: translateY(10px) translateZ(-15px) rotateX(-5deg); }
+}
+@keyframes float3d-b {
+  0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+  40%       { transform: translateY(-30px) translateX(20px) scale(1.08); }
+  70%       { transform: translateY(15px) translateX(-10px) scale(0.94); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.15); }
+}
 
-  --primary: 145 100% 42%;
-  --primary-foreground: 150 30% 3%;
+/* ── Gradient border animation ── */
+@keyframes border-spin {
+  0%   { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(var(--angle, 0deg), #a855f7, #ec4899, #f59e0b, #10b981, #38bdf8, #a855f7);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-spin 4s linear infinite;
+  pointer-events: none;
+}
 
-  --secondary: 145 50% 10%;
-  --secondary-foreground: 145 100% 70%;
-
-  --muted: 145 30% 10%;
-  --muted-foreground: 145 20% 55%;
-
-  --accent: 145 50% 15%;
-  --accent-foreground: 145 100% 80%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-
-  --border: 145 100% 42%;
-  --input: 145 100% 42%;
-  --ring: 145 100% 42%;
-
-  --neon-purple: 145 100% 42%;
-
-  --orb1: rgba(0, 255, 128, 0.14);
-  --orb2: rgba(0, 200, 80, 0.09);
-  --orb3: rgba(100, 255, 150, 0.08);
+/* ── Card shine on hover ── */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s ease;
+}
+.card-3d:hover {
+  box-shadow: 0 25px 60px rgba(168,85,247,0.25), 0 0 40px rgba(59,130,246,0.15);
 }
 
 body {
@@ -119,7 +155,7 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Colourful page glow layer */
+/* Colourful animated page glow layer */
 body::before {
   content: '';
   position: fixed;
@@ -127,10 +163,13 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 50% at 10% 10%, rgba(124,58,237,0.22) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 90% 30%, rgba(37,99,235,0.16) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 45% at 50% 90%, rgba(236,72,153,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 35% at 80% 80%, rgba(16,185,129,0.13) 0%, transparent 65%);
+    radial-gradient(ellipse 70% 55% at 5% 5%, rgba(124,58,237,0.30) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 95% 20%, rgba(37,99,235,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 45% 95%, rgba(236,72,153,0.24) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 40% at 85% 85%, rgba(16,185,129,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(245,158,11,0.08) 0%, transparent 70%);
+  background-size: 200% 200%;
+  animation: bg-shift 18s ease infinite;
 }
 
 body > * { position: relative; z-index: 1; }
