@@ -224,82 +224,39 @@ export default function Portfolio() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <div className="flex flex-col gap-6">
 
-              {/* ── ANIMATED NAME HEADER ── */}
-              <motion.div
-                variants={fadeUp}
-                className="relative rounded-2xl border overflow-hidden p-7 md:p-10 flex flex-col items-center justify-center text-center gap-4"
-                style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(0,0,0,0) 60%)", borderColor: "rgba(14,165,233,0.18)" }}
-              >
-                <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(14,165,233,0.12)" }} />
-                <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(56,189,248,0.10)" }} />
-                <motion.p initial={{ opacity: 0, y: -8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-xs font-mono tracking-[0.25em] uppercase text-zinc-500">
-                  — Portfolio of —
-                </motion.p>
-                <motion.h2 initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 80, damping: 14, delay: 0.2 }} className="text-4xl md:text-6xl font-display font-black leading-tight tracking-tight">
-                  <span className="rainbow-text">Md. Maheeb</span>
-                  <br />
-                  <span className="rainbow-text" style={{ animationDelay: "-2.5s" }}>Hossain</span>
-                </motion.h2>
-                <motion.div initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.35 }} className="flex flex-wrap justify-center gap-2">
-                  {[
-                    { label: "Python Developer", icon: "🐍" },
-                    { label: "Graphic Designer", icon: "🎨" },
-                    { label: "Ethical Hacker", icon: "🛡️" },
-                    { label: "Robotics Enthusiast", icon: "🤖" },
-                  ].map((r, i) => (
-                    <motion.span key={r.label} initial={{ opacity: 0, scale: 0.8, y: 6 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 + i * 0.08, type: "spring", stiffness: 120 }} whileHover={{ scale: 1.06, y: -2 }} className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border text-xs font-mono text-sky-300 cursor-default" style={{ background: "rgba(14,165,233,0.10)", borderColor: "rgba(14,165,233,0.28)" }}>
-                      <span>{r.icon}</span> {r.label}
-                    </motion.span>
-                  ))}
-                </motion.div>
-                <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 0.6 }} className="w-32 h-px origin-left" style={{ background: "linear-gradient(to right, #0ea5e9, transparent)" }} />
-                <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.55 }} className="text-zinc-400 text-sm max-w-md leading-relaxed">
-                  Student from <span className="text-white font-medium">Bangladesh 🇧🇩</span> · Club Rep at{" "}
-                  <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:text-white transition-colors font-medium">Cyber Hub</a>
-                  {" "}· Co-Founder of <span className="text-white font-medium">Slash Web &amp; Design</span>
-                </motion.p>
-              </motion.div>
+              {/* ── PHOTO + BIO (first — visible on load) ── */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
 
-              {/* ── SKILLS ── */}
-              <motion.div variants={fadeUp}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-1 h-5 rounded-full shrink-0" style={{ background: "#0ea5e9" }} />
-                  <h3 className="text-sm font-display font-bold text-white tracking-wide">Skills &amp; Interests</h3>
-                  <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, rgba(14,165,233,0.3), transparent)" }} />
-                </div>
-                <div className="flex flex-wrap gap-2.5">
-                  {[
-                    { label: "Python", sub: "Data Science", logo: <SiPython />, color: "#3b82f6", bg: "rgba(59,130,246,0.10)", border: "rgba(59,130,246,0.28)" },
-                    { label: "Cybersecurity", sub: "Ethical Hacking", logo: <SiKalilinux />, color: "#38bdf8", bg: "rgba(56,189,248,0.08)", border: "rgba(56,189,248,0.25)" },
-                    { label: "Graphic Design", sub: "Figma · Illustrator", logo: <SiFigma />, color: "#f24e1e", bg: "rgba(242,78,30,0.09)", border: "rgba(242,78,30,0.27)" },
-                    { label: "Video Editing", sub: "DaVinci · Storytelling", logo: <SiDavinciresolve />, color: "#f1c40f", bg: "rgba(241,196,15,0.09)", border: "rgba(241,196,15,0.25)" },
-                    { label: "Web Dev", sub: "HTML · CSS · React", logo: <SiReact />, color: "#61dafb", bg: "rgba(97,218,251,0.08)", border: "rgba(97,218,251,0.25)" },
-                    { label: "Robotics", sub: "Arduino · Hardware", logo: <SiArduino />, color: "#00979d", bg: "rgba(0,151,157,0.09)", border: "rgba(0,151,157,0.27)" },
-                    { label: "Leadership", sub: "Club Rep · Events", logo: <Trophy className="w-3.5 h-3.5" />, color: "#f59e0b", bg: "rgba(245,158,11,0.09)", border: "rgba(245,158,11,0.27)" },
-                    { label: "Creative Writing", sub: "Tech blogs", logo: <PenLine className="w-3.5 h-3.5" />, color: "#a78bfa", bg: "rgba(167,139,250,0.09)", border: "rgba(167,139,250,0.25)" },
-                  ].map((s, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.88, y: 6 }}
-                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.055, type: "spring", stiffness: 130, damping: 14 }}
-                      whileHover={{ y: -3, scale: 1.04, transition: { type: "spring", stiffness: 300 } }}
-                      className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border cursor-default select-none"
-                      style={{ background: s.bg, borderColor: s.border }}
-                    >
-                      <span className="text-base leading-none shrink-0" style={{ color: s.color }}>{s.logo}</span>
-                      <div className="leading-none">
-                        <p className="text-xs font-semibold text-zinc-100">{s.label}</p>
-                        <p className="text-[10px] text-zinc-500 mt-0.5">{s.sub}</p>
+                {/* RIGHT — photo (shown first on mobile too via order) */}
+                <motion.div variants={fadeUp} className="md:col-span-2 flex flex-col items-center gap-3 order-first md:order-last">
+                  <div className="relative group w-full max-w-[280px] md:max-w-full mx-auto">
+                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 14, repeat: Infinity, ease: "linear" }} className="absolute -inset-[3px] rounded-2xl opacity-70 blur-[4px]" style={{ background: "conic-gradient(from 0deg, #0ea5e9, #7dd3fc, #0284c7, transparent, #0ea5e9)" }} />
+                    <div className="absolute -inset-[1px] rounded-2xl" style={{ background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, rgba(14,165,233,0.3) 100%)" }} />
+                    <div className="relative rounded-2xl overflow-hidden border-2 border-black">
+                      <img src={avatarImage} alt="Md. Maheeb Hossain" className="w-full aspect-[4/5] object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.0) 45%)" }} />
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <p className="text-white font-display font-bold text-xl leading-tight rainbow-text">Md. Maheeb Hossain</p>
+                        <p className="text-sky-400 font-mono text-xs mt-1 tracking-wide">Student · Designer · Developer</p>
+                        <div className="flex items-center gap-2 mt-2 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}>
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                          <span className="text-emerald-400 font-mono text-[10px] tracking-wider uppercase">Available for collaboration</span>
+                        </div>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+                    </div>
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono border backdrop-blur-sm" style={{ background: "rgba(0,0,0,0.70)", borderColor: "rgba(14,165,233,0.40)", color: "#38bdf8" }}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Online
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-2 w-full">
+                    {[{ label: "📍 Bangladesh" }, { label: "🏆 IT Fest Winner" }, { label: "🎨 Co-Founder" }].map((chip) => (
+                      <span key={chip.label} className="text-[11px] font-mono px-3 py-1 rounded-full border text-sky-300" style={{ background: "rgba(14,165,233,0.10)", borderColor: "rgba(14,165,233,0.25)" }}>{chip.label}</span>
+                    ))}
+                  </div>
+                </motion.div>
 
-              {/* ── BIO + PHOTO ── */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-5 items-start">
+                {/* LEFT — bio + stat cards */}
                 <motion.div variants={fadeUp} className="md:col-span-3 flex flex-col gap-4">
                   <div className="relative rounded-2xl border p-6 overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), transparent)", borderColor: "rgba(14,165,233,0.15)" }}>
                     <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" style={{ background: "rgba(14,165,233,0.08)" }} />
@@ -331,34 +288,36 @@ export default function Portfolio() {
                     ))}
                   </div>
                 </motion.div>
-                <motion.div variants={fadeUp} className="md:col-span-2 flex flex-col items-center gap-4">
-                  <div className="relative group w-full">
-                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 14, repeat: Infinity, ease: "linear" }} className="absolute -inset-[3px] rounded-2xl opacity-70 blur-[4px]" style={{ background: "conic-gradient(from 0deg, #0ea5e9, #7dd3fc, #0284c7, transparent, #0ea5e9)" }} />
-                    <div className="absolute -inset-[1px] rounded-2xl" style={{ background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, rgba(14,165,233,0.3) 100%)" }} />
-                    <div className="relative rounded-2xl overflow-hidden border-2 border-black">
-                      <img src={avatarImage} alt="Md. Maheeb Hossain" className="w-full aspect-[4/5] object-cover object-top group-hover:scale-105 transition-transform duration-700" />
-                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.0) 50%)" }} />
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <p className="text-white font-display font-bold text-lg leading-tight">Md. Maheeb Hossain</p>
-                        <p className="text-sky-400 font-mono text-xs mt-1 tracking-wide">Student · Designer · Developer</p>
-                        <div className="flex items-center gap-2 mt-2 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                          <span className="text-emerald-400 font-mono text-[10px] tracking-wider uppercase">Available for collaboration</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono border backdrop-blur-sm" style={{ background: "rgba(0,0,0,0.70)", borderColor: "rgba(14,165,233,0.40)", color: "#38bdf8" }}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Online
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap justify-center gap-2 w-full">
-                    {[{ label: "📍 Bangladesh" }, { label: "🏆 IT Fest Winner" }, { label: "🎨 Co-Founder" }].map((chip) => (
-                      <span key={chip.label} className="text-[11px] font-mono px-3 py-1 rounded-full border text-sky-300 transition-all" style={{ background: "rgba(14,165,233,0.10)", borderColor: "rgba(14,165,233,0.25)" }}>{chip.label}</span>
-                    ))}
-                  </div>
-                </motion.div>
               </div>
+
+              {/* ── SKILLS ── */}
+              <motion.div variants={fadeUp}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-1 h-5 rounded-full shrink-0" style={{ background: "#0ea5e9" }} />
+                  <h3 className="text-sm font-display font-bold text-white tracking-wide">Skills &amp; Interests</h3>
+                  <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, rgba(14,165,233,0.3), transparent)" }} />
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {[
+                    { label: "Python", sub: "Data Science", logo: <SiPython />, color: "#3b82f6", bg: "rgba(59,130,246,0.10)", border: "rgba(59,130,246,0.28)" },
+                    { label: "Cybersecurity", sub: "Ethical Hacking", logo: <SiKalilinux />, color: "#38bdf8", bg: "rgba(56,189,248,0.08)", border: "rgba(56,189,248,0.25)" },
+                    { label: "Graphic Design", sub: "Figma · Illustrator", logo: <SiFigma />, color: "#f24e1e", bg: "rgba(242,78,30,0.09)", border: "rgba(242,78,30,0.27)" },
+                    { label: "Video Editing", sub: "DaVinci · Storytelling", logo: <SiDavinciresolve />, color: "#f1c40f", bg: "rgba(241,196,15,0.09)", border: "rgba(241,196,15,0.25)" },
+                    { label: "Web Dev", sub: "HTML · CSS · React", logo: <SiReact />, color: "#61dafb", bg: "rgba(97,218,251,0.08)", border: "rgba(97,218,251,0.25)" },
+                    { label: "Robotics", sub: "Arduino · Hardware", logo: <SiArduino />, color: "#00979d", bg: "rgba(0,151,157,0.09)", border: "rgba(0,151,157,0.27)" },
+                    { label: "Leadership", sub: "Club Rep · Events", logo: <Trophy className="w-3.5 h-3.5" />, color: "#f59e0b", bg: "rgba(245,158,11,0.09)", border: "rgba(245,158,11,0.27)" },
+                    { label: "Creative Writing", sub: "Tech blogs", logo: <PenLine className="w-3.5 h-3.5" />, color: "#a78bfa", bg: "rgba(167,139,250,0.09)", border: "rgba(167,139,250,0.25)" },
+                  ].map((s, i) => (
+                    <motion.div key={i} initial={{ opacity: 0, scale: 0.88, y: 6 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.055, type: "spring", stiffness: 130, damping: 14 }} whileHover={{ y: -3, scale: 1.04, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border cursor-default select-none" style={{ background: s.bg, borderColor: s.border }}>
+                      <span className="text-base leading-none shrink-0" style={{ color: s.color }}>{s.logo}</span>
+                      <div className="leading-none">
+                        <p className="text-xs font-semibold text-zinc-100">{s.label}</p>
+                        <p className="text-[10px] text-zinc-500 mt-0.5">{s.sub}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
 
               {/* Contact row */}
               <motion.div variants={fadeUp} className="rounded-2xl border border-white/8 p-6" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.04), transparent)" }}>
