@@ -579,6 +579,92 @@ export default function Portfolio() {
 
             <div className="flex flex-col gap-6">
 
+              {/* ── ANIMATED NAME HEADER ── */}
+              <motion.div
+                variants={fadeUp}
+                className="relative rounded-2xl border overflow-hidden p-7 md:p-10 flex flex-col items-center justify-center text-center gap-4"
+                style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(0,0,0,0) 60%)", borderColor: "rgba(14,165,233,0.18)" }}
+              >
+                {/* background orbs */}
+                <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(14,165,233,0.12)" }} />
+                <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(56,189,248,0.10)" }} />
+
+                {/* top label */}
+                <motion.p
+                  initial={{ opacity: 0, y: -8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-xs font-mono tracking-[0.25em] uppercase text-zinc-500"
+                >
+                  — Portfolio of —
+                </motion.p>
+
+                {/* Big animated name */}
+                <motion.h2
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 80, damping: 14, delay: 0.2 }}
+                  className="text-4xl md:text-6xl font-display font-black leading-tight tracking-tight"
+                >
+                  <span className="rainbow-text">Md. Maheeb</span>
+                  <br />
+                  <span className="rainbow-text" style={{ animationDelay: "-2.5s" }}>Hossain</span>
+                </motion.h2>
+
+                {/* Animated role pills that cycle */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.35 }}
+                  className="flex flex-wrap justify-center gap-2"
+                >
+                  {[
+                    { label: "Python Developer", icon: "🐍" },
+                    { label: "Graphic Designer", icon: "🎨" },
+                    { label: "Ethical Hacker", icon: "🛡️" },
+                    { label: "Robotics Enthusiast", icon: "🤖" },
+                  ].map((r, i) => (
+                    <motion.span
+                      key={r.label}
+                      initial={{ opacity: 0, scale: 0.8, y: 6 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 + i * 0.08, type: "spring", stiffness: 120 }}
+                      whileHover={{ scale: 1.06, y: -2 }}
+                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border text-xs font-mono text-sky-300 cursor-default"
+                      style={{ background: "rgba(14,165,233,0.10)", borderColor: "rgba(14,165,233,0.28)" }}
+                    >
+                      <span>{r.icon}</span> {r.label}
+                    </motion.span>
+                  ))}
+                </motion.div>
+
+                {/* Divider line */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                  className="w-32 h-px origin-left"
+                  style={{ background: "linear-gradient(to right, #0ea5e9, transparent)" }}
+                />
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.55 }}
+                  className="text-zinc-400 text-sm max-w-md leading-relaxed"
+                >
+                  Student from <span className="text-white font-medium">Bangladesh 🇧🇩</span> · Club Rep at{" "}
+                  <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:text-white transition-colors font-medium">Cyber Hub</a>
+                  {" "}· Co-Founder of{" "}
+                  <span className="text-white font-medium">Slash Web &amp; Design</span>
+                </motion.p>
+              </motion.div>
+
               {/* ── SKILLS (top) ── */}
               <motion.div variants={fadeUp} className="rounded-2xl border p-6" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), rgba(0,0,0,0))", borderColor: "rgba(14,165,233,0.15)" }}>
                 <div className="flex items-center gap-2 mb-5">
