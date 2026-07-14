@@ -579,137 +579,155 @@ export default function Portfolio() {
 
             <div className="flex flex-col gap-6">
 
-              {/* Top row — left: bio + stats | right: profile photo */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-5 items-start">
-
-                {/* LEFT — bio text + stat pills */}
-                <motion.div variants={fadeUp} className="md:col-span-3 flex flex-col gap-4">
-
-                  {/* Bio card */}
-                  <div className="relative rounded-2xl border border-white/8 p-6 overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), transparent)" }}>
-                    <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" style={{ background: "rgba(14,165,233,0.08)" }} />
-                    <div className="relative space-y-3 text-zinc-300 text-sm leading-relaxed">
-                      <p>
-                        I'm <span className="text-white font-semibold">Md. Maheeb Hossain</span>, a
-                        passionate tech enthusiast and proud student of{" "}
-                        <span className="highlight-animate text-white font-semibold">
-                          Savar Cantonment Public School &amp; College
-                        </span>{" "}
-                        <span className="text-zinc-500 font-mono text-xs">(SCPSC)</span> from Bangladesh 🇧🇩.
-                        From a young age I've been fascinated by technology — exploring everything from{" "}
-                        <span className="text-white font-medium">Ethical Hacking</span> to{" "}
-                        <span className="text-white font-medium">Graphic Design</span>.
-                      </p>
-                      <p>
-                        As the elected <span className="text-white font-medium">Club Representative</span> of{" "}
-                        <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium hover:text-white transition-colors text-sky-400">
-                          Cyber Hub <ExternalLink className="w-3 h-3" />
-                        </a>{" "}
-                        — I organise workshops, tech events, and seminars to spark curiosity among students.
-                      </p>
-                      <p>
-                        I'm actively learning <span className="text-white font-medium">Python</span> for data science,
-                        diving into <span className="text-white font-medium">Cybersecurity</span>, and building projects
-                        that combine code with creative thinking.
-                      </p>
-                      <p>
-                        Beyond the screen I'm passionate about <span className="text-white font-medium">Robotics</span>,
-                        <span className="text-white font-medium"> Graphic Design</span>, and{" "}
-                        <span className="text-white font-medium">Video Editing</span> — crafting visuals that tell stories.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Stats */}
-                  <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {[
-                      { icon: <MapPin className="w-3.5 h-3.5" />, label: "Location", value: "Bangladesh 🇧🇩" },
-                      { icon: <User className="w-3.5 h-3.5" />, label: "Role", value: "Student & Tech Enthusiast" },
-                      { icon: <Trophy className="w-3.5 h-3.5" />, label: "Award", value: "IT Intra Fest Winner" },
-                      { icon: <Shield className="w-3.5 h-3.5" />, label: "Club", value: "Cyber Hub Rep 2025–26" },
-                    ].map((stat, i) => (
-                      <motion.div key={i} variants={fadeUp} whileHover={{ x: 4, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-3 p-3.5 rounded-xl border border-white/6 bg-zinc-950/50 transition-all group" style={{ borderColor: "rgba(14,165,233,0.12)" }}>
-                        <div className="w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 transition-all" style={{ background: "rgba(14,165,233,0.10)", borderColor: "rgba(14,165,233,0.20)", color: "#38bdf8" }}>{stat.icon}</div>
-                        <div>
-                          <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-wider">{stat.label}</p>
-                          <p className="text-xs text-zinc-200 font-medium mt-0.5">{stat.value}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </motion.div>
-
-                {/* RIGHT — profile photo */}
-                <motion.div variants={fadeUp} className="md:col-span-2 flex flex-col items-center gap-4">
-                  <div className="relative group w-full max-w-xs mx-auto">
-                    {/* Spinning glow ring */}
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                      className="absolute -inset-1.5 rounded-2xl opacity-60 blur-sm"
-                      style={{ background: "conic-gradient(from 0deg, #0ea5e9, #7dd3fc, #0284c7, #0ea5e9)" }}
-                    />
-                    <div className="absolute -inset-0.5 rounded-2xl" style={{ background: "linear-gradient(135deg, #0ea5e9, #0284c7)" }} />
-                    {/* Photo */}
-                    <div className="relative rounded-2xl overflow-hidden border-2 border-black">
-                      <img
-                        src={avatarImage}
-                        alt="Md. Maheeb Hossain"
-                        className="w-full aspect-[3/4] object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      />
-                      {/* Bottom overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)" }}>
-                        <p className="text-white font-display font-bold text-base leading-tight">Md. Maheeb Hossain</p>
-                        <p className="text-sky-400 font-mono text-xs mt-0.5">Student · Designer · Dev</p>
-                        <div className="flex items-center gap-1.5 mt-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          <span className="text-emerald-400 font-mono text-[10px]">Available for work</span>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Online badge */}
-                    <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono border" style={{ background: "rgba(0,0,0,0.75)", borderColor: "rgba(14,165,233,0.3)", color: "#38bdf8" }}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Online
-                    </div>
-                  </div>
-
-                  {/* Quick info chips below photo */}
-                  <div className="flex flex-wrap justify-center gap-2 w-full max-w-xs">
-                    {[
-                      { label: "📍 Bangladesh", color: "rgba(14,165,233,0.15)", border: "rgba(14,165,233,0.25)" },
-                      { label: "🏆 IT Fest Winner", color: "rgba(14,165,233,0.10)", border: "rgba(14,165,233,0.20)" },
-                      { label: "🎨 Co-Founder", color: "rgba(14,165,233,0.10)", border: "rgba(14,165,233,0.20)" },
-                    ].map((chip) => (
-                      <span key={chip.label} className="text-[11px] font-mono px-3 py-1 rounded-full border text-sky-300" style={{ background: chip.color, borderColor: chip.border }}>
-                        {chip.label}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Skills grid */}
-              <motion.div variants={fadeUp} className="rounded-2xl border border-white/8 p-6" style={{ background: "linear-gradient(135deg, hsla(var(--neon-purple),0.04), transparent)" }}>
-                <h3 className="text-sm font-display font-bold text-white mb-4 tracking-wide">Skills & Interests</h3>
+              {/* ── SKILLS (top) ── */}
+              <motion.div variants={fadeUp} className="rounded-2xl border p-6" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), rgba(0,0,0,0))", borderColor: "rgba(14,165,233,0.15)" }}>
+                <div className="flex items-center gap-2 mb-5">
+                  <div className="w-1 h-5 rounded-full" style={{ background: "#0ea5e9" }} />
+                  <h3 className="text-sm font-display font-bold text-white tracking-wide">Skills &amp; Interests</h3>
+                </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
-                    { area: "Python & Data Science", detail: "Pandas, data viz, scripting" },
-                    { area: "Cybersecurity", detail: "Ethical hacking fundamentals, CTF" },
-                    { area: "Graphic Design", detail: "Photoshop, Illustrator, AI Art" },
-                    { area: "Video Editing", detail: "Motion graphics, storytelling" },
-                    { area: "Web Development", detail: "HTML/CSS, JavaScript, React" },
-                    { area: "Robotics", detail: "Hardware + software integration" },
-                    { area: "Leadership", detail: "Club rep, event organiser" },
-                    { area: "Creative Writing", detail: "Tech blogs, school publications" },
+                    { area: "Python & Data Science", detail: "Pandas, data viz, scripting", icon: "🐍" },
+                    { area: "Cybersecurity", detail: "Ethical hacking, CTF", icon: "🛡️" },
+                    { area: "Graphic Design", detail: "Photoshop, Illustrator, AI Art", icon: "🎨" },
+                    { area: "Video Editing", detail: "Motion graphics, storytelling", icon: "🎬" },
+                    { area: "Web Development", detail: "HTML/CSS, JavaScript, React", icon: "💻" },
+                    { area: "Robotics", detail: "Hardware + software integration", icon: "🤖" },
+                    { area: "Leadership", detail: "Club rep, event organiser", icon: "🏆" },
+                    { area: "Creative Writing", detail: "Tech blogs, school publications", icon: "✍️" },
                   ].map((s, i) => (
-                    <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} whileHover={{ y: -2 }} className="p-3 rounded-xl border border-white/6 bg-white/[0.02] hover:border-neon-purple/20 transition-all">
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.06 }}
+                      whileHover={{ y: -3, transition: { type: "spring", stiffness: 300 } }}
+                      className="group p-3.5 rounded-xl border transition-all cursor-default"
+                      style={{ background: "rgba(14,165,233,0.04)", borderColor: "rgba(14,165,233,0.12)" }}
+                      onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(14,165,233,0.35)")}
+                      onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(14,165,233,0.12)")}
+                    >
+                      <span className="text-lg mb-1 block">{s.icon}</span>
                       <p className="text-xs font-semibold text-zinc-200 mb-0.5">{s.area}</p>
                       <p className="text-[11px] text-zinc-500">{s.detail}</p>
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
+
+              {/* ── BIO + PHOTO (below skills) ── */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-5 items-start">
+
+                {/* LEFT — bio + stat cards */}
+                <motion.div variants={fadeUp} className="md:col-span-3 flex flex-col gap-4">
+
+                  {/* Bio */}
+                  <div className="relative rounded-2xl border p-6 overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), transparent)", borderColor: "rgba(14,165,233,0.15)" }}>
+                    <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" style={{ background: "rgba(14,165,233,0.08)" }} />
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-1 h-5 rounded-full" style={{ background: "#0ea5e9" }} />
+                      <h3 className="text-sm font-display font-bold text-white tracking-wide">About Me</h3>
+                    </div>
+                    <div className="relative space-y-3 text-zinc-300 text-sm leading-relaxed">
+                      <p>
+                        I'm <span className="text-white font-semibold">Md. Maheeb Hossain</span>, a passionate tech enthusiast and proud student of{" "}
+                        <span className="highlight-animate text-white font-semibold">Savar Cantonment Public School &amp; College</span>{" "}
+                        <span className="text-zinc-500 font-mono text-xs">(SCPSC)</span> from Bangladesh 🇧🇩. From a young age I've been fascinated by technology — exploring everything from{" "}
+                        <span className="text-white font-medium">Ethical Hacking</span> to <span className="text-white font-medium">Graphic Design</span>.
+                      </p>
+                      <p>
+                        As the elected <span className="text-white font-medium">Club Representative</span> of{" "}
+                        <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium hover:text-white transition-colors text-sky-400">
+                          Cyber Hub <ExternalLink className="w-3 h-3" />
+                        </a>{" "}
+                        — I organise workshops, tech events, and seminars to spark curiosity among my fellow students.
+                      </p>
+                      <p>
+                        I'm actively learning <span className="text-white font-medium">Python</span> for data science, diving into <span className="text-white font-medium">Cybersecurity</span>, and building projects that sit at the intersection of logic and design.
+                      </p>
+                      <p>
+                        My goal is simple: keep learning, keep building, and use technology to make a meaningful difference — starting right here in Bangladesh.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stat cards in 2-col grid */}
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { icon: <MapPin className="w-3.5 h-3.5" />, label: "Location", value: "Bangladesh 🇧🇩" },
+                      { icon: <User className="w-3.5 h-3.5" />, label: "Role", value: "Student & Tech Enthusiast" },
+                      { icon: <Trophy className="w-3.5 h-3.5" />, label: "Award", value: "IT Intra Fest Winner" },
+                      { icon: <Shield className="w-3.5 h-3.5" />, label: "Club", value: "Cyber Hub Rep 2025–26" },
+                    ].map((stat, i) => (
+                      <motion.div
+                        key={i}
+                        variants={fadeUp}
+                        whileHover={{ y: -2, transition: { type: "spring", stiffness: 300 } }}
+                        className="flex items-center gap-3 p-3.5 rounded-xl border transition-all"
+                        style={{ background: "rgba(14,165,233,0.04)", borderColor: "rgba(14,165,233,0.12)" }}
+                      >
+                        <div className="w-8 h-8 rounded-lg border flex items-center justify-center shrink-0" style={{ background: "rgba(14,165,233,0.12)", borderColor: "rgba(14,165,233,0.25)", color: "#38bdf8" }}>{stat.icon}</div>
+                        <div>
+                          <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-wider">{stat.label}</p>
+                          <p className="text-xs text-zinc-200 font-semibold mt-0.5">{stat.value}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* RIGHT — profile photo */}
+                <motion.div variants={fadeUp} className="md:col-span-2 flex flex-col items-center gap-4">
+                  <div className="relative group w-full">
+                    {/* Animated glow ring */}
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+                      className="absolute -inset-[3px] rounded-2xl opacity-70 blur-[4px]"
+                      style={{ background: "conic-gradient(from 0deg, #0ea5e9, #7dd3fc, #0284c7, transparent, #0ea5e9)" }}
+                    />
+                    <div className="absolute -inset-[1px] rounded-2xl" style={{ background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, rgba(14,165,233,0.3) 100%)" }} />
+                    {/* Photo frame */}
+                    <div className="relative rounded-2xl overflow-hidden border-2 border-black">
+                      <img
+                        src={avatarImage}
+                        alt="Md. Maheeb Hossain"
+                        className="w-full aspect-[4/5] object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      />
+                      {/* Gradient overlay at bottom */}
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.0) 50%)" }} />
+                      {/* Name + status */}
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <p className="text-white font-display font-bold text-lg leading-tight">Md. Maheeb Hossain</p>
+                        <p className="text-sky-400 font-mono text-xs mt-1 tracking-wide">Student · Designer · Developer</p>
+                        <div className="flex items-center gap-2 mt-2 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                          <span className="text-emerald-400 font-mono text-[10px] tracking-wider uppercase">Available for collaboration</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* "Open to work" badge top-right */}
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono border backdrop-blur-sm" style={{ background: "rgba(0,0,0,0.70)", borderColor: "rgba(14,165,233,0.40)", color: "#38bdf8" }}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Online
+                    </div>
+                  </div>
+
+                  {/* Chips below photo */}
+                  <div className="flex flex-wrap justify-center gap-2 w-full">
+                    {[
+                      { label: "📍 Bangladesh" },
+                      { label: "🏆 IT Fest Winner" },
+                      { label: "🎨 Co-Founder" },
+                    ].map((chip) => (
+                      <span key={chip.label} className="text-[11px] font-mono px-3 py-1 rounded-full border text-sky-300 transition-all" style={{ background: "rgba(14,165,233,0.10)", borderColor: "rgba(14,165,233,0.25)" }}>
+                        {chip.label}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
 
               {/* Contact row */}
               <motion.div variants={fadeUp} className="rounded-2xl border border-white/8 p-6" style={{ background: "linear-gradient(135deg, hsla(var(--neon-purple),0.04), transparent)" }}>
