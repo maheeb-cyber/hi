@@ -2,8 +2,12 @@ import { motion, Variants, useScroll, useSpring, useMotionValue, useTransform, u
 import {
   Github, Mail, ExternalLink, FileText, Palette, Trophy,
   Star, Shield, ArrowDown, MapPin, User, Code2, Zap, Film,
-  ChevronRight, Cpu, Award, BookOpen, Terminal,
+  ChevronRight, Cpu, Award, BookOpen, Terminal, PenLine,
 } from "lucide-react";
+import {
+  SiPython, SiKalilinux, SiFigma, SiDavinciresolve,
+  SiReact, SiArduino,
+} from "react-icons/si";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
 import aiArtPdf from "@assets/Ai_Art__1765437570484.pdf";
 import slashLogo from "@assets/IMG-f784f2f230c5f92a58249a1d054379ac-V_1783016314442.jpg";
@@ -257,26 +261,38 @@ export default function Portfolio() {
               </motion.div>
 
               {/* ── SKILLS ── */}
-              <motion.div variants={fadeUp} className="rounded-2xl border p-6" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), rgba(0,0,0,0))", borderColor: "rgba(14,165,233,0.15)" }}>
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="w-1 h-5 rounded-full" style={{ background: "#0ea5e9" }} />
+              <motion.div variants={fadeUp}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-1 h-5 rounded-full shrink-0" style={{ background: "#0ea5e9" }} />
                   <h3 className="text-sm font-display font-bold text-white tracking-wide">Skills &amp; Interests</h3>
+                  <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, rgba(14,165,233,0.3), transparent)" }} />
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="flex flex-wrap gap-2.5">
                   {[
-                    { area: "Python & Data Science", detail: "Pandas, data viz, scripting", icon: "🐍" },
-                    { area: "Cybersecurity", detail: "Ethical hacking, CTF", icon: "🛡️" },
-                    { area: "Graphic Design", detail: "Photoshop, Illustrator, AI Art", icon: "🎨" },
-                    { area: "Video Editing", detail: "Motion graphics, storytelling", icon: "🎬" },
-                    { area: "Web Development", detail: "HTML/CSS, JavaScript, React", icon: "💻" },
-                    { area: "Robotics", detail: "Hardware + software integration", icon: "🤖" },
-                    { area: "Leadership", detail: "Club rep, event organiser", icon: "🏆" },
-                    { area: "Creative Writing", detail: "Tech blogs, school publications", icon: "✍️" },
+                    { label: "Python", sub: "Data Science", logo: <SiPython />, color: "#3b82f6", bg: "rgba(59,130,246,0.10)", border: "rgba(59,130,246,0.28)" },
+                    { label: "Cybersecurity", sub: "Ethical Hacking", logo: <SiKalilinux />, color: "#38bdf8", bg: "rgba(56,189,248,0.08)", border: "rgba(56,189,248,0.25)" },
+                    { label: "Graphic Design", sub: "Figma · Illustrator", logo: <SiFigma />, color: "#f24e1e", bg: "rgba(242,78,30,0.09)", border: "rgba(242,78,30,0.27)" },
+                    { label: "Video Editing", sub: "DaVinci · Storytelling", logo: <SiDavinciresolve />, color: "#f1c40f", bg: "rgba(241,196,15,0.09)", border: "rgba(241,196,15,0.25)" },
+                    { label: "Web Dev", sub: "HTML · CSS · React", logo: <SiReact />, color: "#61dafb", bg: "rgba(97,218,251,0.08)", border: "rgba(97,218,251,0.25)" },
+                    { label: "Robotics", sub: "Arduino · Hardware", logo: <SiArduino />, color: "#00979d", bg: "rgba(0,151,157,0.09)", border: "rgba(0,151,157,0.27)" },
+                    { label: "Leadership", sub: "Club Rep · Events", logo: <Trophy className="w-3.5 h-3.5" />, color: "#f59e0b", bg: "rgba(245,158,11,0.09)", border: "rgba(245,158,11,0.27)" },
+                    { label: "Creative Writing", sub: "Tech blogs", logo: <PenLine className="w-3.5 h-3.5" />, color: "#a78bfa", bg: "rgba(167,139,250,0.09)", border: "rgba(167,139,250,0.25)" },
                   ].map((s, i) => (
-                    <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} whileHover={{ y: -3, transition: { type: "spring", stiffness: 300 } }} className="group p-3.5 rounded-xl border transition-all cursor-default" style={{ background: "rgba(14,165,233,0.04)", borderColor: "rgba(14,165,233,0.12)" }} onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(14,165,233,0.35)")} onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(14,165,233,0.12)")}>
-                      <span className="text-lg mb-1 block">{s.icon}</span>
-                      <p className="text-xs font-semibold text-zinc-200 mb-0.5">{s.area}</p>
-                      <p className="text-[11px] text-zinc-500">{s.detail}</p>
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.88, y: 6 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.055, type: "spring", stiffness: 130, damping: 14 }}
+                      whileHover={{ y: -3, scale: 1.04, transition: { type: "spring", stiffness: 300 } }}
+                      className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border cursor-default select-none"
+                      style={{ background: s.bg, borderColor: s.border }}
+                    >
+                      <span className="text-base leading-none shrink-0" style={{ color: s.color }}>{s.logo}</span>
+                      <div className="leading-none">
+                        <p className="text-xs font-semibold text-zinc-100">{s.label}</p>
+                        <p className="text-[10px] text-zinc-500 mt-0.5">{s.sub}</p>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
