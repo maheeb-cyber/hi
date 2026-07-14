@@ -579,78 +579,113 @@ export default function Portfolio() {
 
             <div className="flex flex-col gap-6">
 
-              {/* Top row — bio + stats */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
+              {/* Top row — left: bio + stats | right: profile photo */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-5 items-start">
 
-                {/* Main bio */}
-                <motion.div variants={fadeUp} className="md:col-span-3 relative rounded-2xl border border-white/8 p-6 overflow-hidden" style={{ background: "linear-gradient(135deg, hsla(var(--neon-purple),0.05), transparent)" }}>
-                  <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" style={{ background: "hsla(var(--neon-purple),0.07)" }} />
-                  <div className="relative space-y-3 text-zinc-300 text-sm leading-relaxed">
-                    <p>
-                      I'm <span className="text-white font-semibold">Md. Maheeb Hossain</span>, a 
-                      passionate tech enthusiast, student, and proud student of{" "}
-                      <span className="highlight-animate text-white font-semibold">
-                        Savar Cantonment Public School &amp; College
-                      </span>{" "}
-                      <span className="text-zinc-500 font-mono text-xs">(SCPSC)</span> from Bangladesh 🇧🇩.
-                      From a young age I've been deeply fascinated by the way technology shapes the 
-                      world — and that curiosity has driven me to explore everything from 
-                      <span className="text-white font-medium"> Ethical Hacking</span> to{" "}
-                      <span className="text-white font-medium">Graphic Design</span>.
-                    </p>
-                    <p>
-                      As the elected <span className="text-white font-medium">Club Representative</span> of{" "}
-                      <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium hover:text-white transition-colors" style={{ color: "hsl(var(--neon-purple))" }}>
-                        Cyber Hub <ExternalLink className="w-3 h-3" />
-                      </a>{" "}
-                      — the ICT club of{" "}
-                      <span className="highlight-animate text-white font-semibold" style={{ animationDelay: "0.9s" }}>
-                        Savar Cantonment Public School &amp; College
-                      </span>{" "}
-                      — I organise workshops, tech events, and seminars 
-                      to spark technological curiosity among my fellow students. Leading this 
-                      club has taught me teamwork, communication, and real-world problem-solving 
-                      in ways no classroom ever could.
-                    </p>
-                    <p>
-                      On the technical side, I'm actively learning <span className="text-white font-medium">Python</span> for 
-                      data science and automation, diving into the fundamentals of{" "}
-                      <span className="text-white font-medium">Cybersecurity</span> and ethical hacking, 
-                      and building projects that combine code with creative thinking. I believe 
-                      that the best solutions sit at the intersection of logic and design.
-                    </p>
-                    <p>
-                      Beyond the screen, I'm passionate about <span className="text-white font-medium">Robotics</span>, 
-                      where hardware meets software in the most exciting ways. I also express 
-                      myself through <span className="text-white font-medium">Graphic Design</span> and{" "}
-                      <span className="text-white font-medium">Video Editing</span> — crafting visuals 
-                      that tell stories and leave an impression.
-                    </p>
-                    <p>
-                      My goal is simple: keep learning, keep building, and use technology to 
-                      make a meaningful difference — starting right here in Bangladesh and 
-                      reaching as far as possible. I'm always open to collaboration, new ideas, 
-                      and connecting with like-minded people around the world.
-                    </p>
+                {/* LEFT — bio text + stat pills */}
+                <motion.div variants={fadeUp} className="md:col-span-3 flex flex-col gap-4">
+
+                  {/* Bio card */}
+                  <div className="relative rounded-2xl border border-white/8 p-6 overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), transparent)" }}>
+                    <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" style={{ background: "rgba(14,165,233,0.08)" }} />
+                    <div className="relative space-y-3 text-zinc-300 text-sm leading-relaxed">
+                      <p>
+                        I'm <span className="text-white font-semibold">Md. Maheeb Hossain</span>, a
+                        passionate tech enthusiast and proud student of{" "}
+                        <span className="highlight-animate text-white font-semibold">
+                          Savar Cantonment Public School &amp; College
+                        </span>{" "}
+                        <span className="text-zinc-500 font-mono text-xs">(SCPSC)</span> from Bangladesh 🇧🇩.
+                        From a young age I've been fascinated by technology — exploring everything from{" "}
+                        <span className="text-white font-medium">Ethical Hacking</span> to{" "}
+                        <span className="text-white font-medium">Graphic Design</span>.
+                      </p>
+                      <p>
+                        As the elected <span className="text-white font-medium">Club Representative</span> of{" "}
+                        <a href="https://www.scpscch.tech/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium hover:text-white transition-colors text-sky-400">
+                          Cyber Hub <ExternalLink className="w-3 h-3" />
+                        </a>{" "}
+                        — I organise workshops, tech events, and seminars to spark curiosity among students.
+                      </p>
+                      <p>
+                        I'm actively learning <span className="text-white font-medium">Python</span> for data science,
+                        diving into <span className="text-white font-medium">Cybersecurity</span>, and building projects
+                        that combine code with creative thinking.
+                      </p>
+                      <p>
+                        Beyond the screen I'm passionate about <span className="text-white font-medium">Robotics</span>,
+                        <span className="text-white font-medium"> Graphic Design</span>, and{" "}
+                        <span className="text-white font-medium">Video Editing</span> — crafting visuals that tell stories.
+                      </p>
+                    </div>
                   </div>
+
+                  {/* Stats */}
+                  <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[
+                      { icon: <MapPin className="w-3.5 h-3.5" />, label: "Location", value: "Bangladesh 🇧🇩" },
+                      { icon: <User className="w-3.5 h-3.5" />, label: "Role", value: "Student & Tech Enthusiast" },
+                      { icon: <Trophy className="w-3.5 h-3.5" />, label: "Award", value: "IT Intra Fest Winner" },
+                      { icon: <Shield className="w-3.5 h-3.5" />, label: "Club", value: "Cyber Hub Rep 2025–26" },
+                    ].map((stat, i) => (
+                      <motion.div key={i} variants={fadeUp} whileHover={{ x: 4, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-3 p-3.5 rounded-xl border border-white/6 bg-zinc-950/50 transition-all group" style={{ borderColor: "rgba(14,165,233,0.12)" }}>
+                        <div className="w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 transition-all" style={{ background: "rgba(14,165,233,0.10)", borderColor: "rgba(14,165,233,0.20)", color: "#38bdf8" }}>{stat.icon}</div>
+                        <div>
+                          <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-wider">{stat.label}</p>
+                          <p className="text-xs text-zinc-200 font-medium mt-0.5">{stat.value}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
                 </motion.div>
 
-                {/* Stats */}
-                <motion.div variants={stagger} className="md:col-span-2 flex flex-col gap-3">
-                  {[
-                    { icon: <MapPin className="w-3.5 h-3.5" />, label: "Location", value: "Bangladesh 🇧🇩" },
-                    { icon: <User className="w-3.5 h-3.5" />, label: "Role", value: "Student & Tech Enthusiast" },
-                    { icon: <Trophy className="w-3.5 h-3.5" />, label: "Award", value: "IT Intra Fest Winner" },
-                    { icon: <Shield className="w-3.5 h-3.5" />, label: "Club", value: "Cyber Hub Rep 2025–26" },
-                  ].map((stat, i) => (
-                    <motion.div key={i} variants={fadeUp} whileHover={{ x: 4, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-3 p-3.5 rounded-xl border border-white/6 bg-zinc-950/50 hover:border-neon-purple/20 transition-all group">
-                      <div className="w-7 h-7 rounded-lg border flex items-center justify-center shrink-0 group-hover:bg-neon-purple/15 transition-all" style={{ background: "hsla(var(--neon-purple),0.08)", borderColor: "hsla(var(--neon-purple),0.15)", color: "hsl(var(--neon-purple))" }}>{stat.icon}</div>
-                      <div>
-                        <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-wider">{stat.label}</p>
-                        <p className="text-xs text-zinc-200 font-medium mt-0.5">{stat.value}</p>
+                {/* RIGHT — profile photo */}
+                <motion.div variants={fadeUp} className="md:col-span-2 flex flex-col items-center gap-4">
+                  <div className="relative group w-full max-w-xs mx-auto">
+                    {/* Spinning glow ring */}
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                      className="absolute -inset-1.5 rounded-2xl opacity-60 blur-sm"
+                      style={{ background: "conic-gradient(from 0deg, #0ea5e9, #7dd3fc, #0284c7, #0ea5e9)" }}
+                    />
+                    <div className="absolute -inset-0.5 rounded-2xl" style={{ background: "linear-gradient(135deg, #0ea5e9, #0284c7)" }} />
+                    {/* Photo */}
+                    <div className="relative rounded-2xl overflow-hidden border-2 border-black">
+                      <img
+                        src={avatarImage}
+                        alt="Md. Maheeb Hossain"
+                        className="w-full aspect-[3/4] object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {/* Bottom overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 p-4" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)" }}>
+                        <p className="text-white font-display font-bold text-base leading-tight">Md. Maheeb Hossain</p>
+                        <p className="text-sky-400 font-mono text-xs mt-0.5">Student · Designer · Dev</p>
+                        <div className="flex items-center gap-1.5 mt-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="text-emerald-400 font-mono text-[10px]">Available for work</span>
+                        </div>
                       </div>
-                    </motion.div>
-                  ))}
+                    </div>
+                    {/* Online badge */}
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono border" style={{ background: "rgba(0,0,0,0.75)", borderColor: "rgba(14,165,233,0.3)", color: "#38bdf8" }}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Online
+                    </div>
+                  </div>
+
+                  {/* Quick info chips below photo */}
+                  <div className="flex flex-wrap justify-center gap-2 w-full max-w-xs">
+                    {[
+                      { label: "📍 Bangladesh", color: "rgba(14,165,233,0.15)", border: "rgba(14,165,233,0.25)" },
+                      { label: "🏆 IT Fest Winner", color: "rgba(14,165,233,0.10)", border: "rgba(14,165,233,0.20)" },
+                      { label: "🎨 Co-Founder", color: "rgba(14,165,233,0.10)", border: "rgba(14,165,233,0.20)" },
+                    ].map((chip) => (
+                      <span key={chip.label} className="text-[11px] font-mono px-3 py-1 rounded-full border text-sky-300" style={{ background: chip.color, borderColor: chip.border }}>
+                        {chip.label}
+                      </span>
+                    ))}
+                  </div>
                 </motion.div>
               </div>
 
