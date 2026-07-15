@@ -230,7 +230,7 @@ export default function Portfolio() {
                 {/* RIGHT — photo (shown first on mobile too via order) */}
                 <motion.div variants={fadeUp} className="md:col-span-2 flex flex-col items-center gap-3 order-first md:order-last">
                   <div className="relative group w-full max-w-[280px] md:max-w-full mx-auto">
-                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 14, repeat: Infinity, ease: "linear" }} className="absolute -inset-[3px] rounded-2xl opacity-70 blur-[4px]" style={{ background: "conic-gradient(from 0deg, #0ea5e9, #7dd3fc, #0284c7, transparent, #0ea5e9)" }} />
+                    <motion.div animate={{ rotate: 0 }} transition={{ duration: 0 }} className="absolute -inset-[3px] rounded-2xl opacity-70 blur-[4px]" style={{ background: "conic-gradient(from 0deg, #0ea5e9, #7dd3fc, #0284c7, transparent, #0ea5e9)" }} />
                     <div className="absolute -inset-[1px] rounded-2xl" style={{ background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, rgba(14,165,233,0.3) 100%)" }} />
                     <div className="relative rounded-2xl overflow-hidden border-2 border-black">
                       <img src={avatarImage} alt="Md. Maheeb Hossain" className="w-full aspect-[4/5] object-cover object-top group-hover:scale-105 transition-transform duration-700" />
