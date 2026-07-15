@@ -296,7 +296,7 @@ export default function Portfolio() {
                   <h3 className="text-sm font-display font-bold text-white tracking-wide">Skills &amp; Interests</h3>
                   <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, rgba(14,165,233,0.3), transparent)" }} />
                 </div>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-nowrap gap-2.5 overflow-x-auto pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: "touch" }}>
                   {[
                     { label: "Python", sub: "Data Science", logo: <SiPython />, color: "#3b82f6", bg: "rgba(59,130,246,0.10)", border: "rgba(59,130,246,0.28)" },
                     { label: "Cybersecurity", sub: "Ethical Hacking", logo: <SiKalilinux />, color: "#38bdf8", bg: "rgba(56,189,248,0.08)", border: "rgba(56,189,248,0.25)" },
@@ -307,7 +307,7 @@ export default function Portfolio() {
                     { label: "Leadership", sub: "Club Rep · Events", logo: <Trophy className="w-3.5 h-3.5" />, color: "#f59e0b", bg: "rgba(245,158,11,0.09)", border: "rgba(245,158,11,0.27)" },
                     { label: "Creative Writing", sub: "Tech blogs", logo: <PenLine className="w-3.5 h-3.5" />, color: "#a78bfa", bg: "rgba(167,139,250,0.09)", border: "rgba(167,139,250,0.25)" },
                   ].map((s, i) => (
-                    <motion.div key={i} initial={{ opacity: 0, scale: 0.88, y: 6 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.055, type: "spring", stiffness: 130, damping: 14 }} whileHover={{ y: -3, scale: 1.04, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border cursor-default select-none" style={{ background: s.bg, borderColor: s.border }}>
+                    <motion.div key={i} initial={{ opacity: 0, scale: 0.88, y: 6 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.055, type: "spring", stiffness: 130, damping: 14 }} whileHover={{ y: -3, scale: 1.04, transition: { type: "spring", stiffness: 300 } }} className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border cursor-default select-none shrink-0" style={{ background: s.bg, borderColor: s.border }}>
                       <span className="text-base leading-none shrink-0" style={{ color: s.color }}>{s.logo}</span>
                       <div className="leading-none">
                         <p className="text-xs font-semibold text-zinc-100">{s.label}</p>
