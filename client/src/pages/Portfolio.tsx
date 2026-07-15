@@ -5,7 +5,7 @@ import {
   ChevronRight, Cpu, Award, BookOpen, Terminal, PenLine,
 } from "lucide-react";
 import {
-  SiPython, SiKalilinux, SiFigma, SiDavinciresolve,
+  SiPython, SiKalilinux, SiFigma,
   SiReact, SiArduino,
 } from "react-icons/si";
 import avatarImage from "@assets/IMG_20251209_232112_1765434316677.jpg";
@@ -301,7 +301,6 @@ export default function Portfolio() {
                     { label: "Python", sub: "Data Science", logo: <SiPython />, color: "#3b82f6", bg: "rgba(59,130,246,0.10)", border: "rgba(59,130,246,0.28)" },
                     { label: "Cybersecurity", sub: "Ethical Hacking", logo: <SiKalilinux />, color: "#38bdf8", bg: "rgba(56,189,248,0.08)", border: "rgba(56,189,248,0.25)" },
                     { label: "Graphic Design", sub: "Figma · Illustrator", logo: <SiFigma />, color: "#f24e1e", bg: "rgba(242,78,30,0.09)", border: "rgba(242,78,30,0.27)" },
-                    { label: "Video Editing", sub: "DaVinci · Storytelling", logo: <SiDavinciresolve />, color: "#f1c40f", bg: "rgba(241,196,15,0.09)", border: "rgba(241,196,15,0.25)" },
                     { label: "Web Dev", sub: "HTML · CSS · React", logo: <SiReact />, color: "#61dafb", bg: "rgba(97,218,251,0.08)", border: "rgba(97,218,251,0.25)" },
                     { label: "Robotics", sub: "Arduino · Hardware", logo: <SiArduino />, color: "#00979d", bg: "rgba(0,151,157,0.09)", border: "rgba(0,151,157,0.27)" },
                     { label: "Leadership", sub: "Club Rep · Events", logo: <Trophy className="w-3.5 h-3.5" />, color: "#f59e0b", bg: "rgba(245,158,11,0.09)", border: "rgba(245,158,11,0.27)" },
